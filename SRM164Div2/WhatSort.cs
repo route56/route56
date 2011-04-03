@@ -7,7 +7,6 @@ namespace SRM164Div2
 {
 	public class WhatSort
 	{
-
 		private enum SortUsed
 		{
 			/// <summary>
@@ -44,6 +43,91 @@ namespace SRM164Div2
 			NOT 
 		};
 
+		public interface IColumnElement
+		{
+			bool IsGreaterThan(IColumnElement other);
+			bool IsEqualTo(IColumnElement other);
+			bool IsLessThan(IColumnElement other);
+		}
+
+		class Name : IColumnElement
+		{
+			public string data;
+
+			public bool IsGreaterThan(IColumnElement other)
+			{
+				Name otherAsName = other as Name;
+
+				return this.data.CompareTo(otherAsName.data) > 0;
+			}
+
+			public bool IsEqualTo(IColumnElement other)
+			{
+				Name otherAsName = other as Name;
+
+				return this.data.CompareTo(otherAsName.data) == 0;
+			}
+
+			public bool IsLessThan(IColumnElement other)
+			{
+				Name otherAsName = other as Name;
+
+				return this.data.CompareTo(otherAsName.data) < 0;
+			}
+		}
+
+		class Age : IColumnElement
+		{
+			public int data;
+
+			public bool IsGreaterThan(IColumnElement other)
+			{
+				Age otherAsName = other as Age;
+
+				return this.data > otherAsName.data;
+			}
+
+			public bool IsEqualTo(IColumnElement other)
+			{
+				Age otherAsName = other as Age;
+
+				return this.data == otherAsName.data;
+			}
+
+			public bool IsLessThan(IColumnElement other)
+			{
+				Age otherAsName = other as Age;
+
+				return this.data < otherAsName.data;
+			}
+		}
+
+		class Weight : IColumnElement
+		{
+			public int data;
+
+			public bool IsGreaterThan(IColumnElement other)
+			{
+				Weight otherAsName = other as Weight;
+
+				return this.data < otherAsName.data; // Weight sorted in descending order
+			}
+
+			public bool IsEqualTo(IColumnElement other)
+			{
+				Weight otherAsName = other as Weight;
+
+				return this.data == otherAsName.data;
+			}
+
+			public bool IsLessThan(IColumnElement other)
+			{
+				Weight otherAsName = other as Weight;
+
+				return this.data > otherAsName.data; // Weight sorted in descending order
+			}
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -53,10 +137,16 @@ namespace SRM164Div2
 		/// <returns></returns>
 		public string sortType(string[] name, int[] age, int[] wt)
 		{
+			List<IColumnElement> nameCE = new List<IColumnElement>();
+			List<IColumnElement> ageCE = new List<IColumnElement>();
+			List<IColumnElement> wtCE = new List<IColumnElement>();
+
+			TransformInput(name, age, wt, nameCE, ageCE, wtCE);
+
 			// GetPrimary
-			bool isNameSorted = WhatSortUsed(name, true, 0, name.Length - 1);
-			bool isAgeSorted = WhatSortUsed(age, true, 0, age.Length - 1);
-			bool isWeightSorted = WhatSortUsed(wt, false, 0, wt.Length - 1);
+			bool isNameSorted = WhatSortUsed(nameCE, 0, nameCE.Length - 1);
+			bool isAgeSorted = WhatSortUsed(ageCE, 0, age.Length - 1);
+			bool isWeightSorted = WhatSortUsed(wtCE, 0, wt.Length - 1);
 
 			// If nothing is sorted bail
 			if (!(isNameSorted || isAgeSorted || isWeightSorted))
@@ -90,10 +180,29 @@ namespace SRM164Div2
 				return GetSecondaryWithWeightAsPrimary(wt, name, age).ToString();
 			}
 
-			throw new NotImplementedException();
+			return null;
 		}
 
-		private SortUsed GetSecondaryWithWeightAsPrimary(int[] wt, string[] name, int[] age)
+		public void TransformInput(string[] name, int[] age, int[] wt, List<IColumnElement> nameCE, List<IColumnElement> ageCE, List<IColumnElement> wtCE)
+		{
+			//TransformInput
+			foreach (string item in name)
+			{
+				nameCE.Add(new Name() { data = item });
+			}
+
+			foreach (int item in age)
+			{
+				ageCE.Add(new Age() { data = item });
+			}
+
+			foreach (int item in wt)
+			{
+				wtCE.Add(new Weight() { data = item });
+			}
+		}
+
+		public SortUsed GetSecondaryWithWeightAsPrimary(List<IColumnElement> wt, List<IColumnElement> name, List<IColumnElement> age)
 		{
 			List<KeyValuePair<int, int>> ranges = FindRangesWithSameValues(age);
 
@@ -102,8 +211,8 @@ namespace SRM164Div2
 
 			foreach (KeyValuePair<int, int> item in ranges)
 			{
-				bool nameSorted = WhatSortUsed(name, true, item.Key, item.Value);
-				bool ageSorted = WhatSortUsed(wt, true, item.Key, item.Value);
+				bool nameSorted = WhatSortUsed(name, item.Key, item.Value);
+				bool ageSorted = WhatSortUsed(wt, item.Key, item.Value);
 
 				if (nameSorted)
 				{
@@ -167,7 +276,7 @@ namespace SRM164Div2
 			}
 		}
 
-		private SortUsed GetSecondaryWithAgeAsPrimary(int[] age, string[] name, int[] wt)
+		public SortUsed GetSecondaryWithAgeAsPrimary(List<IColumnElement> age, List<IColumnElement> name, List<IColumnElement> wt)
 		{
 			List<KeyValuePair<int, int>> ranges = FindRangesWithSameValues(age);
 
@@ -176,8 +285,8 @@ namespace SRM164Div2
 
 			foreach (KeyValuePair<int, int> item in ranges)
 			{
-				bool nameSorted = WhatSortUsed(name, true, item.Key, item.Value);
-				bool wtSorted = WhatSortUsed(wt, false, item.Key, item.Value);
+				bool nameSorted = WhatSortUsed(name, item.Key, item.Value);
+				bool wtSorted = WhatSortUsed(wt, item.Key, item.Value);
 
 				if (nameSorted)
 				{
@@ -241,7 +350,7 @@ namespace SRM164Div2
 			}
 		}
 
-		private SortUsed GetSecondaryWithNameAsPrimary(string[] name, int[] age, int[] wt)
+		public SortUsed GetSecondaryWithNameAsPrimary(List<IColumnElement> name, List<IColumnElement> age, List<IColumnElement> wt)
 		{
 			List<KeyValuePair<int,int>> ranges = FindRangesWithSameValues(name);
 
@@ -250,8 +359,8 @@ namespace SRM164Div2
 
 			foreach (KeyValuePair<int,int> item in ranges)
 			{
-				bool ageSorted = WhatSortUsed(age, true, item.Key, item.Value);
-				bool wtSorted = WhatSortUsed(wt, false, item.Key, item.Value);
+				bool ageSorted = WhatSortUsed(age, item.Key, item.Value);
+				bool wtSorted = WhatSortUsed(wt, item.Key, item.Value);
 
 				if (ageSorted)
 				{
@@ -315,15 +424,15 @@ namespace SRM164Div2
 			}
 		}
 
-		public List<KeyValuePair<int, int>> FindRangesWithSameValues(int[] array)
+		public List<KeyValuePair<int, int>> FindRangesWithSameValues(List<IColumnElement> array)
 		{
 			List<KeyValuePair<int, int>> result = new List<KeyValuePair<int, int>>();
 
-			int currentName = array[0];
+			IColumnElement currentName = array[0];
 			int key = -1;
-			for (int i = 1; i < array.Length; i++)
+			for (int i = 1; i < array.Count; i++)
 			{
-				if (currentName == array[i])
+				if (currentName.IsEqualTo(array[i]))
 				{
 					if (key == -1)
 					{
@@ -344,63 +453,26 @@ namespace SRM164Div2
 			// Logic to include last value if any
 			if (key != -1)
 			{
-				result.Add(new KeyValuePair<int, int>(key, array.Length - 1));
-			}
-
-			return result;
-		}
-
-		public List<KeyValuePair<int, int>> FindRangesWithSameValues(string[] name)
-		{
-			List<KeyValuePair<int, int>> result = new List<KeyValuePair<int, int>>();
-
-			string currentName = name[0];
-			int key = -1;
-			for (int i = 1; i < name.Length; i++)
-			{
-				if (currentName.CompareTo(name[i]) == 0)
-				{
-					if (key == -1)
-					{
-						key = i - 1;
-					}
-				}
-				else
-				{
-					currentName = name[i];
-					if (key != -1)
-					{
-						result.Add(new KeyValuePair<int, int>(key, i - 1));
-						key = -1;
-					}
-				}
-			}
-
-			// Logic to include last value if any
-			if (key != -1)
-			{
-				result.Add(new KeyValuePair<int, int>(key, name.Length - 1));
+				result.Add(new KeyValuePair<int, int>(key, array.Count - 1));
 			}
 
 			return result;
 		}
 
 		/// <summary>
-		/// Generic
+		/// Sorted?
 		/// </summary>
 		/// <param name="array"></param>
-		/// <param name="isAscending"></param>
 		/// <param name="start"></param>
 		/// <param name="end"></param>
 		/// <returns></returns>
-		private bool WhatSortUsed(int[] array, bool isAscending, int start, int end)
+		public bool WhatSortUsed(List<IColumnElement> array, int start, int end)
 		{
 			bool result = true;
 
 			for (int i = start; i < end; i++)
 			{
-				if ( (isAscending && array[i] > array[i + 1])
-					|| (!isAscending && array[i] < array[i + 1]))
+				if (array[i].IsGreaterThan(array[i + 1]))
 				{
 					result = false;
 					break;
@@ -409,31 +481,5 @@ namespace SRM164Div2
 
 			return result;
 		}
-
-		/// <summary>
-		/// Generic
-		/// </summary>
-		/// <param name="array"></param>
-		/// <param name="isAscending"></param>
-		/// <param name="start"></param>
-		/// <param name="end"></param>
-		/// <returns></returns>
-		private bool WhatSortUsed(string[] array, bool isAscending, int start, int end)
-		{
-			bool result = true;
-
-			for (int i = start; i < end; i++)
-			{
-				if ((isAscending && array[i].CompareTo(array[i + 1]) > 0)
-					|| (!isAscending && array[i].CompareTo(array[i + 1]) < 0))
-				{
-					result = false;
-					break;
-				}
-			}
-
-			return result;
-		}
-
 	}
 }

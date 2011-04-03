@@ -184,6 +184,10 @@ namespace TestJustifier
 						new KeyValuePair<int,int>(2,3)
 					};
 
+			List<IColumnElement> nameCE = new List<IColumnElement>();
+
+			target.TransformInput(name, null, null, nameCE, null, null);
+
 			List<KeyValuePair<int, int>> actual;
 			actual = target.FindRangesWithSameValues(name);
 			Assert.IsTrue(AreSameRanges(expected, actual));
