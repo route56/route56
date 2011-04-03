@@ -1,0 +1,65 @@
+﻿
+Problem Statement
+    
+We have a sorted list of customer information. Each customer has an age, a weight, and a name. We want to determine the basis on which they were sorted. We believe that the customers were sorted based on alphabetical order of names, ascending order of ages, and descending order of weights. One of these fields was the primary field, used to initially sort the customers. Then one of these fields was used as the secondary field to break ties between customers that were indistinguishable based on the primary field. And finally the remaining field was used to break ties between customers that had the same values for their primary and secondary fields.
+Create a class WhatSort that contains method sortType that is given a string[] name, a int[] age, and a int[] wt that gives the attributes of the customers. The first elements of name, age, and wt correspond to the first customer in the sorted list of customers, the second elements to the second customer, etc. Your method will return a string that tells what sort of sort was used:
+NAW -- name was the primary, age secondary, weight the final field
+NWA -- name was the primary, weight secondary, age final
+ANW -- age was primary, name was secondary, weight final
+AWN -- age was primary, weight was secondary, name final
+WAN -- weight primary, age secondary, name final
+WNA -- weight primary, name secondary, age final
+IND -- indeterminate: more than one of the above is possible
+NOT -- none of the above sorting methods was used
+Definition
+    
+Class:
+WhatSort
+Method:
+sortType
+Parameters:
+string[], int[], int[]
+Returns:
+string
+Method signature:
+string sortType(string[] name, int[] age, int[] wt)
+(be sure your method is public)
+    
+
+Constraints
+-
+name will contain between 1 and 50 elements inclusive
+-
+age and wt will contain the same number of elements as name
+-
+each element in name will contain between 1 and 50 characters inclusive
+-
+each character in each element of name will contain only uppercase letters 'A'-'Z'
+-
+each element of age and wt will be between 1 and 300 inclusive
+Examples
+0)
+
+    
+{"BOB","BOB","DAVE","JOE"}
+{22, 35, 35, 30}
+ {122, 122, 195,  200}
+Returns: "IND"
+The ages are not in ascending order and the weights are not in descending order so the primary field must be name. The tie between the 2 BOB's could have been broken by increasing age, leaving the weight field as final. But it is also possible that the weight field was secondary, leaving the 2 BOB tie to be resolved by age. So we cannot determine which of those two sorts was used.
+1)
+
+    
+{"BOB","BOB","DAVE","DAVE"}
+{22, 35, 35, 30}
+ {122, 122, 195,  200}
+Returns: "NOT"
+The ages are not in ascending order and the weights are not in descending order so the primary field must be name. There is a tie between the 2 BOB's and between the 2 DAVE's. If the secondary field were age, then the DAVE's would have been placed in the other order. That is also true if weight were the secondary field. So none of the sorts could have been used.
+2)
+
+    
+{"BOB","BOB","DAVE","DAVE"}
+ {22, 35, 35, 30}
+{122, 122, 195,  190}
+Returns: "NWA"
+The ages are not in ascending order and the weights are not in descending order so the primary field must be name. Weight as secondary field properly orders the 2 DAVE's and leaves the ordering of the 2 BOB's up to the final field.
+This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
