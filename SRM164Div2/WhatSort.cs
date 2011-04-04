@@ -7,7 +7,7 @@ namespace SRM164Div2
 {
 	public class WhatSort
 	{
-		private enum SortUsed
+		public enum SortUsed
 		{
 			/// <summary>
 			/// name was the primary, age secondary, weight the final field
@@ -144,9 +144,9 @@ namespace SRM164Div2
 			TransformInput(name, age, wt, nameCE, ageCE, wtCE);
 
 			// GetPrimary
-			bool isNameSorted = WhatSortUsed(nameCE, 0, nameCE.Length - 1);
-			bool isAgeSorted = WhatSortUsed(ageCE, 0, age.Length - 1);
-			bool isWeightSorted = WhatSortUsed(wtCE, 0, wt.Length - 1);
+			bool isNameSorted = WhatSortUsed(nameCE, 0, nameCE.Count - 1);
+			bool isAgeSorted = WhatSortUsed(ageCE, 0, ageCE.Count - 1);
+			bool isWeightSorted = WhatSortUsed(wtCE, 0, wtCE.Count - 1);
 
 			// If nothing is sorted bail
 			if (!(isNameSorted || isAgeSorted || isWeightSorted))
@@ -165,21 +165,22 @@ namespace SRM164Div2
 			{
 				Debug.Assert(!(isAgeSorted || isWeightSorted));
 				//GetSecondary
-				return GetSecondaryWithNameAsPrimary(name, age, wt).ToString();
+				return GetSecondaryWithPrimary(nameCE, ageCE, wtCE).ToString();
 			}
 
 			if (isAgeSorted)
 			{
 				Debug.Assert(!(isWeightSorted || isNameSorted));
-				return GetSecondaryWithAgeAsPrimary(age, name, wt).ToString();
+				return GetSecondaryWithPrimary(ageCE, nameCE, wtCE).ToString();
 			}
 
 			if (isWeightSorted)
 			{
 				Debug.Assert(!(isNameSorted || isAgeSorted));
-				return GetSecondaryWithWeightAsPrimary(wt, name, age).ToString();
+				return GetSecondaryWithPrimary(wtCE, nameCE, ageCE).ToString();
 			}
 
+			Debug.Assert(false, "Unreachable code");
 			return null;
 		}
 
@@ -202,47 +203,54 @@ namespace SRM164Div2
 			}
 		}
 
-		public SortUsed GetSecondaryWithWeightAsPrimary(List<IColumnElement> wt, List<IColumnElement> name, List<IColumnElement> age)
+		/// <summary>
+		/// Gets Secondary
+		/// </summary>
+		/// <param name="primary">Primary column</param>
+		/// <param name="secCandidate1">Secondary candidate 1</param>
+		/// <param name="secCandidate2">Secondary candidate 2</param>
+		/// <returns></returns>
+		public SortUsed GetSecondaryWithPrimary(List<IColumnElement> primary, List<IColumnElement> secCandidate1, List<IColumnElement> secCandidate2)
 		{
-			List<KeyValuePair<int, int>> ranges = FindRangesWithSameValues(age);
+			List<KeyValuePair<int, int>> ranges = FindRangesWithSameValues(primary);
 
-			bool canNameBeSecKey = false;
-			bool canAgeBeSecKey = false;
+			bool canSecCandidate1 = false;
+			bool cansecCandidate2 = false;
 
 			foreach (KeyValuePair<int, int> item in ranges)
 			{
-				bool nameSorted = WhatSortUsed(name, item.Key, item.Value);
-				bool ageSorted = WhatSortUsed(wt, item.Key, item.Value);
+				bool secCandidate1Sorted = WhatSortUsed(secCandidate1, item.Key, item.Value);
+				bool secCandidate2Sorted = WhatSortUsed(secCandidate2, item.Key, item.Value);
 
-				if (nameSorted)
+				if (secCandidate1Sorted)
 				{
-					if (ageSorted)
+					if (secCandidate2Sorted)
 					{
 						continue;
 					}
 					else
 					{
-						if (canAgeBeSecKey)
+						if (cansecCandidate2)
 						{
 							return SortUsed.IND;
 						}
 						else
 						{
-							canNameBeSecKey = true;
+							canSecCandidate1 = true;
 						}
 					}
 				}
 				else
 				{
-					if (ageSorted)
+					if (secCandidate2Sorted)
 					{
-						if (canNameBeSecKey)
+						if (canSecCandidate1)
 						{
 							return SortUsed.IND;
 						}
 						else
 						{
-							canAgeBeSecKey = true;
+							cansecCandidate2 = true;
 						}
 					}
 					else
@@ -252,177 +260,72 @@ namespace SRM164Div2
 				}
 			}
 
-			if (canNameBeSecKey)
+			if (canSecCandidate1)
 			{
-				if (canAgeBeSecKey)
+				if (cansecCandidate2)
 				{
 					return SortUsed.IND;
+				}
+				else
+				{
+					return GetSortCode(primary, secCandidate1, secCandidate2);//SortUsed.WNA;
+				}
+			}
+			else
+			{
+				if (cansecCandidate2)
+				{
+					return GetSortCode(primary, secCandidate2, secCandidate1);//SortUsed.WAN;
+				}
+				else
+				{
+					return SortUsed.NOT;
+				}
+			}
+		}
+
+		private SortUsed GetSortCode(List<IColumnElement> primary, List<IColumnElement> secCandidate1, List<IColumnElement> secCandidate2)
+		{
+			if (primary[0].GetType() == typeof(Age))
+			{
+				if (secCandidate1[0].GetType() == typeof(Name))
+				{
+					return SortUsed.ANW;
+				}
+				else
+				{
+					return SortUsed.AWN;
+				}
+			}
+
+			if (primary[0].GetType() == typeof(Name))
+			{
+				if (secCandidate1[0].GetType() == typeof(Age))
+				{
+					return SortUsed.NAW;
+				}
+				else
+				{
+					return SortUsed.NWA;
+				}
+			}
+
+			if (primary[0].GetType() == typeof(Weight))
+			{
+				if (secCandidate1[0].GetType() == typeof(Age))
+				{
+					return SortUsed.WAN;
 				}
 				else
 				{
 					return SortUsed.WNA;
 				}
 			}
-			else
-			{
-				if (canAgeBeSecKey)
-				{
-					return SortUsed.WAN;
-				}
-				else
-				{
-					return SortUsed.NOT;
-				}
-			}
+
+			Debug.Assert(false, "Unreachable code");
+			return SortUsed.NOT;
 		}
 
-		public SortUsed GetSecondaryWithAgeAsPrimary(List<IColumnElement> age, List<IColumnElement> name, List<IColumnElement> wt)
-		{
-			List<KeyValuePair<int, int>> ranges = FindRangesWithSameValues(age);
-
-			bool canNameBeSecKey = false;
-			bool canWtBeSecKey = false;
-
-			foreach (KeyValuePair<int, int> item in ranges)
-			{
-				bool nameSorted = WhatSortUsed(name, item.Key, item.Value);
-				bool wtSorted = WhatSortUsed(wt, item.Key, item.Value);
-
-				if (nameSorted)
-				{
-					if (wtSorted)
-					{
-						continue;
-					}
-					else
-					{
-						if (canWtBeSecKey)
-						{
-							return SortUsed.IND;
-						}
-						else
-						{
-							canNameBeSecKey = true;
-						}
-					}
-				}
-				else
-				{
-					if (wtSorted)
-					{
-						if (canNameBeSecKey)
-						{
-							return SortUsed.IND;
-						}
-						else
-						{
-							canWtBeSecKey = true;
-						}
-					}
-					else
-					{
-						return SortUsed.NOT;
-					}
-				}
-			}
-			
-			if (canNameBeSecKey)
-			{
-				if (canWtBeSecKey)
-				{
-					return SortUsed.IND;
-				}
-				else
-				{
-					return SortUsed.ANW;
-				}
-			}
-			else
-			{
-				if (canWtBeSecKey)
-				{
-					return SortUsed.AWN;
-				}
-				else
-				{
-					return SortUsed.NOT;
-				}
-			}
-		}
-
-		public SortUsed GetSecondaryWithNameAsPrimary(List<IColumnElement> name, List<IColumnElement> age, List<IColumnElement> wt)
-		{
-			List<KeyValuePair<int,int>> ranges = FindRangesWithSameValues(name);
-
-			bool canAgeBeSecKey = false;
-			bool canWtBeSecKey = false;
-
-			foreach (KeyValuePair<int,int> item in ranges)
-			{
-				bool ageSorted = WhatSortUsed(age, item.Key, item.Value);
-				bool wtSorted = WhatSortUsed(wt, item.Key, item.Value);
-
-				if (ageSorted)
-				{
-					if (wtSorted)
-					{
-						continue;
-					}
-					else
-					{
-						if (canWtBeSecKey)
-						{
-							return SortUsed.IND;
-						}
-						else
-						{
-							canAgeBeSecKey = true;
-						}
-					}
-				}
-				else
-				{
-					if (wtSorted)
-					{
-						if (canAgeBeSecKey)
-						{
-							return SortUsed.IND;
-						}
-						else
-						{
-							canWtBeSecKey = true;
-						}
-					}
-					else
-					{
-						return SortUsed.NOT;
-					}
-				}
-			}
-
-			if (canAgeBeSecKey)
-			{
-				if (canWtBeSecKey)
-				{
-					return SortUsed.IND;
-				}
-				else
-				{
-					return SortUsed.NAW;
-				}
-			}
-			else
-			{
-				if (canWtBeSecKey)
-				{
-					return SortUsed.NWA;
-				}
-				else
-				{
-					return SortUsed.IND;
-				}
-			}
-		}
 
 		public List<KeyValuePair<int, int>> FindRangesWithSameValues(List<IColumnElement> array)
 		{

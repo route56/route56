@@ -184,21 +184,27 @@ namespace TestJustifier
 						new KeyValuePair<int,int>(2,3)
 					};
 
-			List<IColumnElement> nameCE = new List<IColumnElement>();
+			List<SRM164Div2.WhatSort.IColumnElement> nameCE = new List<SRM164Div2.WhatSort.IColumnElement>();
+			List<SRM164Div2.WhatSort.IColumnElement> nameCE2 = new List<SRM164Div2.WhatSort.IColumnElement>();
+			List<SRM164Div2.WhatSort.IColumnElement> nameCE3 = new List<SRM164Div2.WhatSort.IColumnElement>();
+			List<SRM164Div2.WhatSort.IColumnElement> nameCE4 = new List<SRM164Div2.WhatSort.IColumnElement>();
 
 			target.TransformInput(name, null, null, nameCE, null, null);
+			target.TransformInput(name2, null, null, nameCE2, null, null);
+			target.TransformInput(name3, null, null, nameCE3, null, null);
+			target.TransformInput(name4, null, null, nameCE4, null, null);
 
 			List<KeyValuePair<int, int>> actual;
-			actual = target.FindRangesWithSameValues(name);
+			actual = target.FindRangesWithSameValues(nameCE);
 			Assert.IsTrue(AreSameRanges(expected, actual));
 
-			actual = target.FindRangesWithSameValues(name2);
+			actual = target.FindRangesWithSameValues(nameCE2);
 			Assert.IsTrue(AreSameRanges(expected2, actual));
 
-			actual = target.FindRangesWithSameValues(name3);
+			actual = target.FindRangesWithSameValues(nameCE3);
 			Assert.IsTrue(AreSameRanges(expected3, actual));
 
-			actual = target.FindRangesWithSameValues(name4);
+			actual = target.FindRangesWithSameValues(nameCE4);
 			Assert.IsTrue(AreSameRanges(expected4, actual));
 		}
 

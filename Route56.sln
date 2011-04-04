@@ -17,6 +17,24 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MM68", "MM68\MM68.csproj", "{8F77A189-84E0-451B-97EB-056F3A456F60}"
 EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs25
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = SRM164Div2\\SRM164Div2.csproj
+		SccProjectName1 = SRM164Div2
+		SccLocalPath1 = SRM164Div2
+		SccProjectUniqueName2 = TestJustifier\\TestSRM164Div2.csproj
+		SccProjectName2 = TestJustifier
+		SccLocalPath2 = TestJustifier
+		SccProjectUniqueName3 = UnitTestHelpers\\UnitTestHelpers.csproj
+		SccProjectName3 = UnitTestHelpers
+		SccLocalPath3 = UnitTestHelpers
+		SccProjectUniqueName4 = MM68\\MM68.csproj
+		SccProjectName4 = MM68
+		SccLocalPath4 = MM68
+	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Route56.vsmdi
 	EndGlobalSection
