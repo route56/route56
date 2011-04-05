@@ -63,3 +63,18 @@ The ages are not in ascending order and the weights are not in descending order 
 Returns: "NWA"
 The ages are not in ascending order and the weights are not in descending order so the primary field must be name. Weight as secondary field properly orders the 2 DAVE's and leaves the ordering of the 2 BOB's up to the final field.
 This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+
+
+
+Problem: 1100
+Test Case: 4
+Succeeded: No
+Execution Time: 0 ms
+Args:
+{{"A", "A", "AAA", "AA", "A"}, {3, 8, 2, 4, 9}, {175, 173, 160, 160, 122}}
+
+Expected:
+"WAN"
+
+Received:
+"NOT"

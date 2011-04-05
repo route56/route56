@@ -71,7 +71,7 @@ namespace TestJustifier
 		[TestMethod()]
 		public void sortTypeTest1()
 		{
-			WhatSort target = new WhatSort(); // TODO: Initialize to an appropriate value
+			WhatSort target = new WhatSort();
 			string[] name = { "BOB", "BOB", "DAVE", "JOE" };
 			int[] age = { 22, 35, 35, 30 };
 			int[] wt = { 122, 122, 195, 200 };
@@ -87,7 +87,7 @@ namespace TestJustifier
 		[TestMethod()]
 		public void sortTypeTest2()
 		{
-			WhatSort target = new WhatSort(); // TODO: Initialize to an appropriate value
+			WhatSort target = new WhatSort(); 
 			string[] name = { "BOB", "BOB", "DAVE", "DAVE" };
 			int[] age = { 22, 35, 35, 30 };
 			int[] wt = { 122, 122, 195, 200 };
@@ -103,7 +103,7 @@ namespace TestJustifier
 		[TestMethod()]
 		public void sortTypeTest3()
 		{
-			WhatSort target = new WhatSort(); // TODO: Initialize to an appropriate value
+			WhatSort target = new WhatSort(); 
 			string[] name = { "BOB", "BOB", "DAVE", "DAVE" };
 			int[] age = { 22, 35, 35, 30 };
 			int[] wt = { 122, 122, 195, 190 };
@@ -116,7 +116,7 @@ namespace TestJustifier
 		[TestMethod()]
 		public void sortTypeTest4()
 		{
-			WhatSort target = new WhatSort(); // TODO: Initialize to an appropriate value
+			WhatSort target = new WhatSort(); 
 			string[] name = { "A", "B", "C", "D" };
 			int[] age = { 1, 2, 3, 4 };
 			int[] wt = { 6, 5, 4, 3 };
@@ -129,7 +129,7 @@ namespace TestJustifier
 		[TestMethod()]
 		public void sortTypeTest5()
 		{
-			WhatSort target = new WhatSort(); // TODO: Initialize to an appropriate value
+			WhatSort target = new WhatSort(); 
 			string[] name = { "B", "B", "C", "C" };
 			int[] age = { 1, 2, 3, 4 };
 			int[] wt = { 6, 5, 4, 3 };
@@ -142,7 +142,7 @@ namespace TestJustifier
 		[TestMethod()]
 		public void sortTypeTest6()
 		{
-			WhatSort target = new WhatSort(); // TODO: Initialize to an appropriate value
+			WhatSort target = new WhatSort(); 
 			string[] name = { "A", "A", "A", "A" };
 			int[] age = { 1, 2, 3, 4 };
 			int[] wt = { 6, 5, 4, 3 };
@@ -158,7 +158,7 @@ namespace TestJustifier
 		[TestMethod()]
 		public void FindRangesWithSameValuesTest()
 		{
-			WhatSort target = new WhatSort(); // TODO: Initialize to an appropriate value
+			WhatSort target = new WhatSort(); 
 			string[] name = { "one", "two", "two", "three", "four", "four", "four" };
 			List<KeyValuePair<int, int>> expected = new List<KeyValuePair<int, int>>()
 					{
