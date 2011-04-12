@@ -189,10 +189,10 @@ namespace TestJustifier
 			List<SRM164Div2.WhatSort.IColumnElement> nameCE3 = new List<SRM164Div2.WhatSort.IColumnElement>();
 			List<SRM164Div2.WhatSort.IColumnElement> nameCE4 = new List<SRM164Div2.WhatSort.IColumnElement>();
 
-			target.TransformInput(name, null, null, nameCE, null, null);
-			target.TransformInput(name2, null, null, nameCE2, null, null);
-			target.TransformInput(name3, null, null, nameCE3, null, null);
-			target.TransformInput(name4, null, null, nameCE4, null, null);
+			target.TransformInput(name, new int[0], new int[0], nameCE, null, null);
+			target.TransformInput(name2, new int[0], new int[0], nameCE2, null, null);
+			target.TransformInput(name3, new int[0], new int[0], nameCE3, null, null);
+			target.TransformInput(name4, new int[0], new int[0], nameCE4, null, null);
 
 			List<KeyValuePair<int, int>> actual;
 			actual = target.FindRangesWithSameValues(nameCE);

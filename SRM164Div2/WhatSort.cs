@@ -279,7 +279,7 @@ namespace SRM164Div2
 				}
 				else
 				{
-					return SortUsed.NOT;
+					return SortUsed.IND; // NO ONE WAS EVER ASSIGNED, both can be candidates continue case
 				}
 			}
 		}
