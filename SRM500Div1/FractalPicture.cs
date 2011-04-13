@@ -8,12 +8,12 @@ namespace SRM500Div1
 {
 	public class FractalPicture
 	{
-		class Line
+		public class Line
 		{
-			public int RootX { get; set; }
-			public int RootY { get; set; }
-			public int EndX { get; set; }
-			public int EndY { get; set; }
+			public double RootX { get; set; }
+			public double RootY { get; set; }
+			public double EndX { get; set; }
+			public double EndY { get; set; }
 			public double? Length { get; set; }
 			public bool IsFinal { get; set; }
 
@@ -25,10 +25,10 @@ namespace SRM500Div1
 
 		class Rect
 		{
-			public int X1 { get; set; }
-			public int Y1 { get; set; }
-			public int X2 { get; set; }
-			public int Y2 { get; set; }
+			public double X1 { get; set; }
+			public double Y1 { get; set; }
+			public double X2 { get; set; }
+			public double Y2 { get; set; }
 
 			public double FindLineLengthIntersectedWith(Line line)
 			{
@@ -45,7 +45,12 @@ namespace SRM500Div1
 				x = GetSideLengthInRect(x1line, x2Line, X1, X2);
 				y = GetSideLengthInRect(y1Line, y2Line, Y1, Y2);
 
-				return Math.Sqrt(x*x + y*y); // TODO One of them will be zero for this problem hence this call can be avoided
+				if (x == 0F || y == 0F)
+					return 0; // TODO Need to come up a better way.
+				else
+				{
+					return Math.Sqrt(x * x + y * y); // TODO One of them will be zero for this problem hence this call can be avoided
+				}
 			}
 
 			private static double GetSideLengthInRect(double x1line, double x2Line, double X1, double X2)
@@ -129,14 +134,70 @@ namespace SRM500Div1
 			}
 
 			// TODO Recursion may have implication on member list LineList
+			List<Line> newLines = new List<Line>();
+
 			foreach (Line line in LineList)
 			{
 				if (line.IsFinal == false)
 				{
-					
+					newLines.AddRange(ProcessLine(line));
 				}
 			}
 
+			LineList.AddRange(newLines);
+		}
+
+		private Line[] ProcessLine(Line line)
+		{
+			Debug.Assert(line.IsFinal == false);
+			Line[] newlines = { new Line(), new Line(), new Line() };
+			
+			double delX = line.EndX - line.RootX;
+			double delY = line.EndY - line.RootY;
+
+			Debug.Assert(delX == 0.0 || delY == 0.0, "Lines should be parallel or perpendicular to coordinate system");
+
+			// find 2:1 point on line
+			double newRootX = line.RootX + 2 * delX / 3;
+			double newRootY = line.RootY + 2 * delY / 3;
+
+			double oneThirdLength = Math.Abs(line.ComputeLength() / 3);
+
+			foreach (Line ln in newlines)
+			{
+				ln.IsFinal = false;
+				ln.RootX = newRootX;
+				ln.RootY = newRootY;
+			}
+
+			// Sub line of original one
+			newlines[0].EndX = line.EndX;
+			newlines[0].EndY = line.EndY;
+
+			// 90 Clockwise
+			if (delY == 0.0)
+			{
+				newlines[1].EndX = newRootX;
+				newlines[2].EndX = newRootX;
+
+				newlines[1].EndY = newRootY + oneThirdLength;
+				newlines[2].EndY = newRootY - oneThirdLength;
+			}
+			else
+			{
+				Debug.Assert(delX == 0.0, "Lines should be parallel or perpendicular to coordinate system");
+				newlines[1].EndY = newRootY;
+				newlines[2].EndY = newRootY;
+
+				newlines[1].EndX = newRootX + oneThirdLength;
+				newlines[2].EndX = newRootX - oneThirdLength;
+			}
+
+			line.EndX = newRootX;
+			line.EndY = newRootY;
+			line.IsFinal = true;
+
+			return newlines;
 		}
 	}
 }
