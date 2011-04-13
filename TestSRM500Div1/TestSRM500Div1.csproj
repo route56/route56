@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FractalPictureTest.cs" />
+    <Compile Include="FractalPicture_RectTest.cs" />
     <Compile Include="MafiaGameTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
