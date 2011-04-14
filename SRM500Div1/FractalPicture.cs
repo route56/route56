@@ -63,6 +63,12 @@ namespace SRM500Div1
 						&& this.Y2 == other.Y2;
 				}
 			}
+
+			internal bool IsPointInside(double x, double y)
+			{
+				return this.X1 <= x && x <= this.X2
+					&& this.Y1 <= y && y <= this.Y2;
+			}
 		}
 
 		public class Line
@@ -132,7 +138,7 @@ namespace SRM500Div1
 						length += GetLength(ln, frame, generationToGo - 1);
 					}
 
-					// TODO Figure out if remaining segment is contained in the rect
+					length += GetLineIntersectionWithRect(line, frame);
 					break;
 
 				case RectOverlap.SubRect:
@@ -143,6 +149,57 @@ namespace SRM500Div1
 			}
 
 			return length;
+		}
+
+		public double GetLineIntersectionWithRect(Line line, Rect frame)
+		{
+			double xmin = 0;
+			double ymin = 0;
+			double xmax = 0;
+			double ymax = 0;
+
+			if (line.RootX < line.EndX)
+			{
+
+			}
+			double x
+			double xmax = 
+			bool isRootInside = frame.IsPointInside();
+			bool isEndInside = frame.IsPointInside(line.EndX, line.EndY);
+
+			if (isRootInside && isEndInside)
+			{
+				return line.GetLength();
+			}
+
+			if (!isRootInside && !isEndInside)
+			{
+				return 0;
+			}
+
+			// Find intersecting point with Assumption lines are parallel to rect sides
+			if (line.RootX == line.EndX)
+			{
+				// parallel to y-axis
+								
+			}
+			else
+			{
+				Debug.Assert(line.RootY == line.EndY);
+
+				// Parallel to x-axis
+				if (isRootInside)
+				{
+					return Math.Abs(line.RootX
+				}
+				else
+				{
+					Debug.Assert(isEndInside);
+
+				}
+
+
+			}
 		}
 
 		/// <summary>

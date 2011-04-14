@@ -179,5 +179,42 @@ namespace TestSRM500Div1
 			actual = target.GetNextGenRect(line);
 			Assert.AreEqual(expected, actual);
 		}
+
+		/// <summary>
+		///A test for GetLineIntersectionWithRect
+		///</summary>
+		[TestMethod()]
+		public void GetLineIntersectionWithRectTest()
+		{
+			RunGetLineIntersectionWithRectTestFor(
+				5, 5, 10, 5,
+				0, 0, 20, 20,
+				5, "whole line is inside");
+
+			RunGetLineIntersectionWithRectTestFor(
+				5, 5, 10, 5,
+				0, 0, 8, 8,
+				3, "Partial line");
+
+			RunGetLineIntersectionWithRectTestFor(
+				5, 5, 10, 5,
+				5, 5, 8, 8,
+				3, "partial line with touching border");
+
+			RunGetLineIntersectionWithRectTestFor(
+				5, 5, 10, 5,
+				0, 0, 4, 4,
+				0, "Line is outside the box");
+		}
+
+		private void RunGetLineIntersectionWithRectTestFor(int p, int p_2, int p_3, int p_4, int p_5, int p_6, int p_7, int p_8, int expected, string assertMsg)
+		{
+			FractalPicture target = new FractalPicture();
+			FractalPicture.Line line = new FractalPicture.Line() { RootX = p, RootY = p_2, EndX = p_3, EndY = p_4 };
+			FractalPicture.Rect frame = new FractalPicture.Rect() { X1 = p_5, Y1 = p_6, X2 = p_7, Y2 = p_8 };
+			double actual;
+			actual = target.GetLineIntersectionWithRect(line, frame);
+			Assert.AreEqual(expected, actual, assertMsg);
+		}
 	}
 }
