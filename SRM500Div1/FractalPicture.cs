@@ -22,242 +22,32 @@ namespace SRM500Div1
 			public double Y1 { get; set; }
 			public double X2 { get; set; }
 			public double Y2 { get; set; }
-			/// <summary>
-			/// Line A and B wrt C and D. e stands for equality
-			/// </summary>
-			enum FourLineOrder
-			{
-				ABCD,
-					ABeCD,
-				ACBD,
-					ACBeD,
-				ACDB,
-					AeCBD,
-						AeCBeD,
-					AeCDB,
-				CABD,
-					CABeD,
-				CADB,
-					CAeDB,
-				CDAB,
-			}
-
-			// TODO Get rid of this logic and use http://stackoverflow.com/questions/306316/determine-if-two-rectangles-overlap-each-other
-			private FourLineOrder GetFourLineOrder(double a, double b, double c, double d)
-			{
-				Debug.Assert(a <= b);
-				Debug.Assert(c <= d);
-
-				if (b < c)
-				{
-					return FourLineOrder.ABCD;
-				}
-
-				if (b == c)
-				{
-					return FourLineOrder.ABeCD;
-				}
-
-				if (a < c && c < b && b < d)
-				{
-					return FourLineOrder.ACBD;
-				}
-
-				if (a < c && b == d)
-				{
-					return FourLineOrder.ACBeD;
-				}
-
-				if (a < c && d < b)
-				{
-					return FourLineOrder.ACDB;
-				}
-
-				if (a == c && b < d)
-				{
-					return FourLineOrder.AeCBD;
-				}
-
-				if (a == c && c < b && b == d)
-				{
-					return FourLineOrder.AeCBeD;
-				}
-
-				if (a == c && d < b)
-				{
-					return FourLineOrder.AeCDB;
-				}
-
-				if (c < a && b < d)
-				{
-					return FourLineOrder.CABD;
-				}
-
-				if (c < a && b == d)
-				{
-					return FourLineOrder.CABeD;
-				}
-
-				if (c < a && a < d && d < b)
-				{
-					return FourLineOrder.CADB;
-				}
-
-				if (c < a && a == d)
-				{
-					return FourLineOrder.CAeDB;
-				}
-
-				if (d < a)
-				{
-					return FourLineOrder.CDAB;
-				}
-
-				Debug.Assert(false, "unreachable code");
-				throw new NotImplementedException();
-			}
 
 			public RectOverlap OverlapWRT(Rect other)
 			{
-				RectOverlap overlap = RectOverlap.Disjoint;
+				bool AreDisjoint =
+						this.X2 < other.X1 || other.X2 < this.X1
+					|| this.Y2 < other.Y1 || other.Y2 < this.Y1;
 
-				FourLineOrder xOrder = GetFourLineOrder(this.X1, this.X2, other.X1, other.X2);
-				FourLineOrder yOrder = GetFourLineOrder(this.Y1, this.Y2, other.Y1, other.Y2);
+				if (AreDisjoint)
+					return RectOverlap.Disjoint;
 
-				switch (xOrder)
-				{
-					case FourLineOrder.ABCD:
-					case FourLineOrder.CDAB:
-						overlap = RectOverlap.Disjoint;
-						break;
-					case FourLineOrder.ABeCD:
-					case FourLineOrder.ACBD:
-					case FourLineOrder.ACBeD:
-					case FourLineOrder.AeCBD:
-					case FourLineOrder.AeCBeD:
-					case FourLineOrder.AeCDB:
-					case FourLineOrder.CABeD:
-					case FourLineOrder.CADB:
-					case FourLineOrder.CAeDB:
-						overlap = OnXOrderIntersecting(yOrder);
-						break;
-					case FourLineOrder.ACDB:
-						overlap = OnXOrderSuper(yOrder);
-						break;
-					case FourLineOrder.CABD:
-						overlap = OnXOrderSub(yOrder);
-						break;
-					default:
-						Debug.Assert(false);
-						break;
-				}
+				// Type of non disjoint
+				bool strictSuperRect =
+					this.X1 < other.X1 && other.X2 < this.X2
+					&& this.Y1 < other.Y1 && other.Y2 < this.Y2;
 
-				return overlap;
-			}
+				bool strictSubRect =
+					other.X1 < this.X1 && this.X2 < other.X2
+					&& other.Y1 < this.Y1 && this.Y2 < other.Y2;
 
-			private RectOverlap OnXOrderSub(FourLineOrder yOrder)
-			{
-				RectOverlap overlap = RectOverlap.Disjoint;
+				if (strictSuperRect)
+					return RectOverlap.SuperRect;
 
-				switch (yOrder)
-				{
-					case FourLineOrder.ABCD:
-					case FourLineOrder.CDAB:
-						overlap = RectOverlap.Disjoint;
-						break;
-					case FourLineOrder.ABeCD:
-					case FourLineOrder.ACBD:
-					case FourLineOrder.ACBeD:
-					case FourLineOrder.AeCBD:
-					case FourLineOrder.AeCBeD:
-					case FourLineOrder.AeCDB:
-					case FourLineOrder.CABeD:
-					case FourLineOrder.CADB:
-					case FourLineOrder.CAeDB:
-						overlap = RectOverlap.Intersecting;
-						break;
-					case FourLineOrder.ACDB:
-						overlap = RectOverlap.Intersecting;
-						break;
-					case FourLineOrder.CABD:
-						overlap = RectOverlap.SubRect;
-						break;
-					default:
-						Debug.Assert(false);
-						break;
-				}
+				if (strictSubRect)
+					return RectOverlap.SubRect;
 
-				return overlap;
-			}
-
-			private RectOverlap OnXOrderSuper(FourLineOrder yOrder)
-			{
-				RectOverlap overlap = RectOverlap.Disjoint;
-
-				switch (yOrder)
-				{
-					case FourLineOrder.ABCD:
-					case FourLineOrder.CDAB:
-						overlap = RectOverlap.Disjoint;
-						break;
-					case FourLineOrder.ABeCD:
-					case FourLineOrder.ACBD:
-					case FourLineOrder.ACBeD:
-					case FourLineOrder.AeCBD:
-					case FourLineOrder.AeCBeD:
-					case FourLineOrder.AeCDB:
-					case FourLineOrder.CABeD:
-					case FourLineOrder.CADB:
-					case FourLineOrder.CAeDB:
-						overlap = RectOverlap.Intersecting;
-						break;
-					case FourLineOrder.ACDB:
-						overlap = RectOverlap.SuperRect;
-						break;
-					case FourLineOrder.CABD:
-						overlap = RectOverlap.Intersecting;
-						break;
-					default:
-						Debug.Assert(false);
-						break;
-				}
-
-				return overlap;
-			}
-
-			private RectOverlap OnXOrderIntersecting(FourLineOrder yOrder)
-			{
-				RectOverlap overlap = RectOverlap.Disjoint;
-
-				switch (yOrder)
-				{
-					case FourLineOrder.ABCD:
-					case FourLineOrder.CDAB:
-						overlap = RectOverlap.Disjoint;
-						break;
-					case FourLineOrder.ABeCD:
-					case FourLineOrder.ACBD:
-					case FourLineOrder.ACBeD:
-					case FourLineOrder.AeCBD:
-					case FourLineOrder.AeCBeD:
-					case FourLineOrder.AeCDB:
-					case FourLineOrder.CABeD:
-					case FourLineOrder.CADB:
-					case FourLineOrder.CAeDB:
-						overlap = RectOverlap.Intersecting;
-						break;
-					case FourLineOrder.ACDB:
-						overlap = RectOverlap.Intersecting;
-						break;
-					case FourLineOrder.CABD:
-						overlap = RectOverlap.Intersecting;
-						break;
-					default:
-						Debug.Assert(false);
-						break;
-				}
-
-				return overlap;
+				return RectOverlap.Intersecting;
 			}
 
 			public override bool Equals(object obj)
