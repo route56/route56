@@ -205,6 +205,11 @@ namespace TestSRM500Div1
 				5, 5, 10, 5,
 				0, 0, 4, 4,
 				0, "Line is outside the box");
+
+			RunGetLineIntersectionWithRectTestFor(
+				-5, 5, 10, 5,
+				0, 0, 8, 8,
+				8, "End Points outside but intercept the rectangle");
 		}
 
 		private void RunGetLineIntersectionWithRectTestFor(int p, int p_2, int p_3, int p_4, int p_5, int p_6, int p_7, int p_8, int expected, string assertMsg)

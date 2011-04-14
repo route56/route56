@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using Geometry;
 
 namespace SRM500Div1
 {
@@ -153,53 +154,56 @@ namespace SRM500Div1
 
 		public double GetLineIntersectionWithRect(Line line, Rect frame)
 		{
-			double xmin = 0;
-			double ymin = 0;
-			double xmax = 0;
-			double ymax = 0;
+			LineIntersection helper = new LineIntersection();
 
-			if (line.RootX < line.EndX)
-			{
+			// Sides of Rect.
+			//frame.X1, frame.Y1, frame.X1, frame.Y2
+			//frame.X1, frame.Y2, frame.X2, frame.Y2
+			//frame.X2, frame.Y2, frame.X2, frame.Y1
+			//frame.X2, frame.Y1, frame.X1, frame.Y1
 
-			}
-			double x
-			double xmax = 
-			bool isRootInside = frame.IsPointInside();
-			bool isEndInside = frame.IsPointInside(line.EndX, line.EndY);
+			Tuple<IntersectionType, double, double> left
+				= helper.FindIntersectionPoint(line.RootX, line.RootY, line.EndX, line.EndY,
+				frame.X1, frame.Y1, frame.X1, frame.Y2);
+			Tuple<IntersectionType, double, double> top
+				= helper.FindIntersectionPoint(line.RootX, line.RootY, line.EndX, line.EndY,
+				frame.X1, frame.Y2, frame.X2, frame.Y2);
+			Tuple<IntersectionType, double, double> right
+				= helper.FindIntersectionPoint(line.RootX, line.RootY, line.EndX, line.EndY,
+				frame.X2, frame.Y2, frame.X2, frame.Y1);
+			Tuple<IntersectionType, double, double> bottom
+				= helper.FindIntersectionPoint(line.RootX, line.RootY, line.EndX, line.EndY,
+				frame.X2, frame.Y1, frame.X1, frame.Y1);
 
-			if (isRootInside && isEndInside)
-			{
-				return line.GetLength();
-			}
+			bool foundNoIntersection
+				= left.Item1 == IntersectionType.DONT_INTERSECT
+				&& top.Item1 == IntersectionType.DONT_INTERSECT
+				&& right.Item1 == IntersectionType.DONT_INTERSECT
+				&& bottom.Item1 == IntersectionType.DONT_INTERSECT;
 
-			if (!isRootInside && !isEndInside)
-			{
+			if (foundNoIntersection)
 				return 0;
-			}
 
-			// Find intersecting point with Assumption lines are parallel to rect sides
-			if (line.RootX == line.EndX)
+			bool foundAtleastOneCollinear
+				= left.Item1 == IntersectionType.COLLINEAR
+				|| top.Item1 == IntersectionType.COLLINEAR
+				|| right.Item1 == IntersectionType.COLLINEAR
+				|| bottom.Item1 == IntersectionType.COLLINEAR;
+
+			if (foundAtleastOneCollinear)
 			{
-				// parallel to y-axis
-								
+				// Handle collinear cases
 			}
 			else
 			{
-				Debug.Assert(line.RootY == line.EndY);
-
-				// Parallel to x-axis
-				if (isRootInside)
+				// At least one intersection is true.
+				if (left.Item1 == IntersectionType.DO_INTERSECT)
 				{
-					return Math.Abs(line.RootX
+					
 				}
-				else
-				{
-					Debug.Assert(isEndInside);
-
-				}
-
-
 			}
+
+			throw new NotImplementedException();
 		}
 
 		/// <summary>
