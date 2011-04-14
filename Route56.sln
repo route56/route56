@@ -28,9 +28,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCProblemParser", "TCProble
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geometry", "Geometry\Geometry.csproj", "{163C0652-472C-42A8-B941-44577CA9DB90}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRM211Div1", "SRM211Div1\SRM211Div1.csproj", "{09215824-230C-4E6A-8060-36CAD600699C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSRM211Div1", "TestSRM211Div1\TestSRM211Div1.csproj", "{4BA9E454-C822-4FFB-94CB-BECCCFD4B82A}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 11
+		SccNumberOfProjects = 13
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs25
 		SccLocalPath0 = .
@@ -64,6 +68,12 @@ Global
 		SccProjectUniqueName10 = Geometry\\Geometry.csproj
 		SccProjectName10 = Geometry
 		SccLocalPath10 = Geometry
+		SccProjectUniqueName11 = SRM211Div1\\SRM211Div1.csproj
+		SccProjectName11 = SRM211Div1
+		SccLocalPath11 = SRM211Div1
+		SccProjectUniqueName12 = TestSRM211Div1\\TestSRM211Div1.csproj
+		SccProjectName12 = TestSRM211Div1
+		SccLocalPath12 = TestSRM211Div1
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Route56.vsmdi
@@ -177,6 +187,26 @@ Global
 		{163C0652-472C-42A8-B941-44577CA9DB90}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{163C0652-472C-42A8-B941-44577CA9DB90}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{163C0652-472C-42A8-B941-44577CA9DB90}.Release|x86.ActiveCfg = Release|Any CPU
+		{09215824-230C-4E6A-8060-36CAD600699C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09215824-230C-4E6A-8060-36CAD600699C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09215824-230C-4E6A-8060-36CAD600699C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{09215824-230C-4E6A-8060-36CAD600699C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{09215824-230C-4E6A-8060-36CAD600699C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{09215824-230C-4E6A-8060-36CAD600699C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09215824-230C-4E6A-8060-36CAD600699C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09215824-230C-4E6A-8060-36CAD600699C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{09215824-230C-4E6A-8060-36CAD600699C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{09215824-230C-4E6A-8060-36CAD600699C}.Release|x86.ActiveCfg = Release|Any CPU
+		{4BA9E454-C822-4FFB-94CB-BECCCFD4B82A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BA9E454-C822-4FFB-94CB-BECCCFD4B82A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BA9E454-C822-4FFB-94CB-BECCCFD4B82A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4BA9E454-C822-4FFB-94CB-BECCCFD4B82A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4BA9E454-C822-4FFB-94CB-BECCCFD4B82A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4BA9E454-C822-4FFB-94CB-BECCCFD4B82A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BA9E454-C822-4FFB-94CB-BECCCFD4B82A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BA9E454-C822-4FFB-94CB-BECCCFD4B82A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4BA9E454-C822-4FFB-94CB-BECCCFD4B82A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4BA9E454-C822-4FFB-94CB-BECCCFD4B82A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
