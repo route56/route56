@@ -42,6 +42,7 @@ namespace SRM500Div1
 				CDAB,
 			}
 
+			// TODO Get rid of this logic and use http://stackoverflow.com/questions/306316/determine-if-two-rectangles-overlap-each-other
 			private FourLineOrder GetFourLineOrder(double a, double b, double c, double d)
 			{
 				Debug.Assert(a <= b);
@@ -97,7 +98,7 @@ namespace SRM500Div1
 					return FourLineOrder.CABeD;
 				}
 
-				if (c < a && d < b)
+				if (c < a && a < d && d < b)
 				{
 					return FourLineOrder.CADB;
 				}

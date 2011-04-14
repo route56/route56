@@ -89,9 +89,14 @@ namespace TestSRM500Div1
 				0,0,10,10,
 				5,5,20,20,
 				FractalPicture.RectOverlap.Intersecting);
+
+			RunOverlapWRTTestFor(
+		-0.03703703703703809, 80.888888888888886, 0.03703703703703809, 81.0,
+		-1.0, 0.0, 1.0, 53.0,
+		FractalPicture.RectOverlap.Disjoint);
 		}
 
-		private void RunOverlapWRTTestFor(int p, int p_2, int p_3, int p_4, int p_5, int p_6, int p_7, int p_8, FractalPicture.RectOverlap expected)
+		private void RunOverlapWRTTestFor(double p, double p_2, double p_3, double p_4, double p_5, double p_6, double p_7, double p_8, FractalPicture.RectOverlap expected)
 		{
 			FractalPicture.Rect target = new FractalPicture.Rect() { X1 = p, Y1 = p_2, X2 = p_3, Y2 = p_4 };
 			FractalPicture.Rect other = new FractalPicture.Rect() { X1 = p_5, Y1 = p_6, X2 = p_7, Y2 = p_8 };

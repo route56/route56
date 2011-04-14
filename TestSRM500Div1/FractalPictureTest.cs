@@ -77,7 +77,10 @@ namespace TestSRM500Div1
 53,
 53.0,
 "Only one part of fractal segments belongs to this rectangle: (0, 0) - (0, 53).");
-
+		}
+		[TestMethod()]
+		public void getLengthTest2()
+		{
 			RunGetLengthTestFor(
 			1,
 			1,
@@ -86,6 +89,10 @@ namespace TestSRM500Div1
 			0.0,
 			"No parts of fractal segments belong to this rectangle.");
 
+		}
+		[TestMethod()]
+		public void getLengthTest3()
+		{
 			RunGetLengthTestFor(
 -10,
 54,
@@ -93,6 +100,10 @@ namespace TestSRM500Div1
 55,
 21.0,
 "Two parts of fractal segments belong to this rectangle: (-10, 54) - (10, 54) and (0, 54) - (0, 55). Note that parts that lie on the rectangle's border also belong to the rectangle.");
+		}
+		[TestMethod()]
+		public void getLengthTest4()
+		{
 			RunGetLengthTestFor(
 			14,
 			45,
