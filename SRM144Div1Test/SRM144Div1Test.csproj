@@ -63,10 +63,6 @@
       <Project>{662087B1-13C4-4E54-B249-B0BE80D8C07E}</Project>
       <Name>SRM144Div1</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UnitTestHelpers\UnitTestHelpers.csproj">
-      <Project>{4E4503D3-842B-4990-B6EB-C5BA450887C5}</Project>
-      <Name>UnitTestHelpers</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

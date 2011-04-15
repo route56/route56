@@ -7,24 +7,24 @@ namespace UnitTestHelpers
 {
 	public class StringHelpers
 	{
-		public static bool AreEqualStringsArrays(string[] expected, string[] actual)
-		{
-			if (expected.Length != actual.Length)
-			{
-				return false;
-			}
+		//public static bool AreEqualStringsArrays(string[] expected, string[] actual)
+		//{
+		//    if (expected.Length != actual.Length)
+		//    {
+		//        return false;
+		//    }
 
-			int i = 0;
-			foreach (string s in expected)
-			{
-				if (s.CompareTo(actual[i]) != 0)
-				{
-					return false;
-				}
-				i++;
-			}
+		//    int i = 0;
+		//    foreach (string s in expected)
+		//    {
+		//        if (s.CompareTo(actual[i]) != 0)
+		//        {
+		//            return false;
+		//        }
+		//        i++;
+		//    }
 
-			return true;
-		}
+		//    return true;
+		//}
 	}
 }

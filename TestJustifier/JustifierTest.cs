@@ -76,7 +76,7 @@ namespace TestJustifier
 			string[] expected = { "  BOB", "TOMMY", "  JIM" };
 			string[] actual;
 			actual = target.justify(textIn);
-			Assert.IsTrue(StringHelpers.AreEqualStringsArrays(expected, actual));
+			CollectionAssert.AreEqual(expected, actual);
 		}
 
 		/// <summary>
@@ -90,7 +90,7 @@ namespace TestJustifier
 			string[] expected = { "JOHN", "JAKE", "ALAN", "BLUE" };
 			string[] actual;
 			actual = target.justify(textIn);
-			Assert.IsTrue(StringHelpers.AreEqualStringsArrays(expected, actual));
+			CollectionAssert.AreEqual(expected, actual);
 		}
 
 		/// <summary>
@@ -104,7 +104,7 @@ namespace TestJustifier
 			string[] expected = { "LONGEST", "      A", " LONGER", "  SHORT" };
 			string[] actual;
 			actual = target.justify(textIn);
-			Assert.IsTrue(StringHelpers.AreEqualStringsArrays(expected, actual));
+			CollectionAssert.AreEqual(expected, actual);
 		}
 	}
 }

@@ -70,7 +70,8 @@ namespace SRM144Div1Test
 			Lottery target = new Lottery();
 			string[] actual;
 			actual = target.sortByOdds(rules);
-			Assert.IsTrue(StringHelpers.AreEqualStringsArrays(expected, actual));
+			
+			CollectionAssert.AreEqual(expected, actual);
 		}
 
 		/// <summary>

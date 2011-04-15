@@ -76,7 +76,7 @@ namespace TestJustifier
 			string[] expected = { "HOST", "JO", "BOB", "HOSTESS", "DAVE", "SAM" };
 			string[] actual;
 			actual = target.seating(attendees);
-			Assert.IsTrue(UnitTestHelpers.StringHelpers.AreEqualStringsArrays(expected, actual));
+			CollectionAssert.AreEqual(expected, actual);
 		}
 
 		/// <summary>
@@ -91,7 +91,7 @@ namespace TestJustifier
 			string[] expected = { };
 			string[] actual;
 			actual = target.seating(attendees);
-			Assert.IsTrue(UnitTestHelpers.StringHelpers.AreEqualStringsArrays(expected, actual));
+			CollectionAssert.AreEqual(expected, actual);
 		}
 
 		/// <summary>
@@ -106,7 +106,7 @@ namespace TestJustifier
 			string[] expected = { };
 			string[] actual;
 			actual = target.seating(attendees);
-			Assert.IsTrue(UnitTestHelpers.StringHelpers.AreEqualStringsArrays(expected, actual));
+			CollectionAssert.AreEqual(expected, actual);
 		}
 
 		/// <summary>
@@ -122,7 +122,7 @@ namespace TestJustifier
 
 			string[] actual;
 			actual = target.seating(attendees);
-			Assert.IsTrue(UnitTestHelpers.StringHelpers.AreEqualStringsArrays(expected, actual));
+			CollectionAssert.AreEqual(expected, actual);
 		}
 	}
 }

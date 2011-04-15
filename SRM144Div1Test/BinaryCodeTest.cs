@@ -70,7 +70,7 @@ namespace SRM144Div1Test
 			BinaryCode target = new BinaryCode();
 			string[] actual;
 			actual = target.decode(message);
-			Assert.IsTrue( StringHelpers.AreEqualStringsArrays(expected, actual));
+			CollectionAssert.AreEqual(expected, actual);
 		}
 
 		/// <summary>

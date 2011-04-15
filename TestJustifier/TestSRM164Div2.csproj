@@ -64,10 +64,6 @@
       <Project>{B24A0462-CC43-4EEC-AE39-09155139D715}</Project>
       <Name>SRM164Div2</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UnitTestHelpers\UnitTestHelpers.csproj">
-      <Project>{4E4503D3-842B-4990-B6EB-C5BA450887C5}</Project>
-      <Name>UnitTestHelpers</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Shadow Include="Test References\SRM164Div2.accessor" />
