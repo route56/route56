@@ -97,7 +97,7 @@ namespace SRM211Div1
 
 				Tuple<int, int>[] sides = 
 					{ 
-						new Tuple<int,int>(current.Item1 - 1, current.Item2),
+						new Tuple<int, int>(current.Item1 - 1, current.Item2),
 						new Tuple<int, int>(current.Item1, current.Item2 - 1),
 						new Tuple<int, int>(current.Item1 + 1, current.Item2),
 						new Tuple<int, int>(current.Item1, current.Item2 + 1)
@@ -105,8 +105,7 @@ namespace SRM211Div1
 
 				foreach (Tuple<int, int> side in sides)
 				{
-					if (side.Item1 >= 0 && side.Item1 < RowMax
-						&& side.Item2 >= 0 && side.Item2 < ColMax)
+					if (IsSideWithinRectangle(side))
 					{
 						if (visited[side.Item1, side.Item2] == false)
 						{
@@ -118,6 +117,12 @@ namespace SRM211Div1
 			}
 
 			return area;
+		}
+
+		private static bool IsSideWithinRectangle(Tuple<int, int> side)
+		{
+			return side.Item1 >= 0 && side.Item1 < RowMax
+									&& side.Item2 >= 0 && side.Item2 < ColMax;
 		}
 	}
 }

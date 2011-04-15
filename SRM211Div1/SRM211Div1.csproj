@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="2003TCCCSemifinalsRoom4_275.txt" />
+    <Compile Include="Circuits.cs" />
     <Compile Include="grafixMask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

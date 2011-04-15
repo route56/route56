@@ -1,0 +1,121 @@
+﻿
+Problem Statement
+    
+An essential part of circuit design and general system optimization is critical path analysis. On a chip, the critical path represents the longest path any signal would have to travel during execution. In this problem we will be analyzing chip designs to determine their critical path length. The chips in this problem will not contain any cycles, i.e. there exists no path from one component of a chip back to itself.  Given a string[] connects representing the wiring scheme, and a string[] costs representing the cost of each connection, your method will return the size of the most costly path between any 2 components on the chip. In other words, you are to find the longest path in a directed, acyclic graph. Element j of connects will list the components of the chip that can be reached directly from the jth component (0-based). Element j of costs will list the costs of each connection mentioned in the jth element of connects. As mentioned above, the chip will not contain any cyclic paths. For example:
+connects = {"1 2",
+            "2",
+            ""}
+costs    = {"5 3",
+            "7",
+            ""}
+In this example, component 0 connects to components 1 and 2 with costs 5 and 3 respectively. Component 1 connects to component 2 with a cost of 7. All connections mentioned are directed. This means a connection from component i to component j does not imply a connection from component j to component i. Since we are looking for the longest path between any 2 components, your method would return 12.
+Definition
+    
+Class:
+Circuits
+Method:
+howLong
+Parameters:
+string[], string[]
+Returns:
+int
+Method signature:
+int howLong(string[] connects, string[] costs)
+(be sure your method is public)
+    
+
+Constraints
+-
+connects must contain between 2 and 50 elements inclusive
+-
+connects must contain the same number of elements as costs
+-
+Each element of connects must contain between 0 and 50 characters inclusive
+-
+Each element of costs must contain between 0 and 50 characters inclusive
+-
+Element i of connects must contain the same number of integers as element i of costs
+-
+Each integer in each element of connects must be between 0 and the size of connects-1 inclusive
+-
+Each integer in each element of costs must be between 1 and 1000 inclusive
+-
+Each element of connects may not contain repeated integers
+-
+Each element of connects must be a single space delimited list of integers, each of which has no extra leading zeros. There will be no leading or trailing whitespace.
+-
+Each element of costs must be a single space delimited list of integers, each of which has no extra leading zeros. There will be no leading or trailing whitespace.
+-
+The circuit may not contain any cycles
+-
+There will be at least 1 connection.
+Examples
+0)
+
+    
+{"1 2",
+ "2",
+ ""}
+{"5 3",
+ "7",
+ ""}
+Returns: 12
+From above
+1)
+
+    
+{"1 2 3 4 5","2 3 4 5","3 4 5","4 5","5",""}
+{"2 2 2 2 2","2 2 2 2","2 2 2","2 2","2",""}
+Returns: 10
+The longest path goes from 0-1-2-3-4-5 for a cost of 10.
+2)
+
+    
+{"1","2","3","","5","6","7",""}
+{"2","2","2","","3","3","3",""}
+Returns: 9
+The 0-1-2-3 path costs 6 whereas the 4-5-6-7 path costs 9
+3)
+
+    
+{"","2 3 5","4 5","5 6","7","7 8","8 9","10",
+ "10 11 12","11","12","12",""}
+{"","3 2 9","2 4","6 9","3","1 2","1 2","5",
+ "5 6 9","2","5","3",""}
+Returns: 22
+
+4)
+
+    
+{"","2 3","3 4 5","4 6","5 6","7","5 7",""}
+{"","30 50","19 6 40","12 10","35 23","8","11 20",""}
+Returns: 105
+
+This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+
+
+Problem: 275
+Test Case: 5
+Succeeded: No
+Execution Time: 15 ms
+Args:
+{{"", "", "", "38 35 14 40 21 19 27 4 31", "", "", "", "", "", "", "", "", "", "1 27 37", "", "29 6 38", "", "1 45 28", "20 26 24 10 17 6", "", "47 1 24", "", "", "13 7 40 43 8 30 48 10 19", "", "", "7 45 0 2 47", "", "", "", "", "", "", "", "", "", "", "45 44", "7 12 28", "4 19 35 9", "6 22 46", "", "48 26 3 22 19 25 40 28", "18", "", "", "13 30", "", "8 15 40 12 45 41 7 0 22", ""}, {"", "", "", "51 45 94 86 94 16 4 36 66", "", "", "", "", "", "", "", "", "", "10 39 33", "", "83 89 12", "", "13 75 97", "52 24 30 87 21 72", "", "49 15 67", "", "", "90 53 63 36 14 62 81 36 55", "", "", "96 36 87 86 90", "", "", "", "", "", "", "", "", "", "", "69 100", "48 57 47", "71 27 21 36", "17 39 49", "", "74 3 17 69 100 90 3 84", "16", "", "", "66 52", "", "40 31 97 67 85 89 90 62 87", ""}}
+
+Expected:
+426
+
+Received:
+334
+
+Problem: 275
+Test Case: 6
+Succeeded: No
+Execution Time: 0 ms
+Args:
+{{"", "", "", "46", "", "21 29 15 43 30 16", "", "35 18", "", "", "", "", "", "", "47 38", "", "", "", "", "", "", "28 35 30 32 44", "24 18 14 47 1", "", "", "40 29 43 31 13", "", "", "33 34", "13 17 4 40 8 27 16 14 31", "3 18", "6 33 23 14 36", "", "", "", "", "", "39 40", "", "3 14 20 38 0 42 35 22 15", "", "", "14 5 23 8", "", "", "", "48 19 41", "", "23", "1 37 12 28 4 43"}, {"", "", "", "3", "", "19 78 78 19 40 81", "", "2 6", "", "", "", "", "", "", "25 37", "", "", "", "", "", "", "89 17 31 80 70", "74 5 17 38 94", "", "", "66 20 18 18 100", "", "", "95 60", "19 57 39 28 93 96 71 21 2", "60 48", "56 94 50 11 20", "", "", "", "", "", "10 5", "", "22 8 39 70 68 64 73 99 93", "", "", "93 56 70 49", "", "", "", "77 29 72", "", "54", "56 78 54 48 93 47"}}
+
+Expected:
+452
+
+Received:
+203
