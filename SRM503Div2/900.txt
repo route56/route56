@@ -1,0 +1,76 @@
+﻿
+Problem Statement
+    
+The Grid Kingdom lies on a plane. There are N cities and M villages in the Grid Kingdom, each is a point on the plane. The i-th city is located at coordinates (cityX[i], cityY[i]) and the i-th village is located at coordinates (villageX[i], villageY[i]). Initially, there are no roads in the kingdom, so no village is initially connected to any city.  To improve this, the king has ordered that each village shall be connected to a city by a system of roads. The scheme for building the roads is as follows:  While there exists a village that is not connected to any city:
+Pick one unconnected village, call it V.
+Select a point, X, which is either a city or a village-that-is-already-connected-to-a-city.
+Construct a road from V to X. The length of this road is equal to the Euclidean Distance between points V and X. V is now connected to a city.
+You are the king's advisor (for the day) and are in charge of applying the scheme above such that the total length of the constructed roads is minimum. Return this total length.
+Definition
+    
+Class:
+KingdomXCitiesandVillagesAnother
+Method:
+determineLength
+Parameters:
+int[], int[], int[], int[]
+Returns:
+double
+Method signature:
+double determineLength(int[] cityX, int[] cityY, int[] villageX, int[] villageY)
+(be sure your method is public)
+    
+
+Notes
+-
+The Euclidean distance between two points (X1, Y1) and (X2, Y2) is defined as the square root of ((X1-X2)^2 + (Y1-Y2)^2).
+-
+The returned value must have an absolute or relative error less than 1e-9.
+Constraints
+-
+cityX will contain between 1 and 50 elements, inclusive.
+-
+cityY will contain the same number of elements as cityX.
+-
+Each element in cityX and cityY will be between 0 and 1,000,000, inclusive.
+-
+villageX will contain between 1 and 50 elements, inclusive.
+-
+villageY will contain the same number of elements as villageX.
+-
+Each element in villageX and villageY will be between 0 and 1,000,000, inclusive.
+-
+The location of all cities will be distinct.
+-
+The location of all villages will be distinct.
+-
+There will be no pair of city and village that is located at the same location.
+Examples
+0)
+
+    
+{1}
+{1}
+{2,3}
+{1,1}
+Returns: 2.0
+If you pick village 0 first, the total length is 2.0. Otherwise, it's 3.0. So, the minimum possible total length is 2.0
+1)
+
+    
+{1,2}
+{1,1}
+{1,2}
+{2,2}
+Returns: 2.0
+
+2)
+
+    
+{0}
+{0}
+{2}
+{2}
+Returns: 2.8284271247461903
+
+This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
