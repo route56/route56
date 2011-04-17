@@ -109,6 +109,22 @@ new int[] { 2 }, 1, "");
 	RunBakeTest(
 new int[] { 1 },
 new int[] { 2, 3, 4 }, 1, "");
+
+			RunBakeTest(
+
+//Succeeded: No
+//Execution Time: 0 ms
+//Args:
+//{
+			new int[] {5}, new int[] {1, 9},
+		//}
+
+//Expected:
+-1, "FAILED System test case!");
+
+//Received:
+//2
+
 		}
 
 		private void RunBakeTest(int[] undertoasted,int[] overtoasted,int expected,string p_4)

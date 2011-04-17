@@ -7,21 +7,18 @@ namespace SRM503Div2
 {
 	class ToastXToast
 	{
-		public int bake(int[] undertoasted, int[] overtoasted)
+		public int bake(int[] un, int[] ov)
 		{
 			int result = -1;
 
-			List<int> un = new List<int>(undertoasted);
-			List<int> ov = new List<int>(overtoasted);
+			Array.Sort(un);
+			Array.Sort(ov);
 
-			un.Sort();
-			ov.Sort();
-
-			if (un[un.Count - 1] > ov[ov.Count -1])
+			if (un[un.Length - 1] > ov[ov.Length - 1] || un[0] > ov[0])
 			{
 				result = -1;
 			}
-			else if (un[un.Count - 1] < ov[0])
+			else if (un[un.Length - 1] < ov[0])
 			{
 				result = 1;
 			}

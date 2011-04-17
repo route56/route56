@@ -45,6 +45,8 @@ namespace SRM503Div2
 			}
 
 			grid.Sort();
+
+			throw new NotImplementedException();
 		}
 
 		private double ComputeDistance(int p, int p_2, int p_3, int p_4)
