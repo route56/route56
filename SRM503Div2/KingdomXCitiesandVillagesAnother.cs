@@ -88,10 +88,15 @@ namespace SRM503Div2
 
 				for (int i = 0; i < vvGrd.Count; i++)
 				{
-					if (vvGrd[i].i == villageAdded || vvGrd[i].j == villageAdded)
+					if (vvGrd[i].i == villageAdded)
 					{
 						toRemove.Add(i);
 						cvGrd.Add(vvGrd[i]);
+					}
+					else if (vvGrd[i].j == villageAdded)
+					{
+						toRemove.Add(i);
+						cvGrd.Add(new Data() { distance = vvGrd[i].distance, i = vvGrd[i].j, j = vvGrd[i].i });
 					}
 				}
 
