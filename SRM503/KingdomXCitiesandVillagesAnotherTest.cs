@@ -93,6 +93,48 @@ new int[] {0},
 new int[] {2},
 new int[] {2},
 2.8284271247461903);
+
+			// failed one
+			a(
+//				Problem: 900
+//Test Case: 5
+//Succeeded: No
+//Execution Time: 16 ms
+//Args:
+//{
+			new int[] {920978}, new int[] {375185}, new int[] {228692}, new int[] {991009},
+			//}
+
+//Expected:
+926552.2676956762);
+
+//Received:
+//NaN
+		}
+		[TestMethod()]
+		[DeploymentItem("SRM503Div2.dll")]
+		public void determineLengthTest2()
+		{
+			// Another failed one
+			a(
+//                Problem: 900
+//Test Case: 8
+//Succeeded: No
+//Execution Time: 0 ms
+//Args:
+//{
+			new int[] {299590}, 
+			new int[] {877251}, 
+			new int[] {481343, 726215, 152216, 471768}, 
+			new int[] {1957, 659416, 729639, 83045},
+		//}
+
+//Expected:
+1399296.0268321058);
+
+//Received:
+//1977574.6117114008
+
 		}
 
 		private void a(int[] cityX,int[] cityY,int[] villageX,int[] villageY,double expected)
