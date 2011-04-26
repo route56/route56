@@ -2,16 +2,16 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace TestSRM504Div2
+namespace SRM144Div1Test
 {
     
     
     /// <summary>
-    ///This is a test class for Class500Test and is intended
-    ///to contain all Class500Test Unit Tests
+    ///This is a test class for Class1000Test and is intended
+    ///to contain all Class1000Test Unit Tests
     ///</summary>
 	[TestClass()]
-	public class Class500Test
+	public class Class1000Test
 	{
 
 
@@ -65,13 +65,45 @@ namespace TestSRM504Div2
 
 
 		/// <summary>
-		///A test for Class500 Constructor
+		///A test for makeProgram
 		///</summary>
 		[TestMethod()]
-		public void Class500ConstructorTest()
+		public void makeProgramTest()
 		{
-			//Class500 target = new Class500();
-			//Assert.Inconclusive("TODO: Implement code to verify target");
+			RunmakeProgramTest(
+new string [] {"WWWWWWW",
+ "WWWWWWB",
+ "BBBBBWW"},
+new string[] {"WWWWWWW", "WWWWWWB", "BBBBBBB" });
+
+			RunmakeProgramTest(
+new string[] {"BBBBB",
+ "WBWBW"},
+new string[] {"BBBBB", "WWBWB" });
+
+			RunmakeProgramTest(
+new string[] {"BBBB",
+ "BBBB",
+ "BBWB",
+ "WWBB",
+ "BWBB"},
+new string[] { });
+
+			RunmakeProgramTest(
+new string[] {"WWBBBBW",
+ "BWBBWBB",
+ "BWBBWBW",
+ "BWWBWBB"},
+new string[] {"WWBBBBW", "BBBBBWB", "BBBBBBB", "BBBWBBB" });
+
+		}
+
+		private void RunmakeProgramTest(string[] output, string[] expected)
+		{
+			Class1000 target = new Class1000();
+			string[] actual;
+			actual = target.makeProgram(output);
+			CollectionAssert.AreEqual(expected, actual);
 		}
 	}
 }

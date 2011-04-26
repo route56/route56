@@ -55,13 +55,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryCodeTest.cs" />
+    <Compile Include="Class1000Test.cs" />
+    <Compile Include="Class250Test.cs" />
     <Compile Include="LotteryTest.cs" />
+    <Compile Include="MathContestTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SRM144Div1\SRM144Div1.csproj">
       <Project>{662087B1-13C4-4E54-B249-B0BE80D8C07E}</Project>
       <Name>SRM144Div1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SRM504Div2\SRM504Div2.csproj">
+      <Project>{A22105F1-ADCC-44AF-9E06-C83115104B8B}</Project>
+      <Name>SRM504Div2</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

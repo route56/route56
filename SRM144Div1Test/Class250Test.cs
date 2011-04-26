@@ -2,16 +2,16 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace TestSRM504Div2
+namespace SRM144Div1Test
 {
     
     
     /// <summary>
-    ///This is a test class for Class500Test and is intended
-    ///to contain all Class500Test Unit Tests
+    ///This is a test class for Class250Test and is intended
+    ///to contain all Class250Test Unit Tests
     ///</summary>
 	[TestClass()]
-	public class Class500Test
+	public class Class250Test
 	{
 
 
@@ -65,13 +65,57 @@ namespace TestSRM504Div2
 
 
 		/// <summary>
-		///A test for Class500 Constructor
+		///A test for makeProgram
 		///</summary>
 		[TestMethod()]
-		public void Class500ConstructorTest()
+		public void makeProgramTest()
 		{
-			//Class500 target = new Class500();
-			//Assert.Inconclusive("TODO: Implement code to verify target");
+			RunMmakeProgramTest(
+			new int[] { 1 },
+			new int[] { 2 },
+			new int[] { 2 },
+			1);
+
+			RunMmakeProgramTest(
+		new int[] { 1, 3 },
+		new int[] { 2, 1 },
+		new int[] { 2, 3 },
+		7);
+
+			RunMmakeProgramTest(
+		new int[] { 1, 3, 5 },
+		new int[] { 2, 1, 7 },
+		new int[] { 2, 3, 5 },
+		-1);
+
+
+			RunMmakeProgramTest(
+		new int[] { 1, 3, 5 },
+		new int[] { 2, 1, 7 },
+		new int[] { 1, 3, 5 },
+		1);
+
+			RunMmakeProgramTest(
+		new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+		new int[] { 5, 4, 7, 8, 3, 1, 1, 2, 3, 4, 6 },
+		new int[] { 1, 2, 3, 4, 3, 1, 1, 2, 3, 4, 6 },
+		7);
+
+
+			RunMmakeProgramTest(
+		new int[] { 1, 5, 6, 7, 8 },
+		new int[] { 1, 5, 6, 7, 8 },
+		new int[] { 1, 5, 6, 7, 8 },
+		1);
+
+		}
+
+		private void RunMmakeProgramTest(int[] A, int[] B, int[] wanted, int expected)
+		{
+			////Class250 target = new Class250(); // TODO: Initialize to an appropriate value
+			//int actual;
+			//actual = target.makeProgram(A, B, wanted);
+			//Assert.AreEqual(expected, actual);
 		}
 	}
 }

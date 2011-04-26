@@ -1,1 +1,92 @@
 ﻿
+Problem Statement
+    
+Algrid is a program that uses a single grid with cells colored white or black as input and returns a new one as output. The grid has H rows and W columns. The topmost row is row 0, the bottommost row is row H-1, the leftmost column is column 0 and the rightmost column is column W-1. The cell at row i, column j can be denoted as (i,j). The program works by evaluating pairs of contiguous cells and making decisions depending on their contents. The following pseudo-code describes how the program works:  
+For i = 0 to H-2:
+    For j = 0 to W-2:
+        //Get the current colors of cells (i,j) and (i,j+1)
+        A = Color(i,j) , B = Color(i,j+1)
+
+        If (A,B) == (White, White) Then:
+             Do nothing.
+        EndIf
+        If (A,B) == (Black, White) Then: 
+             Repaint cells (i+1,j) and (i+1,j+1) Black.
+        EndIf
+        If (A,B) == (White, Black) Then:
+             Repaint cells (i+1,j) and (i+1,j+1) White.
+        EndIf
+        if (A,B) == (Black, Black) Then:
+             Swap the colors in cells (i+1,j) and (i+1,j+1).
+        EndIf
+    EndFor
+EndFor
+  You will be given a possible output for the program as a string[] output. The j-th character in the i-th element of output represents the color of cell (i,j) where 'W' represents white and 'B' represents black. Find an input grid that would yield output as a result. If there is more than one possible result, find the lexicographically smallest one. Return the found grid as a string[] following the same format as the input. If there are no grids that would generate the wanted output, return an empty string[] instead.
+Definition
+    
+Class:
+Algrid
+Method:
+makeProgram
+Parameters:
+string[]
+Returns:
+string[]
+Method signature:
+string[] makeProgram(string[] output)
+(be sure your method is public)
+    
+
+Notes
+-
+To compare two string[]s A and B, find the smallest index i such that A[i] and B[i] differ. If A[i] is lexicographically smaller than B[i], we say that A is lexicographically smaller than B, and vice versa.
+-
+To compare two strings C and D, find the smallest index i such that the characters C[i] and D[i] differ. If C[i] is smaller in ASCII ordering than D[i], we say that C is lexicographically smaller than D, and vice versa.
+Constraints
+-
+output will contain between 2 and 16 elements, inclusive.
+-
+Each element of output will contain between 2 and 16 characters, inclusive.
+-
+All elements of output will have the same length.
+-
+Each element of output will only contain 'W' or 'B' characters.
+Examples
+0)
+
+    
+{"WWWWWWW",
+ "WWWWWWB",
+ "BBBBBWW"}
+Returns: {"WWWWWWW", "WWWWWWB", "BBBBBBB" }
+The following is another input grid that would yield the same output but is not the wanted result as it is not the lexicographically smallest:
+WWWWWWW
+WWWWWWB
+BBBBBWB
+1)
+
+    
+{"BBBBB",
+ "WBWBW"}
+Returns: {"BBBBB", "WWBWB" }
+
+2)
+
+    
+{"BBBB",
+ "BBBB",
+ "BBWB",
+ "WWBB",
+ "BWBB"}
+Returns: { }
+There is no possible input that would generate this output.
+3)
+
+    
+{"WWBBBBW",
+ "BWBBWBB",
+ "BWBBWBW",
+ "BWWBWBB"}
+Returns: {"WWBBBBW", "BBBBBWB", "BBBBBBB", "BBBWBBB" }
+
+This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.

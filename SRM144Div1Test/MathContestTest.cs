@@ -2,16 +2,16 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace TestSRM504Div2
+namespace SRM144Div1Test
 {
     
     
     /// <summary>
-    ///This is a test class for Class500Test and is intended
-    ///to contain all Class500Test Unit Tests
+    ///This is a test class for MathContestTest and is intended
+    ///to contain all MathContestTest Unit Tests
     ///</summary>
 	[TestClass()]
-	public class Class500Test
+	public class MathContestTest
 	{
 
 
@@ -65,13 +65,41 @@ namespace TestSRM504Div2
 
 
 		/// <summary>
-		///A test for Class500 Constructor
+		///A test for countBlack
 		///</summary>
 		[TestMethod()]
-		public void Class500ConstructorTest()
+		public void countBlackTest()
 		{
-			//Class500 target = new Class500();
-			//Assert.Inconclusive("TODO: Implement code to verify target");
+			RunCountBlackTest(
+"BBWWB",
+1,
+2);
+
+
+
+			RunCountBlackTest(
+		"BBB",
+		10,
+		1);
+
+			RunCountBlackTest(
+		"BW",
+		10,
+		20);
+
+			RunCountBlackTest(
+			"WWWWWWWBWWWWWWWWWWWWWW",
+			1,
+			2);
+
+		}
+
+		private void RunCountBlackTest(string ballSequence, int repetitions, int expected)
+		{
+			MathContest target = new MathContest(); // TODO: Initialize to an appropriate value
+			int actual;
+			actual = target.countBlack(ballSequence, repetitions);
+			Assert.AreEqual(expected, actual);
 		}
 	}
 }
