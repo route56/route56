@@ -9,17 +9,10 @@ namespace SRM504Div2
 	{
 		public int countBlack(string ballSequence, int repetitions)
 		{
-			StringBuilder str = new StringBuilder();
-
-			for (int i = 0; i < repetitions; i++)
-			{
-				str.Append(ballSequence);
-			}
-
-			char[] tape = str.ToString().ToCharArray();
+			char[] tape = ballSequence.ToCharArray();
 
 			int blackCount = 0;
-			int size = tape.Length;
+			int size = tape.Length * repetitions;
 			bool flipped = false;
 			bool fromHead = true;
 			int head = 0;
@@ -28,8 +21,8 @@ namespace SRM504Div2
 
 			while (size > 0)
 			{
-				if ( (tape[current] == 'B' && flipped == false) 
-					|| (tape[current] == 'W' && flipped == true))
+				if ( (tape[current % tape.Length] == 'B' && flipped == false)
+					|| (tape[current % tape.Length] == 'W' && flipped == true))
 				{
 					blackCount++;
 					flipped = !flipped;

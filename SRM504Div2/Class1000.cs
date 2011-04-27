@@ -9,12 +9,13 @@ namespace SRM504Div2
 	{
 		public string[] makeProgram(string[] output)
 		{
-			char[,] grid = new char[output.Length, output[0].Length];
+			//char[,] grid = new char[output.Length, output[0].Length];
 
-			for (int i = 0; i < grid.GetLength(0); i++)
-			{
-				String.Copy(grid[i], output[i].ToCharArray());
-			}
+			//for (int i = 0; i < grid.GetLength(0); i++)
+			//{
+			//    String.Copy(grid[i], output[i].ToCharArray());
+			//}
+			throw new NotImplementedException();
 		}
 	}
 }
