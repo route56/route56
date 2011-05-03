@@ -9,83 +9,63 @@ namespace SRM505Div2
 	{
 		public string fixIt(int[] seq)
 		{
-			long sum = 0;
-			long prod = 1;
-
 			for (int i = 0; i < seq.Length; i++)
 			{
-				sum += seq[i];
-				prod *= seq[i];
-			}
+				long s = CalcSum(i, seq);
+				long m = CalcMult(i, seq);
 
-			if (sum == prod)
-			{
-				if (seq.Length == 1)
-					return "Yes";
-				else
-					return "No";
-			}
-			//else if (prod == 0 || prod == 1)
-			//{
-			//    return TryChangingZeroOne(seq, sum, prod);
-			//}
-
-			long[] sumArr = new long[seq.Length];
-			long[] prodArr = new long[seq.Length];
-
-			for (int i = 0; i < seq.Length; i++)
-			{
-				sumArr[i] = sum - seq[i];
-				if (seq[i] == 0)
+				if (m == 1)
 				{
-					prodArr[i] = long.MaxValue;
-				}
-				else
-				{
-					prodArr[i] = prod / seq[i];
-				}
-			}
-
-			for (int i = 0; i < seq.Length; i++)
-			{
-				if (prodArr[i] != 0 && (prodArr[i] - 1) != 0 && (sumArr[i] % (prodArr[i] - 1) == 0))
-				{
-					return "Yes";
-				}
-			}
-
-			if (prod == 0)
-			{
-				int count = 0;
-				int index = 0;
-				for (int i = 0; i < seq.Length; i++)
-				{
-					if (prodArr[i] == 0)
-						count++;
-					else
+					if (seq.Length == 1)
 					{
-						index = i;
+						return "Yes";
 					}
+
+					continue;
 				}
 
-				if (count == seq.Length)
-				{
-					return "No";
-				}
-				else
-				{
+				long v = s / (m - 1);
 
+				if (v >=0 && s+v == v*m && v != seq[i])
+				{
+					return "Yes";
 				}
 			}
 
 			return "No";
 		}
 
-		//private string TryChangingZeroOne(int[] seq, long sum, long prod)
-		//{
-		//    throw new NotImplementedException();
-		//}
+		private long CalcMult(int i, int[] seq)
+		{
+			long mult = 1;
+			for (int index = 0; index < seq.Length; index++)
+			{
+				if (index == i)
+				{
+					continue;
+				}
 
+				mult *= seq[index];
+			}
+
+			return mult;
+		}
+
+		private long CalcSum(int i, int[] seq)
+		{
+			long sum = 0;
+			for (int index = 0; index < seq.Length; index++)
+			{
+				if (index == i)
+				{
+					continue;
+				}
+
+				sum += seq[index];
+			}
+
+			return sum;
+		}
 	}
 }
 
