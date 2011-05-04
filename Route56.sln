@@ -52,13 +52,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCJTest", "GCJTest\GCJTest.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProblemHelper", "ProblemHelper\ProblemHelper.csproj", "{EC5A13BE-6C11-4C43-8E44-553A318ED0BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCJSolver", "GCJSolver\GCJSolver.csproj", "{7EAFFC53-571D-4812-A93C-5CBA063A9855}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCJSolveConsole", "GCJSolveConsole\GCJSolveConsole.csproj", "{CE591C94-BB03-4ED7-B3CE-62E93D6E8A7C}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 24
+		SccNumberOfProjects = 23
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs25
 		SccLocalPath0 = .
@@ -128,14 +126,10 @@ Global
 		SccProjectTopLevelParentUniqueName21 = Route56.sln
 		SccProjectName21 = ProblemHelper
 		SccLocalPath21 = ProblemHelper
-		SccProjectUniqueName22 = GCJSolver\\GCJSolver.csproj
+		SccProjectUniqueName22 = GCJSolveConsole\\GCJSolveConsole.csproj
 		SccProjectTopLevelParentUniqueName22 = Route56.sln
-		SccProjectName22 = GCJSolver
-		SccLocalPath22 = GCJSolver
-		SccProjectUniqueName23 = GCJSolveConsole\\GCJSolveConsole.csproj
-		SccProjectTopLevelParentUniqueName23 = Route56.sln
-		SccProjectName23 = GCJSolveConsole
-		SccLocalPath23 = GCJSolveConsole
+		SccProjectName22 = GCJSolveConsole
+		SccLocalPath22 = GCJSolveConsole
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Route56.vsmdi
@@ -359,16 +353,6 @@ Global
 		{EC5A13BE-6C11-4C43-8E44-553A318ED0BA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EC5A13BE-6C11-4C43-8E44-553A318ED0BA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EC5A13BE-6C11-4C43-8E44-553A318ED0BA}.Release|x86.ActiveCfg = Release|Any CPU
-		{7EAFFC53-571D-4812-A93C-5CBA063A9855}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{7EAFFC53-571D-4812-A93C-5CBA063A9855}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{7EAFFC53-571D-4812-A93C-5CBA063A9855}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{7EAFFC53-571D-4812-A93C-5CBA063A9855}.Debug|x86.ActiveCfg = Debug|x86
-		{7EAFFC53-571D-4812-A93C-5CBA063A9855}.Debug|x86.Build.0 = Debug|x86
-		{7EAFFC53-571D-4812-A93C-5CBA063A9855}.Release|Any CPU.ActiveCfg = Release|x86
-		{7EAFFC53-571D-4812-A93C-5CBA063A9855}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{7EAFFC53-571D-4812-A93C-5CBA063A9855}.Release|Mixed Platforms.Build.0 = Release|x86
-		{7EAFFC53-571D-4812-A93C-5CBA063A9855}.Release|x86.ActiveCfg = Release|x86
-		{7EAFFC53-571D-4812-A93C-5CBA063A9855}.Release|x86.Build.0 = Release|x86
 		{CE591C94-BB03-4ED7-B3CE-62E93D6E8A7C}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{CE591C94-BB03-4ED7-B3CE-62E93D6E8A7C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{CE591C94-BB03-4ED7-B3CE-62E93D6E8A7C}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -387,7 +371,6 @@ Global
 		{1CABB967-9E36-4DF5-8B1B-A5C780771F98} = {7ADFDF0C-69D0-4D4A-A356-CDE08DDF9377}
 		{8DADA122-69A4-4914-8FDB-71716ED098A3} = {7ADFDF0C-69D0-4D4A-A356-CDE08DDF9377}
 		{EC5A13BE-6C11-4C43-8E44-553A318ED0BA} = {7ADFDF0C-69D0-4D4A-A356-CDE08DDF9377}
-		{7EAFFC53-571D-4812-A93C-5CBA063A9855} = {7ADFDF0C-69D0-4D4A-A356-CDE08DDF9377}
 		{CE591C94-BB03-4ED7-B3CE-62E93D6E8A7C} = {7ADFDF0C-69D0-4D4A-A356-CDE08DDF9377}
 	EndGlobalSection
 EndGlobal

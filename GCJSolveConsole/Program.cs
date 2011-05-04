@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Reflection;
+using ProblemHelper;
 
 namespace GCJSolveConsole
 {
@@ -10,9 +12,9 @@ namespace GCJSolveConsole
 	{
 		static void Main(string[] args)
 		{
-			if (args.Length != 3)
+			if (args.Length != 4)
 			{
-				Console.WriteLine("usage: GCJSolveConsole ClassName InputFilePath OutputFilePath");
+				Console.WriteLine("usage: GCJSolveConsole ProjName ClassName InputFilePath OutputFilePath");
 				return;
 			}
 
@@ -46,7 +48,17 @@ namespace GCJSolveConsole
 		{
 			try
 			{
-				Thread.Sleep(5000);
+				//Type t = typeof(OCAA2011.VanishingNumbers);
+				//string s = t.Assembly.FullName.ToString();
+				//Console.WriteLine("***");
+				//Console.WriteLine(s);
+				//Console.WriteLine("***");
+
+				System.Runtime.Remoting.ObjectHandle oh = 
+					Activator.CreateInstance(args[0] + ", Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", args[0] + '.' + args[1]);
+
+				IGCJSolution solver = (IGCJSolution)oh.Unwrap();
+				solver.Solve(args[2], args[3]);
 			}
 			catch (Exception ex)
 			{

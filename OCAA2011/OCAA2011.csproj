@@ -50,6 +50,12 @@
   <ItemGroup>
     <Content Include="VanishingNumbers.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProblemHelper\ProblemHelper.csproj">
+      <Project>{EC5A13BE-6C11-4C43-8E44-553A318ED0BA}</Project>
+      <Name>ProblemHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
