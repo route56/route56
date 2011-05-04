@@ -44,9 +44,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSRM504Div2", "TestSRM50
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRM505Div2", "SRM505Div2\SRM505Div2.csproj", "{BD47D23F-9685-46EA-8FE7-A55F96895B3D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GCJ", "GCJ", "{7ADFDF0C-69D0-4D4A-A356-CDE08DDF9377}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCAA2011", "OCAA2011\OCAA2011.csproj", "{1CABB967-9E36-4DF5-8B1B-A5C780771F98}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 19
+		SccNumberOfProjects = 20
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs25
 		SccLocalPath0 = .
@@ -104,6 +108,10 @@ Global
 		SccProjectUniqueName18 = SRM505Div2\\SRM505Div2.csproj
 		SccProjectName18 = SRM505Div2
 		SccLocalPath18 = SRM505Div2
+		SccProjectUniqueName19 = OCAA2011\\OCAA2011.csproj
+		SccProjectTopLevelParentUniqueName19 = Route56.sln
+		SccProjectName19 = OCAA2011
+		SccLocalPath19 = OCAA2011
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Route56.vsmdi
@@ -297,8 +305,21 @@ Global
 		{BD47D23F-9685-46EA-8FE7-A55F96895B3D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BD47D23F-9685-46EA-8FE7-A55F96895B3D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BD47D23F-9685-46EA-8FE7-A55F96895B3D}.Release|x86.ActiveCfg = Release|Any CPU
+		{1CABB967-9E36-4DF5-8B1B-A5C780771F98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CABB967-9E36-4DF5-8B1B-A5C780771F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CABB967-9E36-4DF5-8B1B-A5C780771F98}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1CABB967-9E36-4DF5-8B1B-A5C780771F98}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1CABB967-9E36-4DF5-8B1B-A5C780771F98}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1CABB967-9E36-4DF5-8B1B-A5C780771F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CABB967-9E36-4DF5-8B1B-A5C780771F98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CABB967-9E36-4DF5-8B1B-A5C780771F98}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1CABB967-9E36-4DF5-8B1B-A5C780771F98}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1CABB967-9E36-4DF5-8B1B-A5C780771F98}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1CABB967-9E36-4DF5-8B1B-A5C780771F98} = {7ADFDF0C-69D0-4D4A-A356-CDE08DDF9377}
 	EndGlobalSection
 EndGlobal
