@@ -59,6 +59,10 @@
       <Project>{EC5A13BE-6C11-4C43-8E44-553A318ED0BA}</Project>
       <Name>ProblemHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\QR2011\QR2011.csproj">
+      <Project>{FFF88266-4682-4365-95EB-08DF2C6C0D73}</Project>
+      <Name>QR2011</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

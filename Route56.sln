@@ -52,9 +52,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProblemHelper", "ProblemHel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCJSolveConsole", "GCJSolveConsole\GCJSolveConsole.csproj", "{CE591C94-BB03-4ED7-B3CE-62E93D6E8A7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QR2011", "QR2011\QR2011.csproj", "{FFF88266-4682-4365-95EB-08DF2C6C0D73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCJQR2011Tests", "GCJQR2011Tests\GCJQR2011Tests.csproj", "{33C09119-92FD-40C7-BE50-EA33C72974D4}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 22
+		SccNumberOfProjects = 24
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs25
 		SccLocalPath0 = .
@@ -124,6 +128,13 @@ Global
 		SccProjectTopLevelParentUniqueName21 = Route56.sln
 		SccProjectName21 = GCJSolveConsole
 		SccLocalPath21 = GCJSolveConsole
+		SccProjectUniqueName22 = QR2011\\QR2011.csproj
+		SccProjectTopLevelParentUniqueName22 = Route56.sln
+		SccProjectName22 = QR2011
+		SccLocalPath22 = QR2011
+		SccProjectUniqueName23 = GCJQR2011Tests\\GCJQR2011Tests.csproj
+		SccProjectName23 = GCJQR2011Tests
+		SccLocalPath23 = GCJQR2011Tests
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Route56.vsmdi
@@ -347,6 +358,26 @@ Global
 		{CE591C94-BB03-4ED7-B3CE-62E93D6E8A7C}.Release|Mixed Platforms.Build.0 = Release|x86
 		{CE591C94-BB03-4ED7-B3CE-62E93D6E8A7C}.Release|x86.ActiveCfg = Release|x86
 		{CE591C94-BB03-4ED7-B3CE-62E93D6E8A7C}.Release|x86.Build.0 = Release|x86
+		{FFF88266-4682-4365-95EB-08DF2C6C0D73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFF88266-4682-4365-95EB-08DF2C6C0D73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFF88266-4682-4365-95EB-08DF2C6C0D73}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FFF88266-4682-4365-95EB-08DF2C6C0D73}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FFF88266-4682-4365-95EB-08DF2C6C0D73}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FFF88266-4682-4365-95EB-08DF2C6C0D73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFF88266-4682-4365-95EB-08DF2C6C0D73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFF88266-4682-4365-95EB-08DF2C6C0D73}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FFF88266-4682-4365-95EB-08DF2C6C0D73}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FFF88266-4682-4365-95EB-08DF2C6C0D73}.Release|x86.ActiveCfg = Release|Any CPU
+		{33C09119-92FD-40C7-BE50-EA33C72974D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33C09119-92FD-40C7-BE50-EA33C72974D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33C09119-92FD-40C7-BE50-EA33C72974D4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{33C09119-92FD-40C7-BE50-EA33C72974D4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{33C09119-92FD-40C7-BE50-EA33C72974D4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{33C09119-92FD-40C7-BE50-EA33C72974D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33C09119-92FD-40C7-BE50-EA33C72974D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33C09119-92FD-40C7-BE50-EA33C72974D4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{33C09119-92FD-40C7-BE50-EA33C72974D4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{33C09119-92FD-40C7-BE50-EA33C72974D4}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -355,5 +386,6 @@ Global
 		{1CABB967-9E36-4DF5-8B1B-A5C780771F98} = {7ADFDF0C-69D0-4D4A-A356-CDE08DDF9377}
 		{EC5A13BE-6C11-4C43-8E44-553A318ED0BA} = {7ADFDF0C-69D0-4D4A-A356-CDE08DDF9377}
 		{CE591C94-BB03-4ED7-B3CE-62E93D6E8A7C} = {7ADFDF0C-69D0-4D4A-A356-CDE08DDF9377}
+		{FFF88266-4682-4365-95EB-08DF2C6C0D73} = {7ADFDF0C-69D0-4D4A-A356-CDE08DDF9377}
 	EndGlobalSection
 EndGlobal

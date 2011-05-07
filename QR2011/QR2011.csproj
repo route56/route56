@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1CABB967-9E36-4DF5-8B1B-A5C780771F98}</ProjectGuid>
+    <ProjectGuid>{FFF88266-4682-4365-95EB-08DF2C6C0D73}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OCAA2011</RootNamespace>
-    <AssemblyName>OCAA2011</AssemblyName>
+    <RootNamespace>QR2011</RootNamespace>
+    <AssemblyName>QR2011</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -44,13 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RadioReceiver.cs" />
-    <Compile Include="VanishingNumbers.cs" />
+    <Compile Include="BotTrust.cs" />
+    <Compile Include="CandySplitting.cs" />
+    <Compile Include="GogoSort.cs" />
+    <Compile Include="Magicka.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="RadioReceiver.txt" />
-    <Content Include="VanishingNumbers.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProblemHelper\ProblemHelper.csproj">
