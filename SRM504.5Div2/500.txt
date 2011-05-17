@@ -1,0 +1,48 @@
+﻿
+Problem Statement
+    
+John believes that the digits 4 and 7 are lucky, and all other digits are unlucky. A positive integer is called a lucky number if its last digit is lucky. For example, 4, 14 and 207 are lucky numbers, while 40, 741 and 3 are not lucky numbers. John would like to represent the int n as a sum of only lucky numbers, and he would like to do this using the minimal possible number of summands. Return the number of summands in the representation, or -1 if it is impossible to achieve the goal.
+Definition
+    
+Class:
+TheNumbersWithLuckyLastDigit
+Method:
+find
+Parameters:
+int
+Returns:
+int
+Method signature:
+int find(int n)
+(be sure your method is public)
+    
+
+Constraints
+-
+n will be between 1 and 1,000,000,000, inclusive.
+Examples
+0)
+
+    
+99
+Returns: 4
+One of the possible representations is 99=14+24+27+34.
+1)
+
+    
+11
+Returns: 2
+11=4+7.
+2)
+
+    
+13
+Returns: -1
+It is impossible to achieve the goal.
+3)
+
+    
+1234567
+Returns: 1
+
+This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
