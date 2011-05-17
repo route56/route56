@@ -7,7 +7,7 @@ namespace SRM504Div2
 {
 	public class MathContest
 	{
-		public int countBlack(string ballSequence, int repetitions)
+		public int countBlackMy(string ballSequence, int repetitions)
 		{
 			char[] tape = ballSequence.ToCharArray();
 
@@ -65,5 +65,59 @@ namespace SRM504Div2
 
 			return blackCount;
 		}
+
+
+		public int countBlack(string str, int rep)
+		{
+			int p1 = 0;
+			int p2 = str.Length - 1;
+			int countW = 0;
+			int countB = 0;
+
+			while (countW + countB != str.Length * rep)
+			{
+				CheckMethod(str, ref p1, ref p2, ref countW, ref countB);
+			}
+
+			return countB;
+		}
+
+		private void CheckMethod(string str, ref int p1, ref int p2, ref int countW, ref int countB)
+		{
+			if (countW % 2 == 0) // p1
+			{
+				if ((str[p1] == 'W' && countB % 2 == 0) || (str[p1] == 'B' && countB % 2 == 1)) // white
+				{
+					countW++;
+				}
+				else
+				{
+					countB++;
+				}
+
+				p1++;
+				if (p1 == str.Length)
+				{
+					p1 = 0;
+				}
+			}
+			else // p2
+			{
+				if ((str[p2] == 'W' && countB % 2 == 0) || (str[p2] == 'B' && countB % 2 == 1)) // white
+				{
+					countW++;
+				}
+				else
+				{
+					countB++;
+				}
+				p2--;
+				if (p2 == -1)
+				{
+					p2 = str.Length - 1;
+				}
+			}
+		}
+
 	}
 }
