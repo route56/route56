@@ -1,0 +1,7 @@
+// TODOH Which test case failed?
+/* GCJ seprate solution start. Make it optimized for time pressure
+ * UT in place. File read in place. File in and out in place. expected file in place.
+ * That console app to sumbit and get problem solve
+ * Solve few previous problems under time constraint. Have some strategy
+ * TCO 11? Dates?? New solution?
+ */

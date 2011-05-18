@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0D8C0470-985D-4C60-8D71-D08DCC459B6B}"
+	ProjectSection(SolutionItems) = preProject
+		GCJ.vsmdi = GCJ.vsmdi
+		Local.testsettings = Local.testsettings
+		PSScript.ps1 = PSScript.ps1
+		ToDo.txt = ToDo.txt
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCJSolver", "GCJSolver\GCJSolver.csproj", "{16C97AAE-2743-4942-B557-93062D804443}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GCJUnitTester", "GCJUnitTester\GCJUnitTester.csproj", "{24E80EED-1336-4C64-8607-ED7976E85706}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs25
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = GCJSolver\\GCJSolver.csproj
+		SccProjectName1 = GCJSolver
+		SccLocalPath1 = GCJSolver
+		SccProjectUniqueName2 = GCJUnitTester\\GCJUnitTester.csproj
+		SccProjectName2 = GCJUnitTester
+		SccLocalPath2 = GCJUnitTester
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = GCJ.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16C97AAE-2743-4942-B557-93062D804443}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{16C97AAE-2743-4942-B557-93062D804443}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{16C97AAE-2743-4942-B557-93062D804443}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{16C97AAE-2743-4942-B557-93062D804443}.Debug|x86.ActiveCfg = Debug|x86
+		{16C97AAE-2743-4942-B557-93062D804443}.Debug|x86.Build.0 = Debug|x86
+		{16C97AAE-2743-4942-B557-93062D804443}.Release|Any CPU.ActiveCfg = Release|x86
+		{16C97AAE-2743-4942-B557-93062D804443}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{16C97AAE-2743-4942-B557-93062D804443}.Release|Mixed Platforms.Build.0 = Release|x86
+		{16C97AAE-2743-4942-B557-93062D804443}.Release|x86.ActiveCfg = Release|x86
+		{16C97AAE-2743-4942-B557-93062D804443}.Release|x86.Build.0 = Release|x86
+		{24E80EED-1336-4C64-8607-ED7976E85706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24E80EED-1336-4C64-8607-ED7976E85706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24E80EED-1336-4C64-8607-ED7976E85706}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{24E80EED-1336-4C64-8607-ED7976E85706}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{24E80EED-1336-4C64-8607-ED7976E85706}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{24E80EED-1336-4C64-8607-ED7976E85706}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24E80EED-1336-4C64-8607-ED7976E85706}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24E80EED-1336-4C64-8607-ED7976E85706}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{24E80EED-1336-4C64-8607-ED7976E85706}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{24E80EED-1336-4C64-8607-ED7976E85706}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
