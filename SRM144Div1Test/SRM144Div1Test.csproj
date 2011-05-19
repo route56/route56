@@ -57,6 +57,7 @@
     <Compile Include="BinaryCodeTest.cs" />
     <Compile Include="Class1000Test.cs" />
     <Compile Include="Class250Test.cs" />
+    <Compile Include="FoxIntegerLevelThreeTest.cs" />
     <Compile Include="LotteryTest.cs" />
     <Compile Include="MathContestTest.cs" />
     <Compile Include="PerfectSequencesTest.cs" />
@@ -75,6 +76,10 @@
     <ProjectReference Include="..\SRM505Div2\SRM505Div2.csproj">
       <Project>{BD47D23F-9685-46EA-8FE7-A55F96895B3D}</Project>
       <Name>SRM505Div2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TCO11QR2\TCO11QR2.csproj">
+      <Project>{9AAAEDB7-49F2-4089-902D-B6889F647F98}</Project>
+      <Name>TCO11QR2</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
