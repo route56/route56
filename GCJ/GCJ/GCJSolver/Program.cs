@@ -20,86 +20,72 @@ namespace GCJSolver
 
 		public static bool IsFreeCellStatCorrect(long n, long pd, long pg)
 		{
-			if (pd == 0 && pg == 0)
+			// pg*oldg - 100*oldgwin = (pd - pg)d
+			long a = pg;
+			long b = -100;
+			long c1 = pd - pg;
+
+			long gcdab = GCD(a, b);
+			long aa = b / gcdab;
+			long bb = - a / gcdab;
+
+			//if (c1 == 0)
+			//{
+			//    return true; // really?
+			//}
+
+			//// c1*c2 % gcdab should be 0
+			//if (c1 % gcdab != 0)
+			//{
+			//    //???
+			//}
+
+			//ax+by=gcdab solve
+			// x = (gcdab-by) % a == 0
+
+			long x1 = 0, y1 = 0;
+
+			for (long y = 0; y < long.MaxValue; y++)
 			{
-				return true;
+				long ax = (gcdab - b * y);
+				if (ax % a == 0)
+				{
+					x1 = ax / a;
+					y1 = y;
+					break;
+				}
 			}
 
-			long div = gcd(pg, 100);
-			long dcoeff = pd - pg;
-
-			if (dcoeff == 0)
+			for (long k = 0; k < long.MaxValue; k++)
 			{
-				return true;
-			}
+				long cplus = a * (x1 + k * aa) + b * (y1 + k * bb);
+				long cminus = a * (x1 - k * aa) + b * (y1 - k * bb);
 
-			long d2 = gcd(div, dcoeff);
-
-			if (div % dcoeff != 0)
-			{
-				if (div/d2 > n)
+				if ( IsThisTheOne(n, c1, cplus) || IsThisTheOne(n, c1, cminus))
+				{
+					return true;
+				}
+				else if (HasCrossedPointOfNoReturn(n, c1, cplus) && HasCrossedPointOfNoReturn(n, c1, cminus))
 				{
 					return false;
 				}
 			}
 
-			return true;
-			//long d = div / d2;
-
-			// pg*oldg - 100*oldgwin = (pd - pg)d
-			// oldg >= oldgiwn
-			// solve for pg*oldg - 100*oldgwin = gcd
-
-			//long? G = null;
-			//long? g = null;
-
-			//for (long oldG = 1; oldG < long.MaxValue && !G.HasValue; oldG++) // bad idea!
-			//{
-			//    for (long oldgwin = 0; oldgwin <= oldG; oldgwin++)
-			//    {
-			//        long isOne = (pg / div) * oldG - (100 / div) * oldgwin;
-
-			//        if (isOne == 1)
-			//        {
-			//            G = oldG;
-			//            g = oldgwin;
-
-			//            break;
-			//        }
-			//    }
-			//}
-
-			//if (!G.HasValue) //unreachable late code... if true
-			//{
-			//    return false;
-			//}
-
-			//for (long k = 0; k < long.MaxValue; k++)
-			//{
-			//    long x = G.Value - k * 100 / div;
-			//    long y = g.Value - k * pg / div;
-
-			//    long xx = G.Value + k * 100 / div;
-			//    long yy = g.Value + k * pg / div;
-
-			//    long c = pg * x - 100 * y;  //// pg*oldg - 100*oldgwin = (pd - pg)d
-			//    long cc = pg * xx - 100 * yy;  //// pg*oldg - 100*oldgwin = (pd - pg)d
-
-			//    if (c == d*dcoeff || cc == d*dcoeff)
-			//    {
-			//        return true;
-			//    }
-			//    else if (Math.Abs(c) > Math.Abs(d * dcoeff) && Math.Abs(cc) > Math.Abs(d * dcoeff))
-			//    {
-			//        return false;
-			//    }
-			//}
-
 			return false;
 		}
 
+		private static bool HasCrossedPointOfNoReturn(long n, long c1, long cplus)
+		{
+			return Math.Abs(c1 * n) < Math.Abs(cplus);
+		}
+
+		private static bool IsThisTheOne(long n, long c1, long cplus)
+		{
+			return (cplus % c1 == 0 && cplus / c1 > 0 && cplus / c1 <= n);
+		}
+
 		//9,223,372,036,854,775,807
-		public static long gcd(long a, long b) // zero case not handled
+		public static long GCD(long a, long b) // zero case not handled
 		{
 			if (b == 0)
 			{
@@ -107,7 +93,7 @@ namespace GCJSolver
 			}
 			else
 			{
-				return (gcd(b, a % b));
+				return (GCD(b, a % b));
 			}
 		}
 	}
