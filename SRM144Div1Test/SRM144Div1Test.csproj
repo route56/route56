@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryCodeTest.cs" />
+    <Compile Include="CB1000Test.cs" />
     <Compile Include="Class1000Test.cs" />
     <Compile Include="Class250Test.cs" />
     <Compile Include="FoxIntegerLevelThreeTest.cs" />
