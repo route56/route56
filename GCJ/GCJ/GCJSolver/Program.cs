@@ -7,124 +7,127 @@ namespace GCJSolver
 {
 	public class Program
 	{
+		class Data
+		{
+			public double RPI { get; set; }
+			public double WP { get; set; }
+			public double OWP { get; set; }
+			public double OOWP { get; set; }
+			public double Win { get; set; }
+			public double Count { get; set; }
+		}
+
 		public static void Main(string[] args)
 		{
 			string input = Console.ReadLine();
-			for (int i = 0; i < Int32.Parse(input); i++)
+			for (int caser = 0; caser < Int32.Parse(input); caser++)
 			{
 				string ip = Console.ReadLine();
-				string[] arr = ip.Split();
-				Console.WriteLine("Case #{0}: {1}", i+1, IsFreeCellStatCorrect(Int32.Parse(arr[0]), Int32.Parse(arr[1]), Int32.Parse(arr[2])) ? "Possible" : "Broken");
-			}
-		}
+				int n = Int32.Parse(ip);
+				bool?[,] grid = new bool?[n, n];
 
-		public static bool IsFreeCellStatCorrect(long n, long pd, long pg)
-		{
-			int d = 1; 
-
-			while (pd * d % 100 != 0) 
-				++d;
-
-			return d > n || pg == 0 && pd > 0 || pg == 100 && pd < 100 ? false : true;
-		}
-
-		public static bool IsFreeCellStatCorrectIncomplete(long n, long pd, long pg)
-		{
-			// pg*oldg - 100*oldgwin = (pd - pg)d
-			long a = pg;
-			long b = -100;
-			long c1 = pd - pg;
-
-			long gcdab = GCD(a, b);
-
-			long window = Math.Abs(b / gcdab);
-
-			// window = 10, every 10 pts it comes.
-			// n = 100. sure its coming
-			// n = 1, maybe maybe not.
-			if (n <= window)
-			{
-				// huh tricky?
-				// k*gcd = c1*(1-n)
-				//1-n = k*gcd/c1.
-
-				// 1- 10 = 2*12/3 | 8 true
-				// 1-10 = 4*12/3
-				// 1-3 = 12/3 = 4
-				if (n <= gcdab / c1)
+				for (int row = 0; row < n; row++)
 				{
-					return false;
-				}
-				else
-				{
-					return true;
+					string ip2 = Console.ReadLine();
+					for (int col = 0; col < n; col++)
+					{
+						switch (ip2[col])
+						{
+							case '1':
+								grid[row, col] = true;
+								break;
+							case '0':
+								grid[row, col] = false;
+								break;
+							default:
+								grid[row, col] = null;
+								break;
+						}
+					}
 				}
 
+				double[] res = Program.GetRPI(grid, n);
 
-				// gcd/c1??? n*c1/gcd = kmax.
-				// c1/gcd = kmin
+				Console.WriteLine("Case #{0}:", caser+1);
 
-				//gcdab % c1 == 0 && gcdab / c1 > 0 && gcdab / c1 <= n
+				foreach (double item in res)
+				{
+					Console.WriteLine(item);
+				}
 			}
-			else
-			{
-				return true;
-			}
-
-			//c1*c2 % gcdab == 0
 		}
 
-		//9,223,372,036,854,775,807
-		public static long GCD(long a, long b) // zero case not handled
+		private static double[] GetRPI(bool?[,] grid, int n)
 		{
-			if (b == 0)
+			List<Data> dt = new List<Data>(n);
+
+			for (int i = 0; i < n; i++)
 			{
-				return Math.Abs(a);
+				dt.Add(new Data());
+				dt[i].Count = 0;
+				dt[i].Win = 0;
+				for (int j = 0; j < n; j++)
+				{
+					if (grid[i,j].HasValue)
+					{
+						dt[i].Count++;
+						dt[i].Win += (grid[i, j].Value ? 1 : 0);
+					}
+				}
+
+				dt[i].WP = dt[i].Win / dt[i].Count;
 			}
-			else
+
+			for (int i = 0; i < n; i++)
 			{
-				return (GCD(b, a % b));
+				// D
+				dt[i].OWP = 0;
+				for (int j = 0; j < n; j++)
+				{
+					//= dt[].WP;
+					// B
+					if (grid[i, j].HasValue)
+					{
+						if (grid[i, j].Value)
+						{
+							dt[i].OWP += (dt[j].Win / (dt[j].Count - 1));// b.win / (b.Count -1)
+						}
+						else
+						{
+							dt[i].OWP += ((dt[j].Win -1)/(dt[j].Count - 1));// c.Win - 1 / c.Count -1
+						}
+					}
+				}
+
+				dt[i].OWP = dt[i].OWP / dt[i].Count;
 			}
+
+			for (int i = 0; i < n; i++)
+			{
+				dt[i].OOWP = 0;
+				for (int j = 0; j < n; j++)
+				{
+					if (grid[i, j].HasValue)
+					{
+						dt[i].OOWP += dt[j].OWP;
+					}
+				}
+
+				dt[i].OOWP = dt[i].OOWP/ dt[i].Count;
+			}
+
+			for (int i = 0; i < n; i++)
+			{
+				dt[i].RPI = 0.25 * dt[i].WP + 0.50 * dt[i].OWP + 0.25 * dt[i].OOWP;
+			}
+
+			double[] res = new double[n];
+			for (int i = 0; i < n; i++)
+			{
+				res[i] = dt[i].RPI;
+			}
+
+			return res;
 		}
 	}
-	
 }
-
-//#include <algorithm>  
-//#include <iostream>  
-//#include <sstream>  
-//#include <string>  
-//#include <vector>  
-//#include <queue>  
-//#include <set>  
-//#include <map>  
-//#include <cstdio>  
-//#include <cstdlib>  
-//#include <cctype>  
-//#include <cmath>  
-//#include <list>  
-//using namespace std;  
-
-//#define PB push_back  
-//#define MP make_pair  
-//#define SZ(v) ((int)(v).size())  
-//#define FOR(i,a,b) for(int i=(a);i<(b);++i)  
-//#define REP(i,n) FOR(i,0,n)  
-//#define FORE(i,a,b) for(int i=(a);i<=(b);++i)  
-//#define REPE(i,n) FORE(i,0,n)  
-//#define FORSZ(i,a,v) FOR(i,a,SZ(v))  
-//#define REPSZ(i,v) REP(i,SZ(v))  
-//typedef long long ll;  
-
-//void run(int casenr) {
-//    ll n; int pd,pg; scanf("%lld%d%d",&n,&pd,&pg);
-//    int d=1; while(pd*d%100!=0) ++d;
-//    printf("Case #%d: %s\n",casenr,d>n||pg==0&&pd>0||pg==100&&pd<100?"Broken":"Possible");
-//}
-
-//int main() {
-//    int n; scanf("%d",&n); FORE(i,1,n) run(i);
-//    return 0;
-//}
-
- 
