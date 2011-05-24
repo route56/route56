@@ -2,78 +2,100 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace GCJSolver
 {
 	public class Program
 	{
-		int N;
-		string[] s = new string[110];
-		double[] WP = new double[110];
-		double[,] WP2 = new double[110,110];
-		double[] OWP= new double[110];
-		double[] OOWP=new double[110];
-		double[] RPI=new double[110];
-
-		public void DoIt()
-		{
-			N = Int32.Parse(Console.ReadLine());
-
-			for (int ii = 0; ii < N; ii++)
-			{
-				s[ii] = Console.ReadLine();
-			}
-
-			for (int i = 0; i < N; i++)
-			{
-				for (int j = 0; j < N+1; j++)
-				{
-					double sum = 0.0, cnt = 0.0;
-
-					for (int k = 0; k < N; k++)
-					{
-						if(k != j && s[i][k] != '.')
-						{
-							cnt += 1.0;
-							if(s[i][k] == '1') sum += 1.0;
-						}
-					}
-					if(j < N) WP2[i,j] = sum / cnt; else WP[i] = sum / cnt;
-				}
-			}
-	
-	for (int i = 0; i < N; i++)
-	{
-	    double sum = 0.0, cnt = 0.0;
-	    for (int j = 0; j < N; j++) if(s[i][j] != '.')
-		{
-	        cnt += 1.0;
-	        sum += WP2[j,i];
-	    }
-	    OWP[i] = sum / cnt;
-	}
-	
-	for (int i = 0; i < N; i++){
-	    double sum = 0.0, cnt = 0.0;
-	    for (int j = 0; j < N; j++) if(s[i][j] != '.'){
-	        cnt += 1.0;
-	        sum += OWP[j];
-	    }
-	    OOWP[i] = sum / cnt;
-	}
-	
-	for (int i = 0; i < N; i++) RPI[i] = 0.25 * WP[i] + 0.5 * OWP[i] + 0.25 * OOWP[i];
-	for (int i = 0; i < N; i++) Console.WriteLine(RPI[i]);
-	    }
-
-		public static void Main(string[] args)
+//3
+//2 3
+//###
+//###
+//1 1
+//.
+//4 5
+//.##..
+//.####
+//.####
+//.##..
+		public static void MainOld(string[] args)
 		{
 			int caser = Int32.Parse(Console.ReadLine());
+			TextWriter tw = new StreamWriter(args[0]);
 			for (int i = 0; i < caser; i++)
 			{
-				Console.WriteLine("Case #{0}:",i);
-				new Program().DoIt();
+				Console.WriteLine("Case #{0}:",i+1);
+				tw.WriteLine("Case #{0}:", i+1);
+				new Program().DoIt(tw);
 			}
+			tw.Close();
 		}
+
+		private void DoIt(TextWriter tw)
+		{
+			string[] rowcol = Console.ReadLine().Split();
+			int row = Int32.Parse(rowcol[0]);
+			int col = Int32.Parse(rowcol[1]);
+
+			StringBuilder[] grid = new StringBuilder[row];
+
+			for (int i = 0; i < row; i++)
+			{
+				grid[i] = new StringBuilder(Console.ReadLine());
+			}
+
+			bool impossible = false;
+			for (int i = 0; i < row; i++)
+			{
+				for (int j = 0; j < col; j++)
+				{
+					switch (grid[i][j])
+					{
+						case '#':
+							if ((i+1 < row && j+1 < col) &&
+								(grid[i][j+1] == '#' && grid[i+1][j] == '#' && grid[i+1][j+1] == '#'))
+							{
+								grid[i][j] = '/';
+								grid[i+1][j+1] = '/';
+								grid[i][j+1] = '\\';
+								grid[i+1][j] = '\\';
+							}
+							else
+							{
+								impossible = true;
+							}
+							break;
+						default:
+							break;
+					}
+
+					if (impossible)
+					{
+						break;
+					}
+				}
+
+				if (impossible)
+				{
+					break;
+				}
+			}
+
+			if (impossible)
+			{
+				Console.WriteLine("Impossible");
+				tw.WriteLine("Impossible");
+			}
+			else
+			{
+				for (int i = 0; i < row; i++)
+				{
+					Console.WriteLine(grid[i].ToString());
+					tw.WriteLine(grid[i].ToString());
+				}
+			}
+
 		}
+	}
 }
