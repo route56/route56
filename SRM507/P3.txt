@@ -1,0 +1,78 @@
+﻿
+Problem Statement
+    
+NOTE: This problem statement contains images that may not display properly if viewed outside of the applet.
+
+Fox Ciel is competing against Fox Jiro in a game called cube roll.
+
+Cube roll is played on a horizontal row of cells. Cells are numbered consecutively, increasing from left to right. The row is infinitely long, so all integers, including negative ones, are valid cell numbers. Certain cells contain holes, and they are given in the int[] holePos.
+Initially, a cube is placed at cell initPos. The objective of the game is to move the cube to cell goalPos using the least possible number of turns. On each turn, the player will choose a direction (left or right) and roll the cube in that direction by x number of cells, where x is a perfect square (1, 4, 9, 16, ...). If at any time during the roll, the cube lands on a cell containing a hole, the cube will fall into the hole. Once the cube falls into a hole, it can never be moved again.
+ 
+
+Return the minimum number of turns required to move the cube to cell goalPos. If it is impossible, return -1 instead.
+Definition
+    
+Class:
+CubeRoll
+Method:
+getMinimumSteps
+Parameters:
+int, int, int[]
+Returns:
+int
+Method signature:
+int getMinimumSteps(int initPos, int goalPos, int[] holePos)
+(be sure your method is public)
+    
+
+Constraints
+-
+initPos and goalPos will each be between 1 and 100,000, inclusive.
+-
+holePos will contain between 1 and 50 elements, inclusive.
+-
+Each element of holePos be between 1 and 100,000, inclusive.
+-
+initPos and goalPos and all elements of holePos will be distinct.
+Examples
+0)
+
+    
+5
+1
+{3}
+Returns: -1
+There is a hole between initPos and goalPos, so the cube cannot be moved from initPos to goalPos.
+1)
+
+    
+36
+72
+{300, 100, 200, 400}
+Returns: 1
+The distance between initPos and goalPos is a perfect square, and there are no holes between them, so the cube can be moved in a single turn.
+2)
+
+    
+10
+21
+{38,45}
+Returns: 2
+One of the optimal solutions is to move the cube to 10 -> -15 -> 21. (Note that the coordinate of the cube can be a negative integer.)
+3)
+
+    
+98765
+4963
+{10,20,40,30}
+Returns: 2
+
+4)
+
+    
+68332
+825
+{99726,371,67,89210}
+Returns: 2
+
+This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.

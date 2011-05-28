@@ -70,9 +70,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberSystem", "NumberSyste
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberSystem.Test", "NumberSystem.Test\NumberSystem.Test.csproj", "{E3A587DC-0B63-4A6F-B96E-D3AC16E700D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRM507", "SRM507\SRM507.csproj", "{7F7CB55A-5A0D-47A3-AA77-AA1F98DFA8A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRM507.UTest", "SRM507.UTest\SRM507.UTest.csproj", "{712615AB-F200-49A8-ACE9-561E0AFBAC8A}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 31
+		SccNumberOfProjects = 33
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs25
 		SccLocalPath0 = .
@@ -170,6 +174,12 @@ Global
 		SccProjectUniqueName30 = NumberSystem.Test\\NumberSystem.Test.csproj
 		SccProjectName30 = NumberSystem.Test
 		SccLocalPath30 = NumberSystem.Test
+		SccProjectUniqueName31 = SRM507\\SRM507.csproj
+		SccProjectName31 = SRM507
+		SccLocalPath31 = SRM507
+		SccProjectUniqueName32 = SRM507.UTest\\SRM507.UTest.csproj
+		SccProjectName32 = SRM507.UTest
+		SccLocalPath32 = SRM507.UTest
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Route56.vsmdi
@@ -483,6 +493,26 @@ Global
 		{E3A587DC-0B63-4A6F-B96E-D3AC16E700D2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E3A587DC-0B63-4A6F-B96E-D3AC16E700D2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E3A587DC-0B63-4A6F-B96E-D3AC16E700D2}.Release|x86.ActiveCfg = Release|Any CPU
+		{7F7CB55A-5A0D-47A3-AA77-AA1F98DFA8A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F7CB55A-5A0D-47A3-AA77-AA1F98DFA8A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F7CB55A-5A0D-47A3-AA77-AA1F98DFA8A2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7F7CB55A-5A0D-47A3-AA77-AA1F98DFA8A2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7F7CB55A-5A0D-47A3-AA77-AA1F98DFA8A2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7F7CB55A-5A0D-47A3-AA77-AA1F98DFA8A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F7CB55A-5A0D-47A3-AA77-AA1F98DFA8A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F7CB55A-5A0D-47A3-AA77-AA1F98DFA8A2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7F7CB55A-5A0D-47A3-AA77-AA1F98DFA8A2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7F7CB55A-5A0D-47A3-AA77-AA1F98DFA8A2}.Release|x86.ActiveCfg = Release|Any CPU
+		{712615AB-F200-49A8-ACE9-561E0AFBAC8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{712615AB-F200-49A8-ACE9-561E0AFBAC8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{712615AB-F200-49A8-ACE9-561E0AFBAC8A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{712615AB-F200-49A8-ACE9-561E0AFBAC8A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{712615AB-F200-49A8-ACE9-561E0AFBAC8A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{712615AB-F200-49A8-ACE9-561E0AFBAC8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{712615AB-F200-49A8-ACE9-561E0AFBAC8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{712615AB-F200-49A8-ACE9-561E0AFBAC8A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{712615AB-F200-49A8-ACE9-561E0AFBAC8A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{712615AB-F200-49A8-ACE9-561E0AFBAC8A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

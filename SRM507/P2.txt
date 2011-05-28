@@ -1,0 +1,61 @@
+﻿
+Problem Statement
+    
+NOTE: This problem statement contains images that may not display properly if viewed outside of the applet.
+
+Fox Ciel has a cube and some colored stickers. You are given a string[] sticker, where the i-th element is the color of the i-th sticker. Ciel wants to choose six of these stickers and apply one on each of the cube's faces. Each pair of adjacent faces must have different colors. Two faces are considered adjacent if they share an edge.
+
+If this is possible, return "YES", otherwise, return "NO" (all quotes for clarity).
+Definition
+    
+Class:
+CubeStickers
+Method:
+isPossible
+Parameters:
+string[]
+Returns:
+string
+Method signature:
+string isPossible(string[] sticker)
+(be sure your method is public)
+    
+
+Constraints
+-
+sticker will contain between 6 and 50 elements, inclusive.
+-
+Each element of sticker will contain between 1 and 10 lowercase letters ('a'-'z'), inclusive.
+Examples
+0)
+
+    
+{"cyan","magenta","yellow","purple","black","white","purple"}
+Returns: "YES"
+One of the possible ways is shown in the following picture:
+ 
+1)
+
+    
+{"blue","blue","blue","blue","blue","blue","blue","blue","blue","blue"}
+Returns: "NO"
+
+2)
+
+    
+{"red","yellow","blue","red","yellow","blue","red","yellow","blue"}
+Returns: "YES"
+
+3)
+
+    
+{"purple","orange","orange","purple","black","orange","purple"}
+Returns: "NO"
+
+4)
+
+    
+{"white","gray","green","blue","yellow","red","target","admin"}
+Returns: "YES"
+
+This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
