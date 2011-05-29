@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A3DF7E84-4A53-4E24-AC29-1C1D0603F39C}"
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
+		MyCode.snippet = MyCode.snippet
 		Route56.vsmdi = Route56.vsmdi
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
