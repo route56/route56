@@ -12,7 +12,10 @@ namespace DowneySemaphores
 			//Signaling.MainX(args);
 			//Rendezvous.MainX(args);
 			//Rendezvous2.MainX(args);
-			Rendezvous3.MainX(args);
+			//Rendezvous3.MainX(args);
+			//Mutex.MainX(args);
+			//Multiplex.MainX(args);
+			Barrier.MainX(args);
 		}
 	}
 }
