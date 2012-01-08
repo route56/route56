@@ -10,7 +10,7 @@ namespace DowneySemaphores
 	{
 		private static Semaphore _a1IsDone;
 
-		static void Main(string[] args)
+		public static void MainX(string[] args)
 		{
 			_a1IsDone = new Semaphore(0, 1);
 
@@ -24,7 +24,7 @@ namespace DowneySemaphores
 		private static void ThreadA()
 		{
 			Console.WriteLine("Thread A: Doing A1");
-			Thread.Sleep(1000);
+			Helper.RandomSleep();
 			Console.WriteLine("Thread A: Sending Signal");
 			_a1IsDone.Release();
 			Console.WriteLine("Thread A exiting.");
@@ -36,7 +36,7 @@ namespace DowneySemaphores
 			_a1IsDone.WaitOne();
 			Console.WriteLine("Thread B: Got Signal");
 			Console.WriteLine("Thread B: Doing B1");
-			Thread.Sleep(1000);
+			Helper.RandomSleep();
 			Console.WriteLine("Thread B: Exiting");
 		}
 	}

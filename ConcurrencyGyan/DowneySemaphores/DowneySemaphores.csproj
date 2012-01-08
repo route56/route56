@@ -47,6 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Rendezvous3.cs" />
+    <Compile Include="Rendezvous2.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="MainClass.cs" />
+    <Compile Include="Rendezvous.cs" />
     <Compile Include="Signaling.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
