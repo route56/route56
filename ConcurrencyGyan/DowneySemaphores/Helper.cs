@@ -15,5 +15,10 @@ namespace DowneySemaphores
 		{
 			Console.WriteLine("TID {0}: {1}", Thread.CurrentThread.ManagedThreadId, msg);
 		}
+
+		public static void ConsoleWriteLineThreadName(string msg)
+		{
+			Console.WriteLine("TName {0}: {1}", Thread.CurrentThread.Name, msg);
+		}
 	}
 }

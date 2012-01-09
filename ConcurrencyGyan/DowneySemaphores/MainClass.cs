@@ -15,7 +15,8 @@ namespace DowneySemaphores
 			//Rendezvous3.MainX(args);
 			//Mutex.MainX(args);
 			//Multiplex.MainX(args);
-			Barrier.MainX(args);
+			//Barrier.MainX(args);
+			ReusableBarrier.MainX(args);
 		}
 	}
 }

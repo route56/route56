@@ -21,37 +21,42 @@ namespace DowneySemaphores
 			for (int i = 0; i < threadsToCreate; i++)
 			{
 				Thread tA = new Thread(ThreadCode);
+				tA.Name = i.ToString();
 				tA.Start();
 			}
 		}
 
 		private static void ThreadCode()
 		{
-			Helper.ConsoleWriteLineThreadId("Started");
+			Helper.ConsoleWriteLineThreadName("Started");
 			Helper.RandomSleep();
 
-			Helper.ConsoleWriteLineThreadId("Acquiring mutex...");
+			Helper.ConsoleWriteLineThreadName("Acquiring mutex...");
 			_mutex.WaitOne();
 			_threadCount--;
-			Helper.ConsoleWriteLineThreadId(string.Format("Critical section: ThreadCount = {0}", _threadCount));
-			Helper.ConsoleWriteLineThreadId("Released mutex.");
+			Helper.ConsoleWriteLineThreadName(string.Format("Critical section: ThreadCount = {0}", _threadCount));
+			Helper.ConsoleWriteLineThreadName("Released mutex.");
 			_mutex.Release();
 
+			// below check needs to be in critical section? No.
+			// but below can be signaled multiple times if context switch happens between above mutex release and this check.
 			if (_threadCount == 0)
 			{
-				Helper.ConsoleWriteLineThreadId("Trigering GoGoGo");
+				Helper.ConsoleWriteLineThreadName("Trigering GoGoGo");
 				_gogogo.Release();
 			}
-			else
+			else // this else isn't really needed
 			{
-				Helper.ConsoleWriteLineThreadId("Waiting for the GoGoGo");
+				// below is called turnstile.
+				Helper.ConsoleWriteLineThreadName("Waiting for the GoGoGo");
 				_gogogo.WaitOne();
-				Helper.ConsoleWriteLineThreadId("Got GoGoGo, Signaling same.");
+				Helper.ConsoleWriteLineThreadName("Got GoGoGo, Signaling same.");
 				_gogogo.Release();
+				// by end of n't thread turnstile will be 1.
 			}
 
 			Helper.RandomSleep();
-			Helper.ConsoleWriteLineThreadId("Exited");
+			Helper.ConsoleWriteLineThreadName("Exited");
 		}
 	}
 }
