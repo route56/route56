@@ -16,7 +16,8 @@ namespace DowneySemaphores
 			//Mutex.MainX(args);
 			//Multiplex.MainX(args);
 			//Barrier.MainX(args);
-			ReusableBarrier.MainX(args);
+			//ReusableBarrier.MainX(args);
+			TargetClass.TestThis();
 		}
 	}
 }

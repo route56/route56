@@ -30,20 +30,23 @@ namespace DowneySemaphores
 			}
 		}
 
+		//public static void UnitTest(out string stream, out Rules rules)
+		//{
+		//    // redirect console output to a stream.
+		//    //
+		//}
+
 		private static void ThreadCode()
 		{
 			Helper.ConsoleWriteLineThreadName("Started");
-			Helper.RandomSleep();
 
-			Helper.ConsoleWriteLineThreadName("Entering barrier code");
-			BarrierCode();
-			Helper.ConsoleWriteLineThreadName("Exiting barrier code");
-
-			Helper.RandomSleep();
-
-			Helper.ConsoleWriteLineThreadName("Entering barrier code again");
-			BarrierCode();
-			Helper.ConsoleWriteLineThreadName("Exiting barrier code again");
+			for (int i = 0; i < 2; i++)
+			{
+				Helper.RandomSleep();
+				Helper.ConsoleWriteLineThreadName(string.Format("Entering barrier code {0} time", i));
+				BarrierCode();
+				Helper.ConsoleWriteLineThreadName(string.Format("Exiting barrier code {0} time", i));
+			}
 
 			Helper.RandomSleep();
 			Helper.ConsoleWriteLineThreadName("Exited");
