@@ -51,6 +51,12 @@ namespace SRM532_Div2.Test
 
 		}
 
+		[TestMethod]
+		public void FailingTests()
+		{
+			TestThis(new string[] { "16.", "9.8", ".24", "52.", "3.1", "532", "4.4", "111" }, 28);
+		}
+
 		private void TestThis(string[] sequence, int ans)
 		{
 			Assert.AreEqual(new DengklekMakingChains().maxBeauty(sequence), ans);

@@ -8,84 +8,180 @@ namespace SRM532_Div2
 	{
 		enum MyEnum
 		{
-			Left, Mid, Right, Both, None
+			Left, Right, Mid, None, DotEnds, DotMid
+		}
+
+		class Pair
+		{
+			public int Index { get; set; }
+			public int Value { get; set; }
 		}
 
 		public int maxBeauty(string[] chains)
 		{
-			int left = 0;
-			int right = 0;
-			int mid = 0;
+			Pair leftMax = null;
+			Pair left2ndMax = null;
 
-			List<string> bothSide = new List<string>();
+			Pair rightMax = null;
+			Pair right2ndMax = null;
 
-			foreach (var item in chains)
+			int dotEndsMax = 0;
+
+			int midSum = 0;
+
+			for (int i = 0; i < chains.Length; i++)
 			{
 				int val = 0;
 
-				switch (GetValue(item, out val))
+				switch (GetValue(chains[i], out val))
 				{
 					case MyEnum.Left:
-						if (val > left)
-						{
-							left = val;
-						}
-						break;
-					case MyEnum.Mid:
-						mid += val;
+						InsertIfMaxAnd2ndMax(ref leftMax, ref left2ndMax, val, i);
 						break;
 					case MyEnum.Right:
-						if (val > right)
-						{
-							right = val;
-						}
+						InsertIfMaxAnd2ndMax(ref rightMax, ref right2ndMax, val, i);
+						break;
+					case MyEnum.Mid:
+						midSum += val;
 						break;
 					case MyEnum.None:
 						break;
-					case MyEnum.Both:
-						bothSide.Add(item);
+					case MyEnum.DotEnds:
+						if (val > dotEndsMax)
+						{
+							dotEndsMax = val;
+						}
+						break;
+					case MyEnum.DotMid:
+						InsertIfMaxAnd2ndMax(ref leftMax, ref left2ndMax, Int32.Parse(chains[i][2].ToString()), i);
+						InsertIfMaxAnd2ndMax(ref rightMax, ref right2ndMax, Int32.Parse(chains[i][0].ToString()), i);
 						break;
 					default:
 						break;
 				}
 			}
 
-			FindLeftRight(bothSide, ref left, ref right);
+			int chain = midSum + GetAnswer(leftMax, left2ndMax, rightMax, right2ndMax);
 
-			return left + right + mid;
+			return GetMaxValue(chain, dotEndsMax);
 		}
 
-		private void FindLeftRight(List<string> bothSide, ref int leftX, ref int rightX)
+		private int GetAnswer(Pair leftMax, Pair left2ndMax, Pair rightMax, Pair right2ndMax)
 		{
-			if (bothSide.Count == 0)
+			if (leftMax == null)
 			{
+				if (rightMax == null)
+				{
+					return 0;
+				}
+				else
+				{
+					return rightMax.Value;
+				}
+			}
+			else
+			{
+				if (rightMax == null)
+				{
+					return leftMax.Value;
+				}
+				else
+				{
+					// if same link
+					if (leftMax.Index == rightMax.Index)
+					{
+						if (left2ndMax == null)
+						{
+							if (right2ndMax == null)
+							{
+								// 2 non nulls
+								// only one link in same places
+								return GetMaxValue(leftMax.Value, rightMax.Value);
+							}
+							else
+							{
+								// 3 non nulls, but 2 links
+								// leftMax; rightMax; right2ndMax;
+								// 2.3 1..
+								// 3.1 1..
+								return GetMaxValue(leftMax.Value + right2ndMax.Value, rightMax.Value);
+							}
+						}
+						else
+						{
+							if (right2ndMax == null)
+							{
+								// 3 non nulls, but 2 links
+								// leftMax; left2ndMax; rightMax;
+								return GetMaxValue(leftMax.Value, left2ndMax.Value + rightMax.Value);
+							}
+							else
+							{
+								//// 4 non nulls
+								//// leftMax; left2ndMax; rightMax; right2ndMax;
+								return GetMaxValue(leftMax.Value + right2ndMax.Value, left2ndMax.Value + rightMax.Value);
+							}
+						}
+					}
+					else
+					{
+						return leftMax.Value + rightMax.Value;
+					}
+				}
+			}
+		}
+
+		private int GetMaxValue(int one, int two)
+		{
+			if (one > two)
+			{
+				return one;
+			}
+			else
+			{
+				return two;
+			}
+		}
+
+		private void InsertIfMaxAnd2ndMax(ref Pair pairMax, ref Pair pair2ndMax, int val, int i)
+		{
+			if (pairMax == null)
+			{
+				pairMax = new Pair() { Index = i, Value = val };
 				return;
 			}
 
-			int left = leftX;
-			int right = rightX;
-			int left2nd = 0;
-			int right2nd = 0;
-			int lIndex = 0;
-			int rIndex = 0;
-
-			for (int i = 0; i < bothSide.Count; i++)
+			if (val > pairMax.Value)
 			{
-				int l = Int32.Parse(bothSide[i].ToCharArray()[2].ToString());
-				int r = Int32.Parse(bothSide[i].ToCharArray()[0].ToString());
-
-				if ( l > left2nd)
+				if (pair2ndMax == null)
 				{
-					if (l > left)
+					pair2ndMax = pairMax;
+					pairMax = new Pair() { Index = i, Value = val };
+				}
+				else
+				{
+					pair2ndMax.Index = pairMax.Index;
+					pair2ndMax.Value = pairMax.Value;
+
+					pairMax.Index = i;
+					pairMax.Value = val;
+				}
+			}
+			else
+			{
+				if (pair2ndMax == null)
+				{
+					pair2ndMax = new Pair() { Index = i, Value = val };
+				}
+				else
+				{
+					if (val > pair2ndMax.Value)
 					{
-						left2nd = left;
-						left = l;
+						pair2ndMax.Index = i;
+						pair2ndMax.Value = val;
 					}
 				}
-
 			}
-
-
 		}
 
 		private MyEnum GetValue(string item, out int val)
@@ -102,36 +198,56 @@ namespace SRM532_Div2
 			{
 				if (arr[1] == '.')
 				{
+					// ..1
 					val = Int32.Parse(arr[2].ToString());
 				}
 				else
 				{
-					val = Int32.Parse(arr[1].ToString()) + Int32.Parse(arr[2].ToString());
+					if (arr[2] == '.')
+					{
+						// .1.
+						val = Int32.Parse(arr[1].ToString());
+						return MyEnum.DotEnds;
+					}
+					else
+					{
+						// .11
+						val = Int32.Parse(arr[1].ToString()) + Int32.Parse(arr[2].ToString());
+					}
 				}
 				return MyEnum.Left;
 			}
 
-			if (arr[2] == '.')
+			// 1XX
+			if (arr[1] == '.')
 			{
-				if (arr[1] == '.')
+				if (arr[2] == '.')
 				{
+					// 1..
 					val = Int32.Parse(arr[0].ToString());
+					return MyEnum.Right;
 				}
 				else
 				{
-					val = Int32.Parse(arr[0].ToString()) + Int32.Parse(arr[1].ToString());
+					// 1.1
+					return MyEnum.DotMid;
 				}
-				return MyEnum.Right;
 			}
-
-			if (arr[1] == '.')
+			else
 			{
-				return MyEnum.Both;
+				if (arr[2] == '.')
+				{
+					// 11.
+					val = Int32.Parse(arr[0].ToString()) + Int32.Parse(arr[1].ToString());
+					return MyEnum.Right;
+				}
+				else
+				{
+					// 111
+					val = Int32.Parse(arr[0].ToString()) + Int32.Parse(arr[1].ToString()) + Int32.Parse(arr[2].ToString());
+					return MyEnum.Mid;
+				}
 			}
-
-			val = Int32.Parse(arr[0].ToString()) + Int32.Parse(arr[1].ToString()) + Int32.Parse(arr[2].ToString());
-
-			return MyEnum.Mid;
 		}
 	}
 }
