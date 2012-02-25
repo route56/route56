@@ -17,7 +17,8 @@ namespace RegexProblems
 				StringBuilder regex =
 					//GetRegExForCodeWithJustPlus(codes[i].ToCharArray());
 					//GetRegExForCode(codes[i].ToCharArray());
-					GetRegExForCodeWithoutStartEndFillers(codes[i].ToCharArray());
+					//GetRegExForCodeWithoutStartEndFillers(codes[i].ToCharArray());
+					GetRegExForCodeWithJustPlusQuestion(codes[i].ToCharArray());
 
 
 				if (Regex.Matches(keyPresses, regex.ToString()).Count > 0)
@@ -33,6 +34,24 @@ namespace RegexProblems
 			if(map[i] == true)
 				res[jj++]=i ; 
 			return res ; 
+		}
+
+		/// <summary>
+		/// +? Lazy quantifer and not greedy
+		/// </summary>
+		/// <param name="code"></param>
+		/// <returns></returns>
+		private StringBuilder GetRegExForCodeWithJustPlusQuestion(char[] code)
+		{
+			StringBuilder regex = new StringBuilder();
+
+			foreach (var item in code)
+			{
+				regex.Append(item);
+				regex.Append("+?");
+			}
+
+			return regex;
 		}
 
 		private StringBuilder GetRegExForCode(char[] code)
