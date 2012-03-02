@@ -49,13 +49,14 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ZigZagTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegExProblemsTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RegexProblems\RegexProblems.csproj">
+    <ProjectReference Include="..\RegexProblems\Tutorial.csproj">
       <Project>{AC56E9C9-D787-46CE-B233-2C26CFAF4CCC}</Project>
-      <Name>RegexProblems</Name>
+      <Name>Tutorial</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

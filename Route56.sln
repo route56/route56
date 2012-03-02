@@ -91,9 +91,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRM532_Div2", "SRM532_Div2\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRM532_Div2.Test", "SRM532_Div2.Test\SRM532_Div2.Test.csproj", "{3B13AC43-A639-447F-90AE-352FA1AF6442}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RegEx", "RegEx", "{2AEAF857-3E82-428D-A351-B6AC11CC5D6E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tutorials", "Tutorials", "{2AEAF857-3E82-428D-A351-B6AC11CC5D6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexProblems", "RegexProblems\RegexProblems.csproj", "{AC56E9C9-D787-46CE-B233-2C26CFAF4CCC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial", "RegexProblems\Tutorial.csproj", "{AC56E9C9-D787-46CE-B233-2C26CFAF4CCC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTester", "QuickTester\QuickTester.csproj", "{7292B354-C92E-4E5E-9F9F-2488DAFC18D4}"
 EndProject
@@ -241,13 +241,13 @@ Global
 		SccProjectTopLevelParentUniqueName35 = Route56.sln
 		SccProjectName35 = SRM532_Div2.Test
 		SccLocalPath35 = SRM532_Div2.Test
-		SccProjectUniqueName36 = RegexProblems\\RegexProblems.csproj
-		SccProjectTopLevelParentUniqueName36 = Route56.sln
-		SccProjectName36 = RegexProblems
-		SccLocalPath36 = RegexProblems
-		SccProjectUniqueName37 = QuickTester\\QuickTester.csproj
-		SccProjectName37 = QuickTester
-		SccLocalPath37 = QuickTester
+		SccProjectUniqueName36 = QuickTester\\QuickTester.csproj
+		SccProjectName36 = QuickTester
+		SccLocalPath36 = QuickTester
+		SccProjectUniqueName37 = RegexProblems\\Tutorial.csproj
+		SccProjectTopLevelParentUniqueName37 = Route56.sln
+		SccProjectName37 = RegexProblems
+		SccLocalPath37 = RegexProblems
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Route56.vsmdi

@@ -44,9 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheatCodes.cs" />
-    <Compile Include="CyberLine.cs" />
+    <Compile Include="DynamicProgrammingProblems\ZigZag.cs" />
+    <Compile Include="RegexProblems\CheatCodes.cs" />
+    <Compile Include="RegexProblems\CyberLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegexProblems\UrlMatcher.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DynamicProgrammingProblems\ZigZag.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
