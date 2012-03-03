@@ -20,6 +20,21 @@ namespace QuickTester
 			Assert.AreEqual(15,
 				new BadNeighbors().MaxDonations(new int[] { 11, 15 }));
 
+			Assert.AreEqual(11,
+				new BadNeighbors().MaxDonations(new int[] { 1, 11, 2 }));
+
+			Assert.AreEqual(11,
+				new BadNeighbors().MaxDonations(new int[] { 10, 2, 1, 4 }));
+
+			Assert.AreEqual(11,
+				new BadNeighbors().MaxDonations(new int[] { 2, 10, 4, 1 }));
+
+			Assert.AreEqual(11,
+				new BadNeighbors().MaxDonations(new int[] { 2, 5, 4, 1, 6 }));
+
+			Assert.AreEqual(11,
+				new BadNeighbors().MaxDonations(new int[] { 5, 2, 1, 6, 4 }));
+
 			Assert.AreEqual(21,
 				new BadNeighbors().MaxDonations(new int[] { 7, 7, 7, 7, 7, 7, 7 }));
 

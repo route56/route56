@@ -9,20 +9,18 @@ namespace RegexProblems.DynamicProgrammingProblems
 	{
 		public int MaxDonations(int[] donations)
 		{
-			int[] stateBar = new int[donations.Length];
-			int[] state = new int[donations.Length];
+			int size = 4;
+			int[] stateBar = new int[size];
+			int[] state = new int[size];
 
-			if (donations.Length <= 3)
+			switch (donations.Length)
 			{
-				switch(donations.Length)
-				{
-					case 1:
-						return donations[0];
-					case 2:
-						return Math.Max(donations[0], donations[1]);
-					case 3:
-						return Math.Max(Math.Max(donations[0], donations[1]), donations[2]);
-				}
+				case 1:
+					return donations[0];
+				case 2:
+					return Math.Max(donations[0], donations[1]);
+				case 3:
+					return Math.Max(Math.Max(donations[0], donations[1]), donations[2]);
 			}
 
 			stateBar[0] = 0;
@@ -36,50 +34,11 @@ namespace RegexProblems.DynamicProgrammingProblems
 
 			for (int i = 3; i < donations.Length; i++)
 			{
-				stateBar[i] = donations[i] + Math.Max(stateBar[i - 2], stateBar[i - 3]);
-				state[i] = donations[i] + Math.Max(state[i - 2], state[i - 3]);
+				stateBar[i % size] = donations[i] + Math.Max(stateBar[(i - 2) % size], stateBar[(i - 3) % size]);
+				state[i % size] = donations[i] + Math.Max(state[(i - 2) % size], state[(i - 3) % size]);
 			}
 
-			return Math.Max(state[state.Length - 2], stateBar[stateBar.Length - 1]);
+			return Math.Max(state[(donations.Length - 2) % size], stateBar[(donations.Length - 1) % size]);
 		}
-
-		//{
-		//    int[] states = new int[donations.Length];
-
-		//    if (donations.Length <= 3)
-		//    {
-		//        throw new NotImplementedException();
-		//    }
-
-		//    states[0] = donations[0];
-		//    states[1] = donations[1];
-		//    states[2] = donations[2];
-
-		//    for (int i = 3; i < donations.Length; i++)
-		//    {
-		//        states[i] = donations[i];
-		//        states[i - 1] += states[0];
-
-		//        for (int j = 1; j < i - 1; j++)
-		//        {
-		//            if (states[j] + donations[i] > states[i])
-		//            {
-		//                states[i] = states[j] + donations[i];
-		//            }
-		//        }
-		//    }
-
-		//    int maxDon = 0;
-
-		//    for (int i = 0; i < states.Length; i++)
-		//    {
-		//        if (maxDon < states[i])
-		//        {
-		//            maxDon = states[i];
-		//        }
-		//    }
-
-		//    return maxDon;
-		//}
 	}
 }
