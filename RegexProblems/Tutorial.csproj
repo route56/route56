@@ -50,10 +50,16 @@
     <Compile Include="RegexProblems\CyberLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegexProblems\UrlMatcher.cs" />
+    <Compile Include="SRM535\250.cs" />
+    <Compile Include="SRM535\500.cs" />
+    <Compile Include="SRMPractice\EllysCheckers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DynamicProgrammingProblems\BadNeighbours.txt" />
     <Content Include="DynamicProgrammingProblems\ZigZag.txt" />
+    <Content Include="SRM535\500.txt" />
+    <Content Include="SRM535\250.txt" />
+    <Content Include="SRMPractice\EllysCheckers.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
