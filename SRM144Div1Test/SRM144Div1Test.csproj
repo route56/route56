@@ -70,14 +70,6 @@
       <Project>{662087B1-13C4-4E54-B249-B0BE80D8C07E}</Project>
       <Name>SRM144Div1</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SRM504Div2\SRM504Div2.csproj">
-      <Project>{A22105F1-ADCC-44AF-9E06-C83115104B8B}</Project>
-      <Name>SRM504Div2</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SRM505Div2\SRM505Div2.csproj">
-      <Project>{BD47D23F-9685-46EA-8FE7-A55F96895B3D}</Project>
-      <Name>SRM505Div2</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TCO11QR2\TCO11QR2.csproj">
       <Project>{9AAAEDB7-49F2-4089-902D-B6889F647F98}</Project>
       <Name>TCO11QR2</Name>
