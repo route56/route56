@@ -9,8 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCProblemParser", "TCProblemParser\TCProblemParser.csproj", "{71DF52BF-5BDB-420B-8C01-984E5F240866}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geometry", "Geometry\Geometry.csproj", "{163C0652-472C-42A8-B941-44577CA9DB90}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberSystem", "NumberSystem\NumberSystem.csproj", "{5A262533-8D0B-4601-9F52-B74994697915}"
@@ -27,32 +25,29 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTester", "QuickTester\
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs25
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = TCProblemParser\\TCProblemParser.csproj
-		SccProjectName1 = TCProblemParser
-		SccLocalPath1 = TCProblemParser
-		SccProjectUniqueName2 = Geometry\\Geometry.csproj
+		SccProjectUniqueName1 = Geometry\\Geometry.csproj
+		SccProjectTopLevelParentUniqueName1 = Route56.sln
+		SccProjectName1 = Geometry
+		SccLocalPath1 = Geometry
+		SccProjectUniqueName2 = NumberSystem\\NumberSystem.csproj
 		SccProjectTopLevelParentUniqueName2 = Route56.sln
-		SccProjectName2 = Geometry
-		SccLocalPath2 = Geometry
-		SccProjectUniqueName3 = NumberSystem\\NumberSystem.csproj
+		SccProjectName2 = NumberSystem
+		SccLocalPath2 = NumberSystem
+		SccProjectUniqueName3 = NumberSystem.Test\\NumberSystem.Test.csproj
 		SccProjectTopLevelParentUniqueName3 = Route56.sln
-		SccProjectName3 = NumberSystem
-		SccLocalPath3 = NumberSystem
-		SccProjectUniqueName4 = NumberSystem.Test\\NumberSystem.Test.csproj
-		SccProjectTopLevelParentUniqueName4 = Route56.sln
-		SccProjectName4 = NumberSystem.Test
-		SccLocalPath4 = NumberSystem.Test
-		SccProjectUniqueName5 = QuickTester\\QuickTester.csproj
-		SccProjectName5 = QuickTester
-		SccLocalPath5 = QuickTester
-		SccProjectUniqueName6 = RegexProblems\\Tutorial.csproj
-		SccProjectTopLevelParentUniqueName6 = Route56.sln
-		SccProjectName6 = RegexProblems
-		SccLocalPath6 = RegexProblems
+		SccProjectName3 = NumberSystem.Test
+		SccLocalPath3 = NumberSystem.Test
+		SccProjectUniqueName4 = QuickTester\\QuickTester.csproj
+		SccProjectName4 = QuickTester
+		SccLocalPath4 = QuickTester
+		SccProjectUniqueName5 = RegexProblems\\Tutorial.csproj
+		SccProjectTopLevelParentUniqueName5 = Route56.sln
+		SccProjectName5 = RegexProblems
+		SccLocalPath5 = RegexProblems
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Route56.vsmdi
@@ -66,16 +61,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{71DF52BF-5BDB-420B-8C01-984E5F240866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71DF52BF-5BDB-420B-8C01-984E5F240866}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71DF52BF-5BDB-420B-8C01-984E5F240866}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{71DF52BF-5BDB-420B-8C01-984E5F240866}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{71DF52BF-5BDB-420B-8C01-984E5F240866}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{71DF52BF-5BDB-420B-8C01-984E5F240866}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71DF52BF-5BDB-420B-8C01-984E5F240866}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71DF52BF-5BDB-420B-8C01-984E5F240866}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{71DF52BF-5BDB-420B-8C01-984E5F240866}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{71DF52BF-5BDB-420B-8C01-984E5F240866}.Release|x86.ActiveCfg = Release|Any CPU
 		{163C0652-472C-42A8-B941-44577CA9DB90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{163C0652-472C-42A8-B941-44577CA9DB90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{163C0652-472C-42A8-B941-44577CA9DB90}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
