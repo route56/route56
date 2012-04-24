@@ -18,4 +18,9 @@ data structures
 unit testing
 	asserts
 
+input output
+	Read Write 
+		on Console
+		on file
+
 
