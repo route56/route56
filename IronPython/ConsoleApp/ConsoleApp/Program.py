@@ -1,19 +1,23 @@
-#Write a code that outputs p after multiplying each entry 
-#by pHit or pMiss at the appropriate places. Remember that
-#the red cells 1 and 2 are hits and the other green cells
-#are misses
+#Modify the program to find and print the sum of all 
+#the entries in the list p.
 
-
-p=[0.2,0.2,0.2,0.2,0.2]
+p=[0.2, 0.2, 0.2, 0.2, 0.2]
 pHit = 0.6
 pMiss = 0.2
 
-#Enter code here
-# http://docs.python.org/tutorial/datastructures.html#more-on-conditions
-for x in range(5) :
-    if (x == 1 or x == 2) :
-        p[x] = p[x]*pHit
-    else:
-        p[x] = p[x]*pMiss
+p[0]=p[0]*pMiss
+p[1]=p[1]*pHit
+p[2]=p[2]*pHit
+p[3]=p[3]*pMiss
+p[4]=p[4]*pMiss
 
-print p
+sum1=0
+for i in range(5) :
+    sum1 += p[i]
+
+print sum1
+
+#other way
+sum2 = sum(p) #if sum1 was named sum, this is error
+
+print sum2
