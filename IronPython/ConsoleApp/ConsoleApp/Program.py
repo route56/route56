@@ -1,22 +1,19 @@
-#  Modify your code to create probability vectors, p, of arbitrary 
-#  size, n. Use n=5 to verify that your new solution matches 
-#  the previous one.
+#Write a code that outputs p after multiplying each entry 
+#by pHit or pMiss at the appropriate places. Remember that
+#the red cells 1 and 2 are hits and the other green cells
+#are misses
 
-# python create array of size n
-# http://stackoverflow.com/questions/1859864/how-to-create-an-integer-array-in-python
 
-n=5
-q=[0]*n
+p=[0.2,0.2,0.2,0.2,0.2]
+pHit = 0.6
+pMiss = 0.2
 
-for x in range(0, n) :
-    q[x] = 1.0/n
-
-print q
-
-p=[]
-
-for y in range(n) :
-    p.append(1./n)
+#Enter code here
+# http://docs.python.org/tutorial/datastructures.html#more-on-conditions
+for x in range(5) :
+    if (x == 1 or x == 2) :
+        p[x] = p[x]*pHit
+    else:
+        p[x] = p[x]*pMiss
 
 print p
-

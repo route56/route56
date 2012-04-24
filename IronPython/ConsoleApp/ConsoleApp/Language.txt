@@ -6,6 +6,8 @@ variable assignment
 
 branching
 	if, switch
+		conditions.
+			And. Or.
 
 looping
 	while, for
