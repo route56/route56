@@ -1,0 +1,19 @@
+data types
+	int float
+
+variable assignment
+	x = 10
+
+branching
+	if, switch
+
+looping
+	while, for
+
+data structures
+	array, list
+
+unit testing
+	asserts
+
+

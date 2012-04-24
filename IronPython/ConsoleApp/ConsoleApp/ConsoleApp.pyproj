@@ -12,6 +12,10 @@
     <AssemblyName>ConsoleApp</AssemblyName>
     <Name>ConsoleApp</Name>
     <RootNamespace>ConsoleApp</RootNamespace>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +26,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="Language.txt" />
     <None Include="Program.py" />
   </ItemGroup>
 </Project>
