@@ -1,12 +1,11 @@
-#Modify the code so that it updates the probability twice
-#and gives the posterior distribution after both 
-#measurements are incorporated. Make sure that your code 
-#allows for any sequence of measurement of any length.
+#Program a function that returns a new distribution 
+#q, shifted to the right by U units. If U=0, q should 
+#be the same as p.
 
-p=[0.2, 0.2, 0.2, 0.2, 0.2]
+p=[0, 1, 0, 0, 0]
 world=['green', 'red', 'red', 'green', 'green']
 measurements = ['red', 'green']
-pHit = 0.6 # changing this and other for above measurements, in end doesn't change final p.
+pHit = 0.6
 pMiss = 0.2
 
 def sense(p, Z):
@@ -18,11 +17,20 @@ def sense(p, Z):
     for i in range(len(q)):
         q[i] = q[i] / s
     return q
-#
-#ADD YOUR CODE HERE
-#
 
-for i in range(len(measurements)) :
-    p = sense(p, measurements[i])
+def move(p, U):
+    #
+    #ADD CODE HERE
+    #
+    q=[]
+    for i in range(len(p)) :
+        q.append(p[(i - U) % len(p)])
 
-print p
+    return q
+
+print move(p, 1)
+print move(p, 3)
+print move(p, -1)
+print move(p, -3)
+
+print 1
