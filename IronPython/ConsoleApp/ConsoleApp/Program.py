@@ -1,12 +1,12 @@
-#Modify your code so that it normalizes the output for 
-#the function sense. This means that the entries in q 
-#should sum to one.
-
+#Modify the code so that it updates the probability twice
+#and gives the posterior distribution after both 
+#measurements are incorporated. Make sure that your code 
+#allows for any sequence of measurement of any length.
 
 p=[0.2, 0.2, 0.2, 0.2, 0.2]
 world=['green', 'red', 'red', 'green', 'green']
-Z = 'red'
-pHit = 0.6
+measurements = ['red', 'green']
+pHit = 0.6 # changing this and other for above measurements, in end doesn't change final p.
 pMiss = 0.2
 
 def sense(p, Z):
@@ -15,8 +15,14 @@ def sense(p, Z):
         hit = (Z == world[i])
         q.append(p[i] * (hit * pHit + (1-hit) * pMiss))
     s = sum(q)
-    for i in range(len(q)) :
-        q[i] /= s
-    return q # this function is called measurement update
-    
-print sense(p,Z)
+    for i in range(len(q)):
+        q[i] = q[i] / s
+    return q
+#
+#ADD YOUR CODE HERE
+#
+
+for i in range(len(measurements)) :
+    p = sense(p, measurements[i])
+
+print p
