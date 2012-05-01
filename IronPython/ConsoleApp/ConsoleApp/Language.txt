@@ -30,3 +30,14 @@ using/including/importing
 	discoverability of api usage
 
 
+Starting method
+	main() C/C++ 
+	Main() of C#. 
+	Python?
+		pyproj contains 
+		Startup file
+		working dir
+
+Debugging
+	exception/error raised.
+	call stack
