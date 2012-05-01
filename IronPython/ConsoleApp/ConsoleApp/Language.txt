@@ -23,4 +23,10 @@ input output
 		on Console
 		on file
 
+dealing with multiple files.
+
+using/including/importing
+	known libraries/modules/packages
+	discoverability of api usage
+
 

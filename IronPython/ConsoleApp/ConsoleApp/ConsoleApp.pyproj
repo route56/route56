@@ -26,6 +26,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="test.py" />
     <None Include="Language.txt" />
     <None Include="Program.py" />
   </ItemGroup>
