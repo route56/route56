@@ -1,10 +1,13 @@
-#Write code that makes the robot move twice and then prints 
-#out the resulting distribution, starting with the initial 
-#distribution p = [0, 1, 0, 0, 0]
+#Given the list motions=[1,1] which means the robot 
+#moves right and then right again, compute the posterior 
+#distribution if the robot first senses red, then moves 
+#right one, then senses green, then moves right again, 
+#starting with a uniform prior distribution.
 
-p=[0, 1, 0, 0, 0]
+p=[0.2, 0.2, 0.2, 0.2, 0.2]
 world=['green', 'red', 'red', 'green', 'green']
 measurements = ['red', 'green']
+motions = [1,1]
 pHit = 0.6
 pMiss = 0.2
 pExact = 0.8
@@ -32,12 +35,13 @@ def move(p, U):
 #
 # ADD CODE HERE
 #
-for i in range(1000) :
-    p=move(p,1)
+for i in range(len(motions)) :
+    p = sense(p, measurements[i])
+    p = move(p, motions[i])
 
 print p
 
-print 1
+
 
 #def collectionAssert(e, a):
 #    assert len(e) == len(a)
