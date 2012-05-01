@@ -1,4 +1,4 @@
-def sense_and_move(colors, measurements, sensor_right):
+def sense_and_move(colors, measurements, sensor_right,motions, p_move):
     # initial prob distribution assuming uniform.
     size=0
     for i in range(len(colors)) :
@@ -7,7 +7,10 @@ def sense_and_move(colors, measurements, sensor_right):
 
     q = [[1./size for j in range(len(colors[i]))] for i in range(len(colors))]
 
-    q = sense(colors, q, measurements[0], sensor_right)
+    for i in range(len(measurements)) :
+        q = move(colors, q, motions[i], p_move)
+        q = sense(colors, q, measurements[i], sensor_right)
+        #q = move(colors, q, motions[i], p_move)
 
     return q
 
@@ -25,21 +28,14 @@ def sense(colors, p, Z, sensor_right):
 
     return q
 
-def move(p, U):
-    q = []
-    for i in range(len(p)):
-        s = pExact * p[(i-U) % len(p)]
-        s = s + pOvershoot * p[(i-U-1) % len(p)]
-        s = s + pUndershoot * p[(i-U+1) % len(p)]
-        q.append(s)
-    return q
-##
-## ADD CODE HERE
-##
-#for i in range(len(motions)) :
-#    p = sense(p, measurements[i])
-#    p = move(p, motions[i])
+def move(colors, p, U, p_move):
+    #0,1 -> right. 0, -1 ->left 1,0 -> down -1,0 ->up. NO 1,1
+    pExact = p_move
+    pSame = 1 - p_move
 
+    q = [[pExact * p[(i-U[0]) % len(p)][(j-U[1]) % len(p[i])] + pSame * p[i][j] for j in range(len(p[i]))] for i in range(len(p))]
+
+    return q
 
 # Why doesn't below work?
 #q=[]
