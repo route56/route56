@@ -41,3 +41,6 @@ Starting method
 Debugging
 	exception/error raised.
 	call stack
+
+File to Folder organization
+	With common code.

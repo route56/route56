@@ -5,9 +5,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{197f1736-eef0-4f71-8b9b-ee29c6b401f8}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Program.py</StartupFile>
-    <SearchPath>
-    </SearchPath>
+    <StartupFile>CS373\homework1tests.py</StartupFile>
+    <SearchPath>C:\Route56\IronPython\ConsoleApp\ConsoleApp\Common</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <AssemblyName>ConsoleApp</AssemblyName>
     <Name>ConsoleApp</Name>
@@ -30,10 +29,18 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="homework1.py" />
-    <None Include="homework1tests.py" />
-    <None Include="test.py" />
+    <None Include="Common\test.py" />
+    <None Include="CS373\homework1.py" />
+    <None Include="CS373\homework1tests.py" />
     <None Include="Language.txt" />
     <None Include="Program.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CS373" />
+    <Folder Include="CS212" />
+    <Folder Include="Common" />
+  </ItemGroup>
+  <ItemGroup>
+    <SearchPath Include="C:\Route56\IronPython\ConsoleApp\ConsoleApp\Common\" />
   </ItemGroup>
 </Project>
