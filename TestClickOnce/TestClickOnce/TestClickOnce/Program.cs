@@ -69,6 +69,7 @@ namespace TestClickOnce
 					}
 
 					int nextNum = rand.Next(100);
+					Console.ForegroundColor = ConsoleColor.Blue;
 					Console.WriteLine("And the number is = {0}", nextNum);
 					if (nextNum == num)
 					{
@@ -101,6 +102,13 @@ namespace TestClickOnce
 					Console.WriteLine("Error occured {0}", ex.Message);
 					Console.WriteLine("Try again");
 				}
+			}
+
+			if (startMoney <= 0)
+			{
+				Console.ForegroundColor = ConsoleColor.Red;
+				Console.WriteLine("You are broke!! Play later");
+				Console.ReadLine();
 			}
 
 			Console.ResetColor();
