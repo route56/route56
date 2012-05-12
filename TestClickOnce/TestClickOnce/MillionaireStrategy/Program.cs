@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace MillionaireStrategy
 {
@@ -11,24 +12,46 @@ namespace MillionaireStrategy
 	{
 		static void BasicStrategy(Decimal currentMoney, int theNumber, out bool high, out decimal bid)
 		{
-			if (theNumber > 50)
-			{
-				high = false;
-				bid = (100 - theNumber) * currentMoney / 49;
-			}
-			else if(theNumber < 50)
-			{
-				high = true;
-				bid = (50 - theNumber) * currentMoney / 49;
-			}
-			else
+			if (theNumber == 50)
 			{
 				high = false;
 				bid = 0;
 			}
+			else if (theNumber < 50)
+			{
+				high = true;
+				bid = (50 - theNumber) * currentMoney / 50;
+			}
+			else
+			{
+				high = false;
+				bid = (theNumber - 49) * currentMoney / 50;
+			}
 		}
 
 		static void Main(string[] args)
+		{
+			Play();
+		}
+
+		static void Test()
+		{
+			bool high;
+			decimal bid;
+
+			BasicStrategy(100, 0, out high, out bid);
+			Debug.Assert(high == true);
+			Debug.Assert(bid == 100);
+
+			BasicStrategy(100, 50, out high, out bid);
+			Debug.Assert(bid == 0);
+
+			BasicStrategy(100, 99, out high, out bid);
+			Debug.Assert(high == false);
+			Debug.Assert(bid == 100);
+		}
+
+		static void Play()
 		{
 			decimal currentMoney = new decimal(10000);
 			decimal millionDollars = new decimal(1000000);
@@ -48,6 +71,19 @@ namespace MillionaireStrategy
 
 				strategy(currentMoney, num, out high, out bid);
 
+				if (bid > currentMoney)
+				{
+					Console.ForegroundColor = ConsoleColor.DarkRed;
+					Console.WriteLine("Strategy returned Bid {0:C} > Current Money {1:C}", bid, currentMoney);
+					continue;
+				}
+
+				if (bid == currentMoney)
+				{
+					Console.ForegroundColor = ConsoleColor.DarkRed;
+					Console.WriteLine("All IN");
+				}
+
 				int nextNum = rand.Next(100);
 
 				PrintBid(currentMoney, num, high, bid, nextNum);
@@ -56,6 +92,11 @@ namespace MillionaireStrategy
 				{
 					PrintMoney("Won! ", bid, ConsoleColor.Green);
 					currentMoney += bid;
+				}
+				else if (nextNum == num)
+				{
+					Console.ForegroundColor = ConsoleColor.Cyan;
+					Console.WriteLine("Draw");
 				}
 				else
 				{
@@ -80,6 +121,7 @@ namespace MillionaireStrategy
 			}
 
 			Console.ReadLine();
+			Console.ResetColor();
 		}
 
 		private static void PrintBid(decimal currentMoney, int num, bool high, decimal bid, int nextNum)
