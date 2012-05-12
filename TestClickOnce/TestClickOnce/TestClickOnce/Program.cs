@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
+using System.Configuration;
 
 namespace TestClickOnce
 {
@@ -21,23 +22,31 @@ namespace TestClickOnce
 
 		static void Main(string[] args)
 		{
-			//// http://support.microsoft.com/kb/307020
-			//string sSourceData;
-			//byte[] tmpSource;
-			//byte[] tmpHash;
+			decimal defMoney = new decimal(10000);
+			decimal startMoney;
 
-			//sSourceData = "MySourceData";
-			////Create a byte array from source data.
-			//tmpSource = ASCIIEncoding.ASCII.GetBytes(sSourceData);
+			try
+			{
+				startMoney = Decimal.Parse(ConfigurationManager.AppSettings["Money"]);
+				string hash = ConfigurationManager.AppSettings["Hash"];
 
-			////Compute hash based on source data.
-			//tmpHash = new MD5CryptoServiceProvider().ComputeHash(tmpSource);
+				string tmpHash = GetMoneyHash(startMoney);
 
-			//Console.WriteLine(ByteArrayToString(tmpHash));
-			
+				if (hash != tmpHash)
+				{
+					Console.ForegroundColor = ConsoleColor.Red;
+					Console.WriteLine("Error! Money value tampered by user. Resetting to default {0:C}", defMoney);
+					throw new Exception();
+				}
+			}
+			catch
+			{
+				startMoney = defMoney;
+			}
+
 			Console.WriteLine("Lets play Hi Low Game.");
 
-			decimal startMoney = new decimal(10000);
+			
 			bool userWantsToPlay = true;
 			Random rand = new Random();
 
@@ -81,14 +90,14 @@ namespace TestClickOnce
 					{
 						Console.ForegroundColor = ConsoleColor.Green;
 						Console.WriteLine("You win!");
-						startMoney += bid;
+						startMoney = SetCurrentMoney(startMoney + bid);
 						Console.WriteLine("Balance = {0:C}", startMoney);
 					}
 					else
 					{
 						Console.ForegroundColor = ConsoleColor.Red;
 						Console.WriteLine("You lose! Better luck next time");
-						startMoney -= bid;
+						startMoney = SetCurrentMoney(startMoney - bid);
 						Console.WriteLine("Balance = {0:C}", startMoney);
 					}
 
@@ -112,6 +121,40 @@ namespace TestClickOnce
 			}
 
 			Console.ResetColor();
+		}
+
+		private static decimal SetCurrentMoney(decimal newMoney)
+		{
+			Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+			KeyValueConfigurationCollection settings = config.AppSettings.Settings;
+
+			// update SaveBeforeExit
+			settings["Money"].Value = newMoney.ToString();
+			settings["Hash"].Value = GetMoneyHash(newMoney);
+			//save the file
+			config.Save(ConfigurationSaveMode.Modified);
+
+			//reload the section you modified
+			ConfigurationManager.RefreshSection(config.AppSettings.SectionInformation.Name);
+
+			return newMoney;
+		}
+
+		private static string GetMoneyHash(decimal startMoney)
+		{
+			// http://support.microsoft.com/kb/307020
+			string sSourceData;
+			byte[] tmpSource;
+			byte[] tmpHash;
+
+			sSourceData = startMoney.ToString();
+			//Create a byte array from source data.
+			tmpSource = ASCIIEncoding.ASCII.GetBytes(sSourceData);
+
+			//Compute hash based on source data.
+			tmpHash = new MD5CryptoServiceProvider().ComputeHash(tmpSource);
+
+			return ByteArrayToString(tmpHash);
 		}
 	}
 }
