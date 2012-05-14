@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace MillionaireStrategy
 {
@@ -29,39 +31,214 @@ namespace MillionaireStrategy
 			}
 		}
 
+		static void ExponentialStrategy(Decimal currentMoney, int theNumber, out bool high, out decimal bid)
+		{
+			if (theNumber == 50)
+			{
+				high = false;
+				bid = 0;
+			}
+			else if (theNumber < 50)
+			{
+				high = true;
+				bid = (new Decimal(Math.Pow(2, (50.0 - theNumber)/50.0) - 1)) * currentMoney;
+			}
+			else
+			{
+				high = false;
+				bid = (new Decimal(Math.Pow(2, (theNumber - 49.0) / 50.0) - 1)) * currentMoney;
+			}
+		}
+
+		static void SqrtStrategy(Decimal currentMoney, int theNumber, out bool high, out decimal bid)
+		{
+			if (theNumber == 50)
+			{
+				high = false;
+				bid = 0;
+			}
+			else if (theNumber < 50)
+			{
+				high = true;
+				bid = (new Decimal(Math.Sqrt((50.0 - theNumber) / 50.0))) * currentMoney;
+			}
+			else
+			{
+				high = false;
+				bid = (new Decimal(Math.Sqrt((theNumber - 49.9) / 50.0))) * currentMoney;
+			}
+		}
+
+		static decimal? basicStragey2LastMoney;
+
+		static void BasicStrategy2(Decimal currentMoney, int theNumber, out bool high, out decimal bid)
+		{
+			BasicStrategy(currentMoney, theNumber, out high, out bid);
+
+			if (basicStragey2LastMoney.HasValue && !(theNumber == 0 || theNumber == 99))
+			{
+				if (currentMoney > basicStragey2LastMoney) // we won last time. Take more risk
+				{
+					bid = bid + (currentMoney - bid) / 2;
+				}
+				else
+				{
+					bid = bid - (currentMoney - bid) / 2;
+				}
+			}
+
+			basicStragey2LastMoney = currentMoney;
+		}
+
+		const int size = 100;
+		static Queue<int> queue = new Queue<int>(size);
+
+
+		static void PastHistory(Decimal currentMoney, int theNumber, out bool high, out decimal bid)
+		{
+			if (queue.Count <= size)
+			{
+				queue.Enqueue(theNumber);
+			}
+			else
+			{
+				queue.Dequeue();
+				queue.Enqueue(theNumber);
+			}
+
+			if (theNumber == 0 || theNumber == 99)
+			{
+				bid = currentMoney;
+				high = theNumber < 50;
+			}
+			else if(theNumber == 50)
+			{
+				bid = 0;
+				high = false;
+			}
+			else
+			{
+				double average = queue.Average();
+				high = average < 50;
+				bid = new decimal(Math.Abs(average - 50) / 50) * currentMoney;
+			}
+		}
+
 		static void Main(string[] args)
 		{
-			Play();
+			//Play(BasicStrategy);
+			//Play(ExponentialStrategy);
+			//Test(ExponentialStrategy);
+			//CompareStrategy(BasicStrategy, SqrtStrategy);
+
+			//CompareStrategy(ExponentialStrategy, SqrtStrategy);
+			// CompareStrategy(BasicStrategy, BasicStrategy2);
+			CompareStrategy(BasicStrategy, PastHistory);
 		}
 
-		static void Test()
+		static void CompareStrategy(TheStrategy one, TheStrategy two)
 		{
-			bool high;
-			decimal bid;
+			List<long> oneList = new List<long>();
+			List<long> twoList = new List<long>();
+			List<long> diff = new List<long>();
 
-			BasicStrategy(100, 0, out high, out bid);
-			Debug.Assert(high == true);
-			Debug.Assert(bid == 100);
+			Random rand = new Random();
 
-			BasicStrategy(100, 50, out high, out bid);
-			Debug.Assert(bid == 0);
+			while (true)
+			{
+				int seed = rand.Next();
 
-			BasicStrategy(100, 99, out high, out bid);
-			Debug.Assert(high == false);
-			Debug.Assert(bid == 100);
+				Random randOne = new Random(seed);
+				Random randTwo = new Random(seed);
+
+				Parallel.Invoke(
+					() => { oneList.Add(RunStrategy(randOne, one)); },
+					() => { twoList.Add(RunStrategy(randTwo, two)); });
+
+				diff.Add(oneList.Last() - twoList.Last());
+				Console.WriteLine("One = {0}, Two = {1}, Diff = {2}", oneList.Last(), twoList.Last(), diff.Last());
+				Console.WriteLine("Average One = {0}, Two = {1}, Diff = {2}", oneList.Average(), twoList.Average(), diff.Average());
+				Console.WriteLine("Total Call = {0}, One won = {1}, Two won = {2}, Draw = {3}",
+					diff.Count,
+					diff.Where(s => s < 0).Count(),
+					diff.Where(s => s > 0).Count(),
+					diff.Where(s => s == 0).Count()
+					);
+
+				Thread.Sleep(100);
+			}
 		}
 
-		static void Play()
+		static long RunStrategy(Random rand, TheStrategy strategy)
 		{
 			decimal currentMoney = new decimal(10000);
 			decimal millionDollars = new decimal(1000000);
 
-			TheStrategy strategy = BasicStrategy;
+			long bidCount;
+
+			for (bidCount = 0; currentMoney > 0 && currentMoney < millionDollars; bidCount++)
+			{
+				int num = rand.Next(100);
+				bool high;
+				decimal bid;
+
+				strategy(currentMoney, num, out high, out bid);
+
+				if (bid > currentMoney)
+				{
+					continue;
+				}
+
+				int nextNum = rand.Next(100);
+
+				if ((nextNum > num && high) || (nextNum < num && !high))
+				{
+					currentMoney += bid;
+				}
+				else if (nextNum == num)
+				{
+				}
+				else
+				{
+					currentMoney -= bid;
+				}
+			}
+
+			if (currentMoney > millionDollars)
+			{
+				return bidCount;
+			}
+			else
+			{
+				throw new Exception("Sorry you are Broke!!");
+			}
+		}
+
+		static void Test(TheStrategy strategy)
+		{
+			bool high;
+			decimal bid;
+
+			strategy(100, 0, out high, out bid);
+			Debug.Assert(high == true);
+			Debug.Assert(bid == 100);
+
+			strategy(100, 50, out high, out bid);
+			Debug.Assert(bid == 0);
+
+			strategy(100, 99, out high, out bid);
+			Debug.Assert(high == false);
+			Debug.Assert(bid == 100);
+		}
+
+		static void Play(Random rand, TheStrategy strategy)
+		{
+			decimal currentMoney = new decimal(10000);
+			decimal millionDollars = new decimal(1000000);
 
 			Console.WriteLine("Running bot for bidding");
 
 			long bidCount;
-			Random rand = new Random();
 
 			for (bidCount = 0; currentMoney > 0 && currentMoney < millionDollars; bidCount++)
 			{
