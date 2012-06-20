@@ -75,6 +75,7 @@ namespace Solver.Test
 			};
 
 			int[] expected = { 0, 2, 3, 4};
+			int[] powerSolver = new PowerSet().Solve(map, weight);
 
 			SolverNonFancy target = new SolverNonFancy();
 			var actual = target.SolveNonFancy(map, weight);
