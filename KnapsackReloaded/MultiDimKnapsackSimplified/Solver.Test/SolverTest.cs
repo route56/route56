@@ -7,6 +7,58 @@ using System.Diagnostics;
 
 namespace Solver.Test
 {
+	[TestClass]
+	public class MSFSolverTest
+	{
+
+		[TestMethod]
+		public void MyTestMethod()
+		{
+			new MSFSolver().CallMe();
+		}
+
+		[TestMethod]
+		public void FailedTestDetectedByRandom1()
+		{
+			int[,] map = 
+			{
+				{0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, },
+				{1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, },
+				{0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, },
+				{1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, },
+				{1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, },
+				{0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, },
+				{0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, },
+				{1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, },
+				{0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, },
+				{1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, },
+				{1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, },
+			};
+
+			int[] weight = 
+			{
+				14, 
+				2, 
+				10, 
+				1, 
+				9, 
+				2, 
+				6, 
+				3, 
+				15, 
+				12, 
+				9, 
+			};
+
+			int[] expected = { 1, 4, 5, 6, 7, 10, };
+			// { 0, 1, 6, 7, 10};
+
+			MSFSolver target = new MSFSolver();
+			var actual = target.SolveNonFancy(map, weight);
+			CollectionAssert.AreEqual(expected, actual);
+		}
+	}
+
 	[TestClass()]
 	public class SolverTest
 	{

@@ -20,7 +20,7 @@ namespace MultiDimKnapsackSimplified
 		public int[] Weight { get; set; }
 	}
 
-	public class SolverNonFancy
+	public class SolverNonFancy : ISolver
 	{
 		public int[] SolveNonFancy(int[,] map, int[] weight)
 		{
