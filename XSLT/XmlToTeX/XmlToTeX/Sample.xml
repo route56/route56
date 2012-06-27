@@ -1,0 +1,37 @@
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Meta>
+    <Compute>
+      <Experience>Experience1</Experience>
+    </Compute>
+  </Meta>
+  <Content>
+    <Education>Education1</Education>
+    <Experience>Experience1</Experience>
+    <Skills>Skills1</Skills>
+    <Interest>Interest1</Interest>
+    <Publications>Publications1</Publications>
+    <Achievements>Achievements1</Achievements>
+    <Name>
+      <First>First1</First>
+      <Last>Last1</Last>
+    </Name>
+    <Contact>
+      <Mobile>Mobile1</Mobile>
+      <Email>Email1</Email>
+      <Address type="type1">
+        <Pin>Pin1</Pin>
+        <Line xsi:nil="true" />
+        <Line>Line1</Line>
+        <Line xsi:nil="true" />
+        <Line>Line2</Line>
+      </Address>
+      <Address type="type2">
+        <Pin>Pin2</Pin>
+        <Line xsi:nil="true" />
+        <Line>Line3</Line>
+        <Line xsi:nil="true" />
+        <Line>Line4</Line>
+      </Address>
+    </Contact>
+  </Content>
+</Document>
