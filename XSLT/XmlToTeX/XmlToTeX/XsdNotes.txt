@@ -1,0 +1,15 @@
+﻿http://www.w3schools.com/dtd/dtd_el_vs_attr.asp
+
+There are no rules about when to use attributes, and when to use child elements. My experience is that attributes are handy in HTML, but in XML you should try to avoid them. Use child elements if the information feels like data.
+
+Some of the problems with attributes are:
+	attributes cannot contain multiple values (child elements can)
+	attributes are not easily expandable (for future changes)
+	attributes cannot describe structures (child elements can)
+	attributes are more difficult to manipulate by program code
+	attribute values are not easy to test against a DTD
+
+An Exception to my Attribute Rule
+Sometimes I assign ID references to elements. These ID references can be used to access XML elements in much the same way as the NAME or ID attributes in HTML.
+
+http://stackoverflow.com/questions/464853/referring-to-another-element-in-xml

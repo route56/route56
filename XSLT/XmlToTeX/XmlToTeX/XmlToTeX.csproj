@@ -57,6 +57,7 @@
     <Content Include="TestFile.xml" />
     <Content Include="XmlGen.exe" />
     <Content Include="XmlSampleGenerator.dll" />
+    <Content Include="XsdNotes.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Final.xsd">
@@ -69,8 +70,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>xsd.exe $(ProjectDir)\TestFile.xml
-$(ProjectDir)\XmlGen.exe $(ProjectDir)\TestFile.xsd</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

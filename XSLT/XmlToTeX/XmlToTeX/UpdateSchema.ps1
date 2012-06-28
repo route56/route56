@@ -1,9 +1,10 @@
 #xsd.exe .\TestFile.xml
 #if($?)
 #{
+#	"Done xsd"
 #	.\XmlGen.exe .\TestFile.xsd
-#	copy .\Sample.xml .\TestFile.xml
+#	"Done xmlgen"
 #}
 
-.\XmlGen.exe .\Final.xsd
-copy .\Sample.xml .\Final.xml
+#.\XmlGen.exe .\Final.xsd
+#copy .\Sample.xml .\Final.xml

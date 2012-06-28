@@ -1,57 +1,208 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="Document" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-  <xs:element name="Document" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="Document">
     <xs:complexType>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Meta">
+      <xs:sequence>
+        <xs:element name="Objective" type="xs:string" minOccurs="0" />
+        <xs:element name="Name">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Compute" minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="First" type="xs:string" minOccurs="0" />
+              <xs:element name="Last" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CurrentJob">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="xPath" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Contact">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Mobile" type="xs:string" minOccurs="0" />
+              <xs:element name="Email" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EducationList">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Education" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="Experience" type="xs:string" minOccurs="0" />
+                    <xs:element name="Degree" type="xs:string" minOccurs="0" msdata:Ordinal="0" />
+                    <xs:element name="Major" type="xs:string" minOccurs="0" msdata:Ordinal="1" />
+                    <xs:element name="Board" type="xs:string" minOccurs="0" msdata:Ordinal="2" />
+                    <xs:element ref="Start"/>
+                    <xs:element ref="End"/>
+                    <xs:element name="Institute">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Name" type="xs:string"/>
+                          <xs:element name="Address">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Line" type="xs:string" minOccurs="0" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Score">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Name" type="xs:string"/>
+                          <xs:element name="Result" type="xs:string"/>
+                          <xs:element name="Max" type="xs:string"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:string" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EmploymentList" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="Employment" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Projects" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Project" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Type" type="xs:string" minOccurs="0" />
+                    <xs:element name="Summary" type="xs:string" minOccurs="0" />
+                    <xs:element name="About" type="xs:string" minOccurs="0" />
+                    <xs:element name="Contribution" nillable="true" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:simpleContent msdata:ColumnName="Contribution_Text" msdata:Ordinal="1">
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="level" type="xs:string" />
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+					  <xs:choice>
+                    <xs:element name="College">
+                      <xs:complexType>
+                        <xs:sequence>
+							<xs:element name="Facultysupervisor" type="xs:string" minOccurs="0" />
+                          <xs:element name="xPath" type="xs:string" minOccurs="0" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+						  <xs:element ref="Employment"/>
+					  </xs:choice>
+                    <xs:element ref="Start" minOccurs="0"/>
+                    <xs:element ref="End" minOccurs="0"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Content">
+        <xs:element name="AwardsAndAchievements" minOccurs="0">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Education" type="xs:string" minOccurs="0" />
-              <xs:element name="Experience" type="xs:string" minOccurs="0" />
-              <xs:element name="Skills" type="xs:string" minOccurs="0" />
-              <xs:element name="Interest" type="xs:string" minOccurs="0" />
-              <xs:element name="Publications" type="xs:string" minOccurs="0" />
-              <xs:element name="Achievements" type="xs:string" minOccurs="0" />
-              <xs:element name="Name" minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="Award" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="First" type="xs:string" minOccurs="0" />
-                    <xs:element name="Last" type="xs:string" minOccurs="0" />
+                    <xs:element name="Name" type="xs:string" minOccurs="0" />
+                    <xs:element name="Organizer" type="xs:string" minOccurs="0" />
+                    <xs:element name="Year" type="xs:string" minOccurs="0" />
+                    <xs:element name="Summary" type="xs:string" minOccurs="0" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="Contact" minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="Achievement" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="Mobile" type="xs:string" minOccurs="0" />
-                    <xs:element name="Email" type="xs:string" minOccurs="0" />
-                    <xs:element name="Address" minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="Name" type="xs:string" minOccurs="0" />
+                    <xs:element name="Organizer" type="xs:string" minOccurs="0" />
+                    <xs:element name="Year" type="xs:string" minOccurs="0" />
+                    <xs:element name="Summary" type="xs:string" minOccurs="0" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Interests" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Interest" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Name" type="xs:string" minOccurs="0" />
+                    <xs:element name="Description" type="xs:string" minOccurs="0" />
+                    <xs:element name="Achievement" type="xs:string" minOccurs="0" />
+                    <xs:element ref="Start" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SkillList" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Skill" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Name" type="xs:string"/>
+                    <xs:element name="List">
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="Pin" type="xs:string" minOccurs="0" msdata:Ordinal="0" />
-                          <xs:element name="Line" nillable="true" minOccurs="0" maxOccurs="unbounded">
+                          <xs:element name="Value" minOccurs="0" maxOccurs="unbounded">
                             <xs:complexType>
-                              <xs:simpleContent msdata:ColumnName="Line_Text" msdata:Ordinal="0">
-                                <xs:extension base="xs:string">
-                                </xs:extension>
-                              </xs:simpleContent>
+                              <xs:sequence>
+                                <xs:element name="Name" type="xs:string" minOccurs="0" />
+                                <xs:element name="Proficiency" type="xs:string" minOccurs="0" />
+                                <xs:element name="LastUsed" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Year" type="xs:string" minOccurs="0" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
                             </xs:complexType>
                           </xs:element>
                         </xs:sequence>
-                        <xs:attribute name="type" type="xs:string" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="importance" type="xs:string" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="LevelMatrix" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Category" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Name" type="xs:string" minOccurs="0" />
+                    <xs:element name="Row" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:simpleContent msdata:ColumnName="Row_Text" msdata:Ordinal="1">
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="level" type="xs:string" />
+                          </xs:extension>
+                        </xs:simpleContent>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
@@ -60,7 +211,50 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-      </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+	<xs:element name="Start">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Year" type="xs:string" minOccurs="0" />
+				<xs:element name="Month" type="xs:string" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="End">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Year" type="xs:string" minOccurs="0" />
+				<xs:element name="Month" type="xs:string" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Employment">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Summary" type="xs:string" minOccurs="0" msdata:Ordinal="0" />
+				<xs:element name="Designation" type="xs:string" minOccurs="0" msdata:Ordinal="1" />
+				<xs:element name="xPath" type="xs:string" minOccurs="0" msdata:Ordinal="5" />
+				<xs:element name="Company">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Name" type="xs:string" minOccurs="0" />
+							<xs:element name="Address" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="Start" minOccurs="0"/>
+				<xs:element ref="End" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+		<xs:sequence>
+			<xs:element ref="Document" />
+		</xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>
