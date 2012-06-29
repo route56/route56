@@ -14,20 +14,31 @@ namespace XmlToTeX
 
 	public class Converter
 	{
+		public bool ValidateSource(string source, Keywords keyword)
+		{
+			string[] splitSource = GetSplitByForEach(source, keyword);
+
+			for (int i = 0; i < splitSource.Length; i++)
+			{
+				if (splitSource[i].Split(new string[] { keyword.XPath }, StringSplitOptions.None).Length % 2 == 0)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
 		public string Convert(string source, IDictionary<string, IEnumerable<string>> data, Keywords keyword)
 		{
+			if (ValidateSource(source, keyword) == false)
+			{
+				throw new ArgumentException("Invalid source");
+			}
+
 			StringBuilder sb = new StringBuilder();
 
-			string[] splitSource;
-
-			if (string.IsNullOrWhiteSpace(keyword.ForEach))
-			{
-				splitSource = new string[] { source };
-			}
-			else
-			{
-				splitSource = source.Split(new string[] { keyword.ForEach }, StringSplitOptions.None);
-			}
+			string[] splitSource = GetSplitByForEach(source, keyword);
 
 			for (int i = 0; i < splitSource.Length; i++)
 			{
@@ -74,10 +85,29 @@ namespace XmlToTeX
 							}
 						}
 					}
+
+					foreach (var enumerators in listEnum)
+					{
+						enumerators.Dispose();
+					}
 				}
 			}
 
 			return sb.ToString();
+		}
+
+		private static string[] GetSplitByForEach(string source, Keywords keyword)
+		{
+			string[] splitSource;
+			if (string.IsNullOrWhiteSpace(keyword.ForEach))
+			{
+				splitSource = new string[] { source };
+			}
+			else
+			{
+				splitSource = source.Split(new string[] { keyword.ForEach }, StringSplitOptions.None);
+			}
+			return splitSource;
 		}
 
 		private bool MoveNext(IList<IEnumerator<string>> listEnum)

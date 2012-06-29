@@ -115,9 +115,49 @@ jkl";
 			Assert.AreEqual(expected, actual);
 		}
 
-		// multiline code.
-		// # $ $ # is valid but # $ # $ is not.
+		[TestMethod()]
+		public void ConvertTestXpathXPathInNonLoop()
+		{
+			Converter target = new Converter();
+			string source = "a$b$c#d$e$f#h$i$";
+
+			IDictionary<string, IEnumerable<string>> data = new Dictionary<string, IEnumerable<string>>()
+			{
+			    { "b", new string[] {"B"} },
+				{ "e", new string[] {"E", "G"}},
+				{ "i", new string[] {"I"} }
+			};
+
+			Keywords keys = new Keywords() { XPath = "$", ForEach = "#"};
+
+			string expected = "aBcdEfdGfhI";
+			string actual;
+			actual = target.Convert(source, data, keys);
+			Assert.AreEqual(expected, actual);
+		}
+
+		[TestMethod()]
+		public void ConvertTestExpectsException()
+		{
+			Converter target = new Converter();
+
+			// equal number of begin end.
+			// equal match
+			// nested looping ???? #abc#def##
+
+			Keywords keys = new Keywords() { XPath = "$", ForEach = "#" };
+
+			Assert.IsFalse(target.ValidateSource("a#$foo#$", keys), "$ $ should be conatined inside # #");
+			Assert.IsTrue(target.ValidateSource("a#$foo$#", keys), "$ $ is conatined inside # #");
+
+			Assert.IsFalse(target.ValidateSource("a$foo", keys), "Equal no of $");
+			Assert.IsTrue(target.ValidateSource("a$foo$", keys), "Equal no of $");
+			Assert.IsFalse(target.ValidateSource("a$foo$bar$aaa", keys), "Equal no of $");
+			Assert.IsTrue(target.ValidateSource("a$foo$bar$aaa$aaaaa", keys), "Equal no of $");
+
+			Assert.IsTrue(target.ValidateSource("aaa#aaaa$aaaaaa$aaaa$aa$aa#aaaa$a$##a##a$a$#", keys));
+		}
+
 		// Loop count doesn't match # $key1$ $key2$ # where key1 returns 1, key2 returns 2 items should throw exception. Count should MATCH.
-		// 
 	}
 }
