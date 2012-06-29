@@ -3,15 +3,30 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlToTeX", "XmlToTeX\XmlToTeX.csproj", "{6EDF99B5-C49B-4A2D-8D91-75A9ADD106C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlToTex.Test", "XmlToTex.Test\XmlToTex.Test.csproj", "{709CDA47-773C-453E-9B78-2CC201DCB7F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A69ECD82-186F-4A36-A291-B2E550F45C3F}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+		XmlToTeX.vsmdi = XmlToTeX.vsmdi
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs25
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = XmlToTeX\\XmlToTeX.csproj
 		SccProjectName1 = XmlToTeX
 		SccLocalPath1 = XmlToTeX
+		SccProjectUniqueName2 = XmlToTex.Test\\XmlToTex.Test.csproj
+		SccProjectName2 = XmlToTex.Test
+		SccLocalPath2 = XmlToTex.Test
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = XmlToTeX.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +37,10 @@ Global
 		{6EDF99B5-C49B-4A2D-8D91-75A9ADD106C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EDF99B5-C49B-4A2D-8D91-75A9ADD106C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EDF99B5-C49B-4A2D-8D91-75A9ADD106C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{709CDA47-773C-453E-9B78-2CC201DCB7F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{709CDA47-773C-453E-9B78-2CC201DCB7F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709CDA47-773C-453E-9B78-2CC201DCB7F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{709CDA47-773C-453E-9B78-2CC201DCB7F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
