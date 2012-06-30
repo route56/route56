@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace XmlToTeX
 {
@@ -29,7 +30,7 @@ namespace XmlToTeX
 			return true;
 		}
 
-		public string Convert(string source, IDictionary<string, IEnumerable<string>> data, Keywords keyword)
+		public string Convert(string source, IQuerier data, Keywords keyword)
 		{
 			if (ValidateSource(source, keyword) == false)
 			{
@@ -55,7 +56,7 @@ namespace XmlToTeX
 						}
 						else
 						{
-							sb.Append(data[xpathSplit[j]].First());
+							sb.Append(EscapeLaTeX(data.GetData(xpathSplit[j]).First()));
 						}
 					}
 				}
@@ -68,7 +69,7 @@ namespace XmlToTeX
 					// Get odd ones
 					for (int j = 1; j < xpathSplit.Length; j+=2)
 					{
-						listEnum.Add(data[xpathSplit[j]].GetEnumerator());
+						listEnum.Add(data.GetData(xpathSplit[j]).GetEnumerator());
 					}
 
 					while (MoveNext(listEnum))
@@ -81,7 +82,7 @@ namespace XmlToTeX
 							}
 							else
 							{
-								sb.Append(listEnum[j / 2].Current);
+								sb.Append(EscapeLaTeX(listEnum[j / 2].Current));
 							}
 						}
 					}
@@ -94,6 +95,18 @@ namespace XmlToTeX
 			}
 
 			return sb.ToString();
+		}
+
+		private static StringBuilder EscapeLaTeX(string source)
+		{
+			StringBuilder result = new StringBuilder(source);
+
+			for (int i = 0; i < escapeMapping.GetLength(0); i++)
+			{
+				result = result.Replace(escapeMapping[i,0], escapeMapping[i,1]);
+			}
+
+			return result;
 		}
 
 		private static string[] GetSplitByForEach(string source, Keywords keyword)
@@ -122,5 +135,72 @@ namespace XmlToTeX
 
 			return true;
 		}
+
+		public void Convert(string source, string dest, string xmlData)
+		{
+			Keywords keywords = null;
+
+			string sourceText = null;
+
+			using (StreamReader sr = File.OpenText(source))
+			{
+				string readLine1 = sr.ReadLine();
+
+				if (string.IsNullOrEmpty(readLine1))
+				{
+					return;
+				}
+
+				string readLine2 = sr.ReadLine();
+
+				if (string.IsNullOrEmpty(readLine2))
+				{
+					return;
+				}
+
+				keywords = new Keywords();
+
+				string xpathEscape = "%XPATH";
+				string foreachEscape = "%FOREACH";
+
+				if (readLine1.StartsWith(xpathEscape, StringComparison.OrdinalIgnoreCase))
+				{
+					keywords.XPath = readLine1.Substring(xpathEscape.Length);
+				}
+
+				if (readLine2.StartsWith(foreachEscape, StringComparison.OrdinalIgnoreCase))
+				{
+					keywords.ForEach = readLine2.Substring(foreachEscape.Length);
+				}
+
+				if (string.IsNullOrEmpty(keywords.XPath) && string.IsNullOrEmpty(keywords.ForEach))
+				{
+					return;
+				}
+
+				sourceText = sr.ReadToEnd();
+			}
+
+			File.WriteAllText(dest, Convert(sourceText, new XmlQuerier(xmlData), keywords));
+
+			//var node = doc.SelectSingleNode(split[i]);
+			//sb.Append(node.InnerText);
+
+		}
+
+		// Ordering of below items in table matter!
+		private static string[,] escapeMapping = {
+												 {"\\", "\\textbackslash"},
+												 {"&", "\\&"},
+												 {"%", "\\%"},
+												 {"$", "\\$"},
+												 {"#", "\\#"},
+												 {"_", "\\_"},
+												 {"{", "\\{"},
+												 {"}", "\\}"},
+												 {"~", "\\textasciitilde"},
+												 {"^", "\\textasciicircum"},
+												 };
 	}
 }
+

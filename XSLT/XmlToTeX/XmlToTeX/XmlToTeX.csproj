@@ -49,7 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converter.cs" />
+    <Compile Include="IQuerier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlQuerier.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Final.xml" />
