@@ -18,6 +18,25 @@
 						<xs:sequence>
 							<xs:element name="Mobile" type="xs:string" />
 							<xs:element name="Email" type="xs:string" />
+							<xs:element name="AddressList">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Address" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Type" type="xs:string"/>
+													<xs:element name="Line1" type="NoNewlineString" />
+													<xs:element name="Line2" type="NoNewlineString" />
+													<xs:element name="City" type="NoNewlineString" />
+													<xs:element name="Country" type="NoNewlineString" />
+													<xs:element name="Pin" type="xs:integer" />
+												</xs:sequence>
+												<xs:attribute name="id" type="xs:string" />
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
@@ -39,7 +58,7 @@
 													<xs:element name="Address">
 														<xs:complexType>
 															<xs:sequence>
-																<xs:element name="Line" type="xs:string" />
+																<xs:element name="Line" type="NoNewlineString" />
 															</xs:sequence>
 														</xs:complexType>
 													</xs:element>
@@ -104,18 +123,8 @@
 							<xs:element name="Award" maxOccurs="unbounded">
 								<xs:complexType>
 									<xs:sequence>
-										<xs:element name="Name" type="xs:string"/>
-										<xs:element name="Organizer" type="xs:string"/>
-										<xs:element name="Year" type="xs:string"/>
-										<xs:element name="Summary" type="xs:string"/>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="Achievement" maxOccurs="unbounded">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="Name" type="xs:string"/>
-										<xs:element name="Organizer" type="xs:string"/>
+										<xs:element name="Name" type="NoNewlineString"/>
+										<xs:element name="Organizer" type="NoNewlineString"/>
 										<xs:element name="Year" type="xs:string"/>
 										<xs:element name="Summary" type="xs:string"/>
 									</xs:sequence>
@@ -199,6 +208,13 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+
+	<xs:simpleType name="NoNewlineString">
+		<xs:restriction base="xs:string">
+			<xs:pattern value=".*[^\n].*" />
+		</xs:restriction>
+	</xs:simpleType>
+	
 	<xs:element name="Start">
 		<xs:complexType>
 			<xs:sequence>
@@ -223,8 +239,8 @@
 				<xs:element name="Company">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="Name" type="xs:string" />
-							<xs:element name="Address" type="xs:string" />
+							<xs:element name="Name" type="NoNewlineString" />
+							<xs:element name="Address" type="NoNewlineString" />
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>

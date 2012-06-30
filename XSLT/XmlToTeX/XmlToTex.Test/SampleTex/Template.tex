@@ -1,32 +1,25 @@
 %XPATH$
 %FOREACH#
 
-\documentclass[11pt,a4paper,sans]{moderncv}   % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+\documentclass[11pt,a4paper,sans]{moderncv}
 
-% moderncv themes
-\moderncvstyle{casual}                        % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
-\moderncvcolor{blue}                          % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
-%\renewcommand{\familydefault}{\sfdefault}    % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
-%\nopagenumbers{}                             % uncomment to suppress automatic page numbering for CVs longer than one page
+\moderncvstyle{casual}
+\moderncvcolor{blue}
 
-% character encoding
-%\usepackage[utf8]{inputenc}                  % if you are not using xelatex ou lualatex, replace by the encoding you are using
-%\usepackage{CJKutf8}                         % if you need to use CJK to typeset your resume in Chinese, Japanese or Korean
-
-% adjust the page margins
 \usepackage[scale=0.75]{geometry}
-%\setlength{\hintscolumnwidth}{3cm}           % if you want to change the width of the column with the dates
-%\setlength{\maketitlenamewidth}{10cm}        % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
 
-% personal data
 \firstname{$/Document/Name/First$}
 \familyname{$/Document/Name/Last$}
-\title{$/Document/Objective$}               % optional, remove the line if not wanted
-%\address{street and number}{postcode city}    % optional, remove the line if not wanted
-\mobile{$/Document/Contact/Mobile$}                     % optional, remove the line if not wanted
-%\phone{+2~(345)~678~901}                      % optional, remove the line if not wanted
-%\fax{+3~(456)~789~012}                        % optional, remove the line if not wanted
-\email{$/Document/Contact/Email$}                          % optional, remove the line if not wanted
+\title{$/Document/Objective$}
+
+\address{$/Document/Contact/AddressList/Address/Type[text()="Current"]/../Line1$, %
+$/Document/Contact/AddressList/Address/Type[text()="Current"]/../Line2$}
+{$/Document/Contact/AddressList/Address/Type[text()="Current"]/../City$, %
+$/Document/Contact/AddressList/Address/Type[text()="Current"]/../Pin$}
+
+\mobile{$/Document/Contact/Mobile$}
+
+\email{$/Document/Contact/Email$}
 %\homepage{www.johndoe.com}                    % optional, remove the line if not wanted
 %\extrainfo{additional information}            % optional, remove the line if not wanted
 \photo[64pt][0.4pt]{picture}                  % '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file; optional, remove the line if not wanted
@@ -44,15 +37,14 @@
 %            content
 %----------------------------------------------------------------------------------
 \begin{document}
-%\begin{CJK*}{UTF8}{gbsn}                     % to typeset your resume in Chinese using CJK
-%-----       resume       ---------------------------------------------------------
+
 \makecvtitle
 
 \section{Education}
 
 #
 \cventry{$/Document/EducationList/Education/Start/Year$--$/Document/EducationList/Education/End/Year$}
-{$/Document/EducationList/Education/Degree$ $/Document/EducationList/Education/Major$ }
+{$/Document/EducationList/Education/Degree$, $/Document/EducationList/Education/Major$}
 {$/Document/EducationList/Education/Institute/Name$}
 {$/Document/EducationList/Education/Institute/Address/Line$}
 {\textit{$/Document/EducationList/Education/Score/Result$/$/Document/EducationList/Education/Score/Max$}}
@@ -146,14 +138,23 @@ $/Document/Projects/Project/Type[text()="Hobby"]/../End/Year$}
 {$/Document/SkillList/Skill/Name[text()="Version control"]/../List/Value/Proficiency$}
 #
 
-\section{Computer skills}
-\cvdoubleitem{Development Platforms}
-{#$/Document/SkillList/Skill/Name[text()="Development Platforms"]/../List/Value/Name$, #}
-{Development IDE}
-{#$/Document/SkillList/Skill/Name[text()="Development IDE"]/../List/Value/Name$, #}
+\section{Development Platforms}
+#
+\cvitemwithcomment{$/Document/SkillList/Skill/Name[text()="Development Platforms"]/../List/Value/LastUsed/Year$}
+{$/Document/SkillList/Skill/Name[text()="Development Platforms"]/../List/Value/Name$}
+{$/Document/SkillList/Skill/Name[text()="Development Platforms"]/../List/Value/Proficiency$}
+#
 
-\cvdoubleitem{Databases}
-{#$/Document/SkillList/Skill/Name[text()="Databases"]/../List/Value/Name$, #}
+\section{Databases}
+#
+\cvitemwithcomment{$/Document/SkillList/Skill/Name[text()="Databases"]/../List/Value/LastUsed/Year$}
+{$/Document/SkillList/Skill/Name[text()="Databases"]/../List/Value/Name$}
+{$/Document/SkillList/Skill/Name[text()="Databases"]/../List/Value/Proficiency$}
+#
+
+\section{Computer skills}
+\cvdoubleitem{Development IDE}
+{#$/Document/SkillList/Skill/Name[text()="Development IDE"]/../List/Value/Name$, #}
 {Operating Systems}
 {#$/Document/SkillList/Skill/Name[text()="Operating Systems"]/../List/Value/Name$, #}
 
@@ -166,15 +167,8 @@ $/Document/Projects/Project/Type[text()="Hobby"]/../End/Year$}
 \section{Awards}
 #
 \cvitemwithcomment{$/Document/AwardsAndAchievements/Award/Year$}
-{$/Document/AwardsAndAchievements/Award/Name$ organized by $/Document/AwardsAndAchievements/Award/Organizer$}
+{$/Document/AwardsAndAchievements/Award/Name$ by $/Document/AwardsAndAchievements/Award/Organizer$}
 {$/Document/AwardsAndAchievements/Award/Summary$}
-#
-
-\section{Achievement}
-#
-\cvitemwithcomment{$/Document/AwardsAndAchievements/Achievement/Year$}
-{$/Document/AwardsAndAchievements/Achievement/Name$ organized by $/Document/AwardsAndAchievements/Achievement/Organizer$}
-{$/Document/AwardsAndAchievements/Achievement/Summary$}
 #
 
 %\cvlistitem{Item 2}
