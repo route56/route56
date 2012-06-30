@@ -216,9 +216,8 @@ jkl";
 		{
 			Converter target = new Converter();
 
-			string source = @"C:\Git\TestBed\Template.tex";
-			string dest = @"C:\Git\TestBed\Actual" + Guid.NewGuid().ToString() + ".tex";
-			//string expected = @"C:\Git\TestBed\Expected.tex";
+			string source = @"Template.tex";
+			string dest = @"Actual" + Guid.NewGuid().ToString() + ".tex";
 			string xmlData = @"C:\Git\TestBed\Data.xml";
 
 			target.Convert(source, dest, xmlData);
