@@ -24,7 +24,14 @@
 										<xs:element name="Address" maxOccurs="unbounded">
 											<xs:complexType>
 												<xs:sequence>
-													<xs:element name="Type" type="xs:string"/>
+													<xs:element name="Type">
+														<xs:simpleType>
+															<xs:restriction base="xs:string">
+																<xs:enumeration value="Current"/>
+																<xs:enumeration value="Permanent"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
 													<xs:element name="Line1" type="NoNewlineString" />
 													<xs:element name="Line2" type="NoNewlineString" />
 													<xs:element name="City" type="NoNewlineString" />
@@ -94,14 +101,22 @@
 							<xs:element name="Project" maxOccurs="unbounded">
 								<xs:complexType>
 									<xs:sequence>
-										<xs:element name="Type" type="xs:string" />
-										<xs:element name="Summary" type="xs:string" />
-										<xs:element name="About" type="xs:string" />
+										<xs:element name="Type">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="Professional"/>
+													<xs:enumeration value="Academic"/>
+													<xs:enumeration value="Hobby"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Summary" type="NoNewlineString" />
+										<xs:element name="About" type="NoNewlineString" />
 
 										<xs:element name="Contribution">
 											<xs:complexType>
 												<xs:simpleContent>
-													<xs:extension base="xs:string">
+													<xs:extension base="NoNewlineString">
 														<xs:attribute name="level" type="xs:string"/>
 													</xs:extension>
 												</xs:simpleContent>
@@ -126,7 +141,7 @@
 										<xs:element name="Name" type="NoNewlineString"/>
 										<xs:element name="Organizer" type="NoNewlineString"/>
 										<xs:element name="Year" type="xs:string"/>
-										<xs:element name="Summary" type="xs:string"/>
+										<xs:element name="Summary" type="NoNewlineString"/>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
@@ -162,7 +177,16 @@
 														<xs:complexType>
 															<xs:sequence>
 																<xs:element name="Name" type="xs:string" />
-																<xs:element name="Proficiency" type="xs:string" />
+																<xs:element name="Proficiency">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:enumeration value="Novice"/>
+																			<xs:enumeration value="Intermediate"/>
+																			<xs:enumeration value="Advanced"/>
+																			<xs:enumeration value="Expert"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
 																<xs:element name="LastUsed" minOccurs="0">
 																	<xs:complexType>
 																		<xs:sequence>
@@ -211,7 +235,7 @@
 
 	<xs:simpleType name="NoNewlineString">
 		<xs:restriction base="xs:string">
-			<xs:pattern value=".*[^\n].*" />
+			<xs:pattern value="[^\n]*" />
 		</xs:restriction>
 	</xs:simpleType>
 	

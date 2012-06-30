@@ -218,7 +218,7 @@ jkl";
 
 			string source = @"Template.tex";
 			string dest = @"Actual" + Guid.NewGuid().ToString() + ".tex";
-			string xmlData = @"C:\Git\TestBed\Data.xml";
+			string xmlData = @"C:\Git\Resume\Data.xml";
 
 			target.Convert(source, dest, xmlData);
 
