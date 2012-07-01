@@ -12,9 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		XmlToTeX.vsmdi = XmlToTeX.vsmdi
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlToTex.Console", "XmlToTex.Console\XmlToTex.Console.csproj", "{56181590-0E0E-4E29-953F-37B42676369A}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs25
 		SccLocalPath0 = .
@@ -24,23 +26,52 @@ Global
 		SccProjectUniqueName2 = XmlToTex.Test\\XmlToTex.Test.csproj
 		SccProjectName2 = XmlToTex.Test
 		SccLocalPath2 = XmlToTex.Test
+		SccProjectUniqueName3 = XmlToTex.Console\\XmlToTex.Console.csproj
+		SccProjectName3 = XmlToTex.Console
+		SccLocalPath3 = XmlToTex.Console
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = XmlToTeX.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6EDF99B5-C49B-4A2D-8D91-75A9ADD106C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6EDF99B5-C49B-4A2D-8D91-75A9ADD106C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EDF99B5-C49B-4A2D-8D91-75A9ADD106C0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6EDF99B5-C49B-4A2D-8D91-75A9ADD106C0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6EDF99B5-C49B-4A2D-8D91-75A9ADD106C0}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{6EDF99B5-C49B-4A2D-8D91-75A9ADD106C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EDF99B5-C49B-4A2D-8D91-75A9ADD106C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EDF99B5-C49B-4A2D-8D91-75A9ADD106C0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6EDF99B5-C49B-4A2D-8D91-75A9ADD106C0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6EDF99B5-C49B-4A2D-8D91-75A9ADD106C0}.Release|x86.ActiveCfg = Release|Any CPU
 		{709CDA47-773C-453E-9B78-2CC201DCB7F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{709CDA47-773C-453E-9B78-2CC201DCB7F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709CDA47-773C-453E-9B78-2CC201DCB7F9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{709CDA47-773C-453E-9B78-2CC201DCB7F9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{709CDA47-773C-453E-9B78-2CC201DCB7F9}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{709CDA47-773C-453E-9B78-2CC201DCB7F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{709CDA47-773C-453E-9B78-2CC201DCB7F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{709CDA47-773C-453E-9B78-2CC201DCB7F9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{709CDA47-773C-453E-9B78-2CC201DCB7F9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{709CDA47-773C-453E-9B78-2CC201DCB7F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{56181590-0E0E-4E29-953F-37B42676369A}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{56181590-0E0E-4E29-953F-37B42676369A}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{56181590-0E0E-4E29-953F-37B42676369A}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{56181590-0E0E-4E29-953F-37B42676369A}.Debug|x86.ActiveCfg = Debug|x86
+		{56181590-0E0E-4E29-953F-37B42676369A}.Debug|x86.Build.0 = Debug|x86
+		{56181590-0E0E-4E29-953F-37B42676369A}.Release|Any CPU.ActiveCfg = Release|x86
+		{56181590-0E0E-4E29-953F-37B42676369A}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{56181590-0E0E-4E29-953F-37B42676369A}.Release|Mixed Platforms.Build.0 = Release|x86
+		{56181590-0E0E-4E29-953F-37B42676369A}.Release|x86.ActiveCfg = Release|x86
+		{56181590-0E0E-4E29-953F-37B42676369A}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
