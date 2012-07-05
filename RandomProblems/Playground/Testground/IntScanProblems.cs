@@ -7,61 +7,15 @@ using System.Diagnostics;
 
 namespace Testground
 {
-	public class IntScanProblems
+	public interface IScanProblem
 	{
-		public int MaxCircularSum(int[] input)
-		{
-			if (input.Length == 0)
-			{
-				return 0;
-			}
-
-			int maxSumTillNow = input[0];
-			int maxIndex = 0;
-			int tailIndex = 0;
-			int tailSum = maxSumTillNow;
-
-			for (int i = 1; i < input.Length * 2; i++)
-			{
-				Debug.WriteLine("{0} {1} {2} {3} {4}", i, tailSum, tailIndex, maxSumTillNow, maxIndex);
-				if (tailSum < 0)
-				{
-					tailSum = 0;
-					tailIndex = i;
-				}
-
-				if (i >= input.Length + tailIndex)
-				{
-					break;
-				}
-
-				tailSum += input[i % input.Length];
-
-				if(maxSumTillNow < tailSum)
-				{
-					maxSumTillNow = tailSum;
-					maxIndex = tailIndex;
-				}
-
-				Debug.WriteLine("{0} {1} {2} {3} {4}", i, tailSum, tailIndex, maxSumTillNow, maxIndex);
-			}
-
-			return maxSumTillNow;
-		}
+		int Worst(int[] input);
+		int Optimal(int[] input);
 	}
 
-	[TestClass()]
-	public class IntScanProblemsTest
+	public class CircularProblem : IScanProblem
 	{
-		//public IEnumerable<IEnumerable<T>> GetPowerSet<T>(IList<T> list)
-		//{
-		//    foreach (var m in Enumerable.Range(0, 1 << list.Count))
-		//    {
-		//        yield return Enumerable.Range(0, list.Count).Where(i => (m & (1 << i)) != 0).Select(i => list[i]);
-		//    }
-		//}
-
-		private int WorstAlgo(int[] input)
+		public int Worst(int[] input)
 		{
 			int max = int.MinValue;
 
@@ -69,7 +23,7 @@ namespace Testground
 			{
 				int sum = 0;
 
-				for (int j = 1; j < input.Length; j++)
+				for (int j = 0; j < input.Length; j++)
 				{
 					sum += input[(i + j) % input.Length];
 
@@ -80,51 +34,112 @@ namespace Testground
 			return max;
 		}
 
-		private int[] GetRandomDataSet(Random rand)
+		public int Optimal(int[] input)
 		{
-			int rsize =   100;
-			int rmin = -1000;
-			int rmax =  1000;
-
-			int size = rand.Next(rsize);
-
-			int[] res = new int[size];
-
-			for (int i = 0; i < res.Length; i++)
+			if (input.Length == 0)
 			{
-				res[i] = rand.Next(rmin, rmax);
+				return int.MinValue;
 			}
 
-			return res;
+			// Find min element's index.
+			int min = int.MaxValue;
+			int minIndex = -1;
+
+			for (int i = 0; i < input.Length; i++)
+			{
+				if (min > input[i])
+				{
+					min = input[i];
+					minIndex = i;
+				}
+			}
+
+			int maxSumTillNow = int.MinValue;
+			int tailSum = int.MinValue;
+
+			for (int i = 0; i < input.Length; i++)
+			{
+				tailSum = Math.Max(tailSum, 0);
+
+				tailSum += input[(i + minIndex) % input.Length];
+
+				maxSumTillNow = Math.Max(maxSumTillNow, tailSum);
+			}
+
+			return maxSumTillNow;
+		}
+	}
+
+	class LinearProblem : IScanProblem
+	{
+		public int Worst(int[] input)
+		{
+			int max = int.MinValue;
+
+			for (int i = 0; i < input.Length; i++)
+			{
+				int sum = 0;
+
+				for (int j = i; j < input.Length; j++)
+				{
+					sum += input[j];
+
+					max = Math.Max(sum, max);
+				}
+			}
+
+			return max;
 		}
 
-		[TestMethod()]
-		public void MaxCircularSumTest()
+		public int Optimal(int[] input)
 		{
-			IntScanProblems target = new IntScanProblems();
-			int[] input = { 8, -8, 9, -9, 10, -11, 12 };
-			int expected = 22; // WorstAlgo(input); 
-			int actual;
-			actual = target.MaxCircularSum(input);
-			Assert.AreEqual(expected, actual);
+			if (input.Length == 0)
+			{
+				return int.MinValue;
+			}
+
+			int maxSumTillNow = input[0];
+			int tailSum = maxSumTillNow;
+
+			for (int i = 1; i < input.Length; i++)
+			{
+				if (tailSum < 0)
+				{
+					tailSum = 0;
+				}
+
+				tailSum += input[i];
+
+				if (maxSumTillNow < tailSum)
+				{
+					maxSumTillNow = tailSum;
+				}
+			}
+
+			return maxSumTillNow;
 		}
+	}
+
+	[TestClass]
+	public abstract class ScanProblemTest
+	{
+		public abstract IScanProblem Target { get; }
+
+		//public IEnumerable<IEnumerable<T>> GetPowerSet<T>(IList<T> list)
+		//{
+		//    foreach (var m in Enumerable.Range(0, 1 << list.Count))
+		//    {
+		//        yield return Enumerable.Range(0, list.Count).Where(i => (m & (1 << i)) != 0).Select(i => list[i]);
+		//    }
+		//}
 
 		[TestMethod]
 		public void FailedTestCases()
 		{
-			//TestFor(new int[] { 148, 267, 475, -44, 813, -937, -326, 281, 499, -713, -415, 121, 912, 134, -252, 686, 729 });
 			TestFor(new int[] { 100, -10, 100 });
+			TestFor(new int[] { 10, -100, 30, -100, 10 });
+			TestFor(new int[] { 10, -9, 11, -5, -5, 10 });
 		}
-
-		private void TestFor(int[] input)
-		{
-			IntScanProblems target = new IntScanProblems();
-			int expected = WorstAlgo(input); 
-			int actual;
-			actual = target.MaxCircularSum(input);
-			Assert.AreEqual(expected, actual);
-		}
-
 
 		[TestMethod]
 		public void MaxCircularSumTextRandom()
@@ -139,12 +154,69 @@ namespace Testground
 
 		private void RandomTest(Random rand)
 		{
-			IntScanProblems target = new IntScanProblems();
 			int[] input = GetRandomDataSet(rand);
-			int expected = WorstAlgo(input); 
+			int expected = Target.Worst(input); 
 			int actual;
-			actual = target.MaxCircularSum(input);
+			actual = Target.Optimal(input);
 			Assert.AreEqual(expected, actual);
 		}
+
+		private void TestFor(int[] input)
+		{
+			int expected = Target.Worst(input);
+			int actual;
+			actual = Target.Optimal(input);
+			Assert.AreEqual(expected, actual);
+		}
+
+		private int[] GetRandomDataSet(Random rand)
+		{
+			int rsize = 100;
+			int rmin = -1000;
+			int rmax = 1000;
+
+			int size = rand.Next(rsize);
+
+			int[] res = new int[size];
+
+			for (int i = 0; i < res.Length; i++)
+			{
+				res[i] = rand.Next(rmin, rmax);
+			}
+
+			return res;
+		}
+	}
+
+	[TestClass]
+	public class CircularTest : ScanProblemTest
+	{
+		public override IScanProblem Target
+		{
+			get { return target; }
+		}
+
+		IScanProblem target = new CircularProblem();
+
+		[TestMethod()]
+		public void MaxSumTest()
+		{
+			int[] input = { 8, -8, 9, -9, 10, -11, 12 };
+			int expected = 22;
+			int actual;
+			actual = target.Optimal(input);
+			Assert.AreEqual(expected, actual);
+		}
+	}
+
+	[TestClass]
+	public class LinearTest : ScanProblemTest
+	{
+		public override IScanProblem Target
+		{
+			get { return target; }
+		}
+
+		IScanProblem target = new LinearProblem();
 	}
 }
