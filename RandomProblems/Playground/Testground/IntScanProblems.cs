@@ -125,14 +125,6 @@ namespace Testground
 	{
 		public abstract IScanProblem Target { get; }
 
-		//public IEnumerable<IEnumerable<T>> GetPowerSet<T>(IList<T> list)
-		//{
-		//    foreach (var m in Enumerable.Range(0, 1 << list.Count))
-		//    {
-		//        yield return Enumerable.Range(0, list.Count).Where(i => (m & (1 << i)) != 0).Select(i => list[i]);
-		//    }
-		//}
-
 		[TestMethod]
 		public void FailedTestCases()
 		{

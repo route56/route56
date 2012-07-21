@@ -54,9 +54,12 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyLineProblem.cs" />
     <Compile Include="IntScanProblems.cs" />
     <Compile Include="LRUCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SatisfiabilityReloaded.cs" />
+    <Compile Include="StreetProblems.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

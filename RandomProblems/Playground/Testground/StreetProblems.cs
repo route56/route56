@@ -90,6 +90,18 @@ namespace Testground
 
 			Dictionary<string, NodeBFSData> data = BFSTraversal(AdjGraph, source);
 
+			// print path
+			Console.WriteLine();
+			Console.Write(dest);
+
+			string parent = data[dest].ParentPath;
+
+			while (string.IsNullOrEmpty(parent) == false)
+			{
+				Console.Write("->" + parent);
+				parent = data[parent].ParentPath;
+			}
+
 			return data[dest].Distance + 1; // including source node
 		}
 
@@ -102,7 +114,8 @@ namespace Testground
 				nodeData.Add(item, new NodeBFSData() 
 					{ 
 						Color = NodeColor.White, 
-						Distance = int.MaxValue 
+						Distance = int.MaxValue,
+						ParentPath = string.Empty,
 					});
 			}
 
@@ -123,6 +136,7 @@ namespace Testground
 					{
 						nodeData[item].Color = NodeColor.Grey;
 						nodeData[item].Distance = nodeData[node].Distance + 1;
+						nodeData[item].ParentPath = node;
 						queue.Enqueue(item);
 					}
 				}
@@ -144,6 +158,7 @@ namespace Testground
 		{
 			public NodeColor Color { get; set; }
 			public int Distance { get; set; }
+			public string ParentPath { get; set; }
 		}
 
 		class SourceDest
