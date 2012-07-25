@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyLineProblem.cs" />
+    <Compile Include="BinaryTreeProblems.cs" />
     <Compile Include="IntScanProblems.cs" />
     <Compile Include="LRUCache.cs" />
     <Compile Include="MatrixMultiplyOptimizer.cs" />
