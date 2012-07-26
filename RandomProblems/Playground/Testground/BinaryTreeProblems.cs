@@ -11,10 +11,192 @@ namespace Testground
 		public int Value { get; set; }
 		public Node Left { get; set; }
 		public Node Right { get; set; }
+
 		public List<int> LevelList { get; set; }
 	}
 
-	class BinaryTreeProblems
+	class BSTFlatteningProblem
+	{
+		/*
+		 * Write a program to convert a BST to sorted list. 
+		 * You must use the same tree and make the right child pointer 
+		 * as the next pointer in the list.
+		 */
+		internal void TransformSortedList(ref Node root)
+		{
+			Node parent = new Node();
+
+			Explore(root, ref parent, null);
+
+			root = parent.Right;
+		}
+
+		/// <summary>
+		/// Explores and transforms into sorted list
+		/// </summary>
+		/// <param name="me">node to explore. Can't be null</param>
+		/// <param name="parent">Parent of leftmost inner node</param>
+		/// <param name="rightEnd">right end node for right most</param>
+		private void Explore(Node me, ref Node parent, Node rightEnd)
+		{
+			if (me.Left == null)
+			{
+				parent.Right = me;
+			}
+			else
+			{
+				Explore(me.Left, ref parent, me);
+			}
+
+			if (me.Right == null)
+			{
+				me.Right = rightEnd;
+			}
+			else
+			{
+				Explore(me.Right, ref me, rightEnd);
+			}
+		}
+	}
+
+	[TestClass]
+	public class BSTFlattehingProblemTest
+	{
+		[TestMethod]
+		public void FullBalancedBST()
+		{
+			var target = new BSTFlatteningProblem();
+
+			Node root = new Node() { Value = 4 };
+
+			root.Left = new Node() { Value = 2 };
+			root.Right = new Node() { Value = 6 };
+
+			root.Left.Left = new Node() { Value = 1 };
+			root.Left.Right = new Node() { Value = 3 };
+
+			root.Right.Left = new Node() { Value = 5 };
+			root.Right.Right = new Node() { Value = 7 };
+
+			target.TransformSortedList(ref root);
+
+			var next = root;
+
+			for (int i = 1; i < 8; i++)
+			{
+				Assert.AreEqual(i, next.Value);
+				next = next.Right;
+			}
+
+			Assert.IsNull(next);
+		}
+
+		[TestMethod]
+		public void SkewedLeftBST()
+		{
+			var target = new BSTFlatteningProblem();
+
+			Node root = new Node() { Value = 6 };
+			root.Left = new Node() { Value = 5 };
+			root.Left.Left = new Node() { Value = 4 };
+			root.Left.Left.Left = new Node() { Value = 3 };
+			root.Left.Left.Left.Left = new Node() { Value = 2 };
+			root.Left.Left.Left.Left.Left = new Node() { Value = 1 };
+
+			target.TransformSortedList(ref root);
+
+			var next = root;
+
+			for (int i = 1; i < 7; i++)
+			{
+				Assert.AreEqual(i, next.Value);
+				next = next.Right;
+			}
+
+			Assert.IsNull(next);
+		}
+
+		[TestMethod]
+		public void SkewedRightBST()
+		{
+			var target = new BSTFlatteningProblem();
+
+			Node root = new Node() { Value = 1 };
+			root.Right = new Node() { Value = 2 };
+			root.Right.Right = new Node() { Value = 3 };
+			root.Right.Right.Right = new Node() { Value = 4 };
+			root.Right.Right.Right.Right = new Node() { Value = 5 };
+			root.Right.Right.Right.Right.Right = new Node() { Value = 6 };
+
+			target.TransformSortedList(ref root);
+
+			var next = root;
+
+			for (int i = 1; i < 7; i++)
+			{
+				Assert.AreEqual(i, next.Value);
+				next = next.Right;
+			}
+
+			Assert.IsNull(next);
+		}
+
+		[TestMethod]
+		public void PartialBalancedBST()
+		{
+			var target = new BSTFlatteningProblem();
+
+			Node root = new Node() { Value = 5 };
+
+			root.Left = new Node() { Value = 1 };
+			root.Right = new Node() { Value = 7 };
+
+			root.Left.Right = new Node() { Value = 3 };
+
+			root.Left.Right.Left = new Node() { Value = 2 };
+			root.Left.Right.Right = new Node() { Value = 4 };
+
+			root.Right.Left = new Node() { Value = 6 };
+			root.Right.Right = new Node() { Value = 9 };
+
+			root.Right.Right.Left = new Node() { Value = 8 };
+			root.Right.Right.Right = new Node() { Value = 10 };
+
+			target.TransformSortedList(ref root);
+
+			var next = root;
+
+			for (int i = 1; i < 11; i++)
+			{
+				Assert.AreEqual(i, next.Value);
+				next = next.Right;
+			}
+
+			Assert.IsNull(next);
+		}
+
+		[TestMethod]
+		public void BoundaryBST()
+		{
+			var target = new BSTFlatteningProblem();
+
+			Node root = new Node() { Value = 1 };
+
+			target.TransformSortedList(ref root);
+
+			var next = root;
+
+			for (int i = 1; i < 2; i++)
+			{
+				Assert.AreEqual(i, next.Value);
+				next = next.Right;
+			}
+
+			Assert.IsNull(next);
+		}
+	}
+
+	class BinaryTreeProblemsSumNodesEquidistantFromLeaves 
 	{
 		/*
 		 * Given a binary tree , 
@@ -167,12 +349,12 @@ The idea is to figure out the height of all leaf nodes and then choose all the n
 	}
 
 	[TestClass]
-	public class BinaryTreeTest
+	public class BinaryTreeTestSumNodesEquidistantFromLeaves
 	{
 		[TestMethod]
 		public void BalancedTree()
 		{
-			BinaryTreeProblems target = new BinaryTreeProblems();
+			BinaryTreeProblemsSumNodesEquidistantFromLeaves target = new BinaryTreeProblemsSumNodesEquidistantFromLeaves();
 
 			Node root = new Node() { Value = 1 };
 
@@ -197,7 +379,7 @@ The idea is to figure out the height of all leaf nodes and then choose all the n
 		[TestMethod]
 		public void SkewedTree()
 		{
-			BinaryTreeProblems target = new BinaryTreeProblems();
+			BinaryTreeProblemsSumNodesEquidistantFromLeaves target = new BinaryTreeProblemsSumNodesEquidistantFromLeaves();
 
 			Node root = new Node() { Value = 1 };
 				root.Left = new Node() { Value = 2 };
@@ -218,7 +400,7 @@ The idea is to figure out the height of all leaf nodes and then choose all the n
 		[TestMethod]
 		public void UnBalancedTree()
 		{
-			BinaryTreeProblems target = new BinaryTreeProblems();
+			BinaryTreeProblemsSumNodesEquidistantFromLeaves target = new BinaryTreeProblemsSumNodesEquidistantFromLeaves();
 
 			Node root = new Node() { Value = 1 };
 
