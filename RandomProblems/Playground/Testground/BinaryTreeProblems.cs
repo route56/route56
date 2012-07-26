@@ -22,7 +22,95 @@ namespace Testground
 		 * which are at a particular level from all of its existing leaves. 
 		 * ( note:- it might be possible a single such node would exist for two different leaf , in that case we need to sum it up only once )
 		 */
+
 		internal int SumNodesBeforeLeafLevel(Node root, int level)
+		{
+/*
+ * 1. Allocate a global bit vector of size h where h is height of the tree.
+2. Traverse the tree in post-order fashion.
+3. At each node do the following:
+a) if leaf node: set the kth bit of the vector as 1 where k is the height of the current node.
+b) else check if the k+l bit is set and add the value of the current node to sum.
+
+Time complexity: O(n)
+Space: O(logn)
+
+The idea is to figure out the height of all leaf nodes and then choose all the nodes that are level 'l' from every leaf node.
+ */
+			header = true;
+			visitCallCount = 0;
+
+			Dictionary<int, bool> boolList = new Dictionary<int, bool>();
+			int sum = 0;
+
+			Visit(root, boolList, level, 0, ref sum);
+
+			return sum;
+		}
+
+		static int visitCallCount = 0;
+
+		private void Visit(Node node, Dictionary<int, bool> boolList, int level, int nodeDepth, ref int sum)
+		{
+			int functionId = visitCallCount++;
+
+			Dump("before", functionId, visitCallCount, boolList, node, sum);
+
+			if (node != null)
+			{
+				Visit(node.Left, boolList, level, nodeDepth + 1, ref sum);
+				Visit(node.Right, boolList, level, nodeDepth + 1, ref sum);
+
+				if (node.Left == null && node.Right == null)
+				{
+					if (level == 0)
+					{
+						sum += node.Value;
+					}
+					else
+					{
+						boolList[nodeDepth] = true;
+					}
+				}
+				else
+				{
+					if (boolList.ContainsKey(nodeDepth + level))
+					{
+						sum += node.Value;
+					}
+				}
+			}
+
+			Dump("after", functionId, visitCallCount, boolList, node, sum);
+		}
+
+		static bool header = true;
+
+		private void Dump(string message, int functionId, int visitCallCount, Dictionary<int, bool> boolList, Node node, int sum)
+		{
+			if (header)
+			{
+				Console.WriteLine("Message\tfunctionId\tcallcount\tboolList\tNode\tsum");
+				header = false;
+			}
+
+			Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}",
+				message,
+				functionId,
+				visitCallCount,
+				String.Join(",", boolList.Keys.Select(s => s.ToString())),
+				node == null ? "Null" : node.Value.ToString(),
+				sum
+				);
+		}
+
+		/// <summary>
+		/// O(n^2) time, O(n^2) space
+		/// </summary>
+		/// <param name="root"></param>
+		/// <param name="level"></param>
+		/// <returns></returns>
+		internal int SumNodesBeforeLeafLevel2(Node root, int level)
 		{
 			if (root == null || level < 0)
 			{
