@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading;
 
 namespace Testground
 {
@@ -10,9 +11,101 @@ namespace Testground
 	{
 		internal long Solve(int[] dimentionChain)
 		{
-			throw new NotImplementedException();
+			_dimentionChain = dimentionChain;
+			InitMemory(_dimentionChain.Length);
+
+			return OptimalMultiply(0, _dimentionChain.Length);
 		}
 
+		private void InitMemory(int length)
+		{
+			_memory = new long[length, length];
+			for (int i = 0; i < _memory.GetLength(0); i++)
+			{
+				for (int j = 0; j < _memory.GetLength(1); j++)
+				{
+					_memory[i, j] = -1;
+				}
+			}
+		}
+
+		private long[,] _memory;
+		private int[] _dimentionChain;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="start">inclusive start</param>
+		/// <param name="end">exclusive end</param>
+		/// <returns></returns>
+		private long OptimalMultiply(int start, int end)
+		{
+			if (start + 1 >= end)
+			{
+				throw new ArgumentException();
+			}
+
+			if (_memory[start, end-1] == -1)
+			{
+				if (start + 2 == end)
+				{
+					_memory[start, end-1] = 0;
+				}
+				else if(start + 3 == end)
+				{
+					_memory[start, end - 1] = _dimentionChain[start] * _dimentionChain[start + 1] * _dimentionChain[start + 2];
+				}
+				else
+				{
+					long min = long.MaxValue;
+
+					for (int k = start + 1; k < end - 1; k++)
+					{
+						long sum =
+							OptimalMultiply(start, k + 1)
+							+ OptimalMultiply(k, end)
+							+ _dimentionChain[start] * _dimentionChain[k] * _dimentionChain[end-1];
+
+						if (min > sum)
+						{
+							min = sum;
+						}
+					}
+
+					_memory[start, end-1] = min;
+				}
+			}
+
+			return _memory[start, end-1];
+		}
+	}
+
+	[TestClass]
+	public class OptimalMatrixTest
+	{
+		[TestMethod]
+		public void BasicTest()
+		{
+			int[] dimentionChain = { 10, 100, 5, 50 };
+
+			var target = new MatrixMultiplyOptimizer();
+
+			Assert.AreEqual(7500, target.Solve(dimentionChain));
+		}
+
+		[TestMethod]
+		public void CLRExampleTest()
+		{
+			int[] dimentionChain = { 30, 35, 15, 5, 10, 20, 25 };
+
+			var target = new MatrixMultiplyOptimizer();
+
+			Assert.AreEqual(15125, target.Solve(dimentionChain));
+		}
+	}
+
+	class Paranthesis
+	{
 		// paranthesis
 		// XXXYYY, XYXXYY
 		// (((AB)C)D)
@@ -40,6 +133,11 @@ namespace Testground
 			}
 
 			return catalanNumber[n];
+		}
+
+		internal static long GetCatalanNumberLength()
+		{
+			return catalanNumber.Length;
 		}
 
 		private static long[] catalanNumber = new long[]
@@ -99,22 +197,12 @@ namespace Testground
 	}
 
 	[TestClass]
-	public class OptimizerTest
+	public class FactorsParanthesisTest
 	{
-		[TestMethod]
-		public void BasicTest()
-		{
-			int[] dimentionChain = { 10, 100, 5, 50 };
-
-			MatrixMultiplyOptimizer target = new MatrixMultiplyOptimizer();
-
-			Assert.AreEqual(7500, target.Solve(dimentionChain));
-		}
-
 		[TestMethod]
 		public void FactorsParanthesis()
 		{
-			MatrixMultiplyOptimizer target = new MatrixMultiplyOptimizer();
+			Paranthesis target = new Paranthesis();
 
 			string factors = "ABC";
 			string[] expected = 
@@ -138,7 +226,7 @@ namespace Testground
 			TestFactorParanthesis(target, factors, expected);
 		}
 
-		private static void TestFactorParanthesis(MatrixMultiplyOptimizer target, string factors, string[] expected)
+		private static void TestFactorParanthesis(Paranthesis target, string factors, string[] expected)
 		{
 			var actual = target.FactorParanthesis(factors);
 
@@ -148,6 +236,32 @@ namespace Testground
 			{
 				Assert.IsTrue(actual.Contains(item));
 			}
+		}
+
+		[TestMethod]
+		public void CatalanCountTest()
+		{
+			Paranthesis target = new Paranthesis();
+			StringBuilder sb = new StringBuilder();
+
+			//Thread thread = new Thread(
+			//    () =>
+				{
+					for (int i = 0; i < 14; i++)
+					{
+						sb.Append('A');
+						var watch = new System.Diagnostics.Stopwatch();
+						watch.Start();
+						Assert.AreEqual(Paranthesis.GetCatalanNumber(i), target.FactorParanthesis(sb.ToString()).Count);
+						watch.Stop();
+						Console.WriteLine("i = {0} watch = {1}", i, watch.Elapsed.ToString());
+					}
+				}
+			//);
+
+			//thread.Start();
+			//Thread.Sleep(10000);
+			//thread.Abort();
 		}
 	}
 }
