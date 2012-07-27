@@ -239,22 +239,34 @@
 		</xs:restriction>
 	</xs:simpleType>
 	
-	<xs:element name="Start">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="Year" type="xs:string" />
-				<xs:element name="Month" type="xs:string" minOccurs="0" />
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="End">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="Year" type="xs:string"/>
-				<xs:element name="Month" type="xs:string" minOccurs="0"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+	<xs:element name="Start" type="YearMonth"/>
+	<xs:element name="End" type="YearMonth"/>
+
+	<xs:complexType name="YearMonth">
+		<xs:sequence>
+			<xs:element name="Year" type="xs:string" />
+			<xs:element name="Month">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Jan"/>
+						<xs:enumeration value="Feb"/>
+						<xs:enumeration value="Mar"/>
+						<xs:enumeration value="Apr"/>
+						<xs:enumeration value="May"/>
+						<xs:enumeration value="Jun"/>
+						<xs:enumeration value="Jul"/>
+						<xs:enumeration value="Aug"/>
+						<xs:enumeration value="Sep"/>
+						<xs:enumeration value="Oct"/>
+						<xs:enumeration value="Nov"/>
+						<xs:enumeration value="Dec"/>
+						<xs:enumeration value="-"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
 	<xs:element name="Employment">
 		<xs:complexType>
 			<xs:sequence>
