@@ -88,7 +88,7 @@ namespace Testground
 				AdjGraph = ConstructAdjancyGraph(Dictionary);
 			}
 
-			Dictionary<string, NodeBFSData> data = BFSTraversal(AdjGraph, source);
+			var data = GraphSearch.BFSTraversal<string>(AdjGraph, source);
 
 			// print path
 			Console.WriteLine();
@@ -105,61 +105,6 @@ namespace Testground
 			return data[dest].Distance + 1; // including source node
 		}
 
-		private static Dictionary<string, NodeBFSData> BFSTraversal(Dictionary<string, List<string>> adjGraph, string source)
-		{
-			Dictionary<string, NodeBFSData> nodeData = new Dictionary<string, NodeBFSData>();
-
-			foreach (var item in adjGraph.Keys)
-			{
-				nodeData.Add(item, new NodeBFSData() 
-					{ 
-						Color = NodeColor.White, 
-						Distance = int.MaxValue,
-						ParentPath = string.Empty,
-					});
-			}
-
-			nodeData[source].Color = NodeColor.Grey;
-			nodeData[source].Distance = 0;
-
-			Queue<string> queue = new Queue<string>();
-
-			queue.Enqueue(source);
-
-			while (queue.Count != 0)
-			{
-				string node = queue.Dequeue();
-
-				foreach (var item in adjGraph[node])
-				{
-					if (nodeData[item].Color == NodeColor.White)
-					{
-						nodeData[item].Color = NodeColor.Grey;
-						nodeData[item].Distance = nodeData[node].Distance + 1;
-						nodeData[item].ParentPath = node;
-						queue.Enqueue(item);
-					}
-				}
-
-				nodeData[node].Color = NodeColor.Black;
-			}
-
-			return nodeData;
-		}
-
-		enum NodeColor
-		{
-			White,
-			Grey,
-			Black
-		}
-
-		class NodeBFSData
-		{
-			public NodeColor Color { get; set; }
-			public int Distance { get; set; }
-			public string ParentPath { get; set; }
-		}
 
 		class SourceDest
 		{
