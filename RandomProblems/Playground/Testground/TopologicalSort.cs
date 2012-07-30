@@ -116,19 +116,45 @@ namespace Testground
 					"h,i"
 				};
 
-			string[] expected = 
-				{
-					"a,d,c,b,e,f,g,h,i",
-					"g,h,i,a,d,c,b,e,f",
-					"a,d,e,c,b,f,g,h,i",
-					"g,h,i,a,d,e,c,b,f",
-				};
+			_ComplexCases(dependency);
+		}
 
+		[TestMethod]
+		public void RandomDependencyCase()
+		{
+			Assert.Inconclusive("todo random DAG generation");
+
+			//Random rand = new Random();
+
+			//int nodeCount = rand.Next(1, 1000);
+
+			//var dependency = List<string>();
+
+			//for (int i = 0; i < nodeCount; i++)
+			//{
+			//    var edgeCount = rand.Next(1, nodeCount);
+
+			//    for (int j = 0; j < nodeCount; j++)
+			//    {
+
+			//    }
+			//}
+
+			//_ComplexCases(dependency);
+		}
+
+		private static void _ComplexCases(string[] dependency)
+		{
 			var target = new TopologicalSort();
 
 			string actual = target.Solve(dependency);
 
-			Assert.IsTrue(expected.Contains(actual));
+			foreach (var item in dependency)
+			{
+				string[] split = item.Split(',');
+
+				Assert.IsTrue(actual.IndexOf(split[0]) < actual.IndexOf(split[1]));
+			}
 		}
 	}
 

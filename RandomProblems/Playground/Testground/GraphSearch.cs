@@ -79,7 +79,13 @@ namespace Testground
 			return nodeData;
 		}
 
+		// TODO classification of edges as Tree, Back, Forward, Cross. DAG => No Back. Undirected, Only Tree and Back.
 		internal static Dictionary<T, NodeDFSData<T>> DFSTraversal<T>(Dictionary<T, List<T>> adjGraph)
+		{
+			return _DFSTraversalIterative<T>(adjGraph);
+		}
+
+		private static Dictionary<T, NodeDFSData<T>> _DFSTraversalRecursive<T>(Dictionary<T, List<T>> adjGraph)
 		{
 			var result = new Dictionary<T, NodeDFSData<T>>();
 
@@ -121,6 +127,63 @@ namespace Testground
 
 			result[current].EndTime = ++time;
 			result[current].Color = NodeColor.Black;
+		}
+
+		private static Dictionary<T, NodeDFSData<T>> _DFSTraversalIterative<T>(Dictionary<T, List<T>> adjGraph)
+		{
+			var result = new Dictionary<T, NodeDFSData<T>>();
+
+			foreach (var item in adjGraph.Keys)
+			{
+				result.Add(item, new NodeDFSData<T>()
+				{
+					Color = NodeColor.White,
+				});
+			}
+
+			int time = 0;
+
+			foreach (var item in adjGraph.Keys)
+			{
+				if (result[item].Color == NodeColor.White)
+				{
+					//_DFSVisit<T>(item, adjGraph, result, ref time);
+					var stack = new Stack<T>();
+					var flag = new List<T>();
+
+					stack.Push(item);
+					while (stack.Count > 0)
+					{
+						var current = stack.Pop();
+
+						if (flag.Contains(current) == false)
+						{
+							result[current].Color = NodeColor.Grey;
+							result[current].StartTime = ++time;
+
+							foreach (var adjItem in adjGraph[current])
+							{
+								if (result[adjItem].Color == NodeColor.White)
+								{
+									result[adjItem].ParentPath = current;
+
+									// _DFSVisit<T>(adjItem, adjGraph, result, ref time);
+									flag.Add(current);
+									stack.Push(current);
+									stack.Push(adjItem);
+								}
+							}
+						}
+						else
+						{
+							result[current].EndTime = ++time;
+							result[current].Color = NodeColor.Black;
+						}
+					}
+				}
+			}
+
+			return result;
 		}
 	}
 }
