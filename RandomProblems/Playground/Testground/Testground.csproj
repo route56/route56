@@ -58,6 +58,7 @@
     <Compile Include="BinaryTreeProblems.cs" />
     <Compile Include="GraphSearch.cs" />
     <Compile Include="IntScanProblems.cs" />
+    <Compile Include="LongestCommonSubsequence.cs" />
     <Compile Include="LRUCache.cs" />
     <Compile Include="MatrixMultiplyOptimizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
