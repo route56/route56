@@ -27,55 +27,50 @@ namespace Testground
 	 */
 	class StableMergeMaxProd
 	{
-		public List<int[]> AllStableMerge(int[] left, int[] right)
+		public List<List<int>> AllStableMerge(int[] left, int lstart, int lend,
+			int[] right, int rstart, int rend)
 		{
-			if (left.Length == 0)
+			if (lstart == lend)
 			{
-				if (right.Length == 0)
+				if (rstart == rend)
 				{
-					return new List<int[]>();
+					return new List<List<int>>();
 				}
 				else
 				{
-					return new List<int[]>() { right };
+					return new List<List<int>>() 
+					{ 
+						right.Skip(rstart).Take(rend - rstart).ToList()
+					};
 				}
 			}
 			else
 			{
-				if (right.Length == 0)
+				if (rstart == rend)
 				{
-					return new List<int[]>() { left };
+					return new List<List<int>>() 
+					{ 
+						left.Skip(lstart).Take(lend - lstart).ToList()
+					};
 				}
 				else
 				{
-					var result = new List<int[]>();
+					var result = new List<List<int>>();
 
-					int[] dLeft = new int[left.Length - 1];
-					Array.Copy(left, 1, dLeft, 0, dLeft.Length);
-					var downLef = AllStableMerge(dLeft, right);
+					var downLef = AllStableMerge(left, lstart + 1, lend, right, rstart, rend);
 
 					foreach (var item in downLef)
 					{
-						int[] dAdd = new int[left.Length + right.Length];
-
-						dAdd[0] = left[0];
-						Array.Copy(item, 0, dAdd, 1, item.Length);
-
-						result.Add(dAdd);
+						item.Insert(0, left[lstart]);
+						result.Add(item);
 					}
 
-					int[] dRight = new int[right.Length - 1];
-					Array.Copy(right, 1, dRight, 0, dRight.Length);
-					var downRt = AllStableMerge(left, dRight);
+					var downRt = AllStableMerge(left, lstart, lend, right, rstart + 1, rend);
 
 					foreach (var item in downRt)
 					{
-						int[] dAdd = new int[left.Length + right.Length];
-
-						dAdd[0] = right[0];
-						Array.Copy(item, 0, dAdd, 1, item.Length);
-
-						result.Add(dAdd);
+						item.Insert(0, right[rstart]);
+						result.Add(item);
 					}
 
 					return result;
@@ -109,17 +104,17 @@ namespace Testground
 		{
 			var target = new StableMergeMaxProd();
 
-			var actual = target.AllStableMerge(a, b);
+			var actual = target.AllStableMerge(a, 0, a.Length, b, 0, b.Length);
 
 			Assert.AreEqual(Combination(a.Length + b.Length, a.Length), actual.Count);
 
 			foreach (var item in actual)
 			{
-				Assert.AreEqual(a.Length + b.Length, item.Length);
+				Assert.AreEqual(a.Length + b.Length, item.Count);
 
 				int j = 0, k = 0;
 
-				for (int i = 0; i < item.Length; i++)
+				for (int i = 0; i < item.Count; i++)
 				{
 					if (j < a.Length && item[i] == a[j])
 					{
