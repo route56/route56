@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics;
 
 namespace Testground
 {
@@ -174,7 +175,7 @@ namespace Testground
 
 		private int ComputeMax(int[] arr, int start)
 		{
-			if ((arr.Length - start) % 2 != 0)
+			if ((arr.Length - start) % 2 == 0)
 			{
 				int sum = 0;
 
@@ -199,13 +200,6 @@ namespace Testground
 		}
 
 		private Dictionary<Tuple<int, int>, NodeData> memoization = new Dictionary<Tuple<int, int>, NodeData>();
-
-		class NodeData
-		{
-			public int Max { get; set; }
-			public bool NeedsPairing { get; set; }
-			public Tuple<int, int> Child { get; set; }
-		}
 
 		public List<List<int>> AllStableMerge(int[] left, int lstart, int[] right, int rstart)
 		{
@@ -261,6 +255,14 @@ namespace Testground
 		}
 	}
 
+	[DebuggerDisplay("Max = {Max}, NeedsPairing = {NeedsPairing}, Child = {Child}")]
+	public class NodeData
+	{
+		public int Max { get; set; }
+		public bool NeedsPairing { get; set; }
+		public Tuple<int, int> Child { get; set; }
+	}
+
 	[TestClass]
 	public class StableMergeMaxProdTest
 	{
@@ -269,10 +271,15 @@ namespace Testground
 		{
 			var target = new StableMergeMaxProd();
 
-			// var actual = target.Solver(new int[] { 2, 1, 3 }, new int[] { 3, 7, 9 });
 			var actual = target.Solver(new int[] { 1, 100 }, new int[] { 1, 100 });
-
 			CollectionAssert.AreEqual(new int[] { 1, 1, 100, 100 }, actual);
+
+			var actual2 = target.Solver(new int[] { 2, 1, 3 }, new int[] { 3, 7, 9 });
+			CollectionAssert.AreEqual(new int[] { 2, 1, 3, 3, 7, 9}, actual2);
+
+			// Investigate why below case fails.
+			//var actual3 = target.Solver(new int[] { 100, 1, 1 }, new int[] { 1, 1, 100 });
+			//CollectionAssert.AreEqual(new int[] { 1, 1, 100, 100, 1, 1 }, actual3);
 		}
 
 		[TestMethod]
