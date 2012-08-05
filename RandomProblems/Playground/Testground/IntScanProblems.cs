@@ -13,6 +13,72 @@ namespace Testground
 		int Optimal(int[] input);
 	}
 
+	public class Inversions
+	{
+		public int CountBruteForce(int[] source)
+		{
+			int count = 0;
+
+			for (int i = 0; i < source.Length - 1; i++)
+			{
+				for (int j = i + 1; j < source.Length; j++)
+				{
+					if (source[i] > source[j])
+					{
+						count++;
+					}
+				}
+			}
+
+			return count;
+		}
+
+		public int CountOptimal(int[] source)
+		{
+			int count = 0;
+
+			var copy = source.ToList();
+
+			copy.Sort();
+
+			for (int i = 0; i < source.Length; i++)
+			{
+				int index = copy.BinarySearch(source[i]);
+				count += index;
+				copy.RemoveAt(index);
+			}
+
+			return count;
+		}
+	}
+
+	[TestClass]
+	public class InversionTest
+	{
+		[TestMethod]
+		public void BasicBruteForce()
+		{
+			Assert.AreEqual(0, new Inversions().CountBruteForce(new int[] { 1, 2, 3, 4, 5, 6 }));
+
+			Assert.AreEqual(1, new Inversions().CountBruteForce(new int[] { 1, 2, 4, 3, 5, 6 }));
+
+			Assert.AreEqual(2, new Inversions().CountBruteForce(new int[] { 1, 4, 2, 3, 5, 6 }));
+		}
+
+		[TestMethod]
+		public void BasicOptimal()
+		{
+			Assert.AreEqual(3, new Inversions().CountOptimal(new int[] { 3, 2, 1 }));
+
+			Assert.AreEqual(1, new Inversions().CountOptimal(new int[] { 2, 1, 3 }));
+			Assert.AreEqual(0, new Inversions().CountOptimal(new int[] { 1, 2, 3, 4, 5, 6 }));
+
+			Assert.AreEqual(1, new Inversions().CountOptimal(new int[] { 1, 2, 4, 3, 5, 6 }));
+
+			Assert.AreEqual(2, new Inversions().CountOptimal(new int[] { 1, 4, 2, 3, 5, 6 }));
+		}
+	}
+
 	public class CircularProblem : IScanProblem
 	{
 		public int Worst(int[] input)
